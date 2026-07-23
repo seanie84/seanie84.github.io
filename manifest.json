@@ -1,0 +1,12 @@
+{
+  "name": "NEXA — AI Command Center",
+  "short_name": "NEXA",
+  "description": "77 specialised AI agents. One command center. By ClearVision AI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050d1f",
+  "theme_color": "#0b1e3d",
+  "icons": [
+    { "src": "/nexa-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
