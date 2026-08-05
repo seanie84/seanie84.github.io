@@ -10,7 +10,7 @@ interface AuthCtx {
 
 const Ctx = createContext<AuthCtx | null>(null);
 
-const DEMO_EMAIL = 'demo@nexa.ai';
+const DEMO_EMAIL = 'Nexa@clearvision-ai.co.za';
 const DEMO_PASSWORD = 'nexa2024';
 
 export function AuthProvider({ children }: { children: ReactNode }) {

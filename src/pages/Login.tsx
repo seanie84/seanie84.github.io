@@ -20,7 +20,7 @@ export default function Login() {
     if (ok) {
       navigate('/dashboard');
     } else {
-      setError('Invalid credentials. Use demo@nexa.ai / nexa2024');
+      setError('Invalid credentials. Use Nexa@clearvision-ai.co.za / nexa2024');
     }
   }
 
@@ -68,7 +68,7 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <Field label="Name" type="text" value={name} onChange={setName} autoComplete="name" placeholder="Your name" />
-            <Field label="Email" type="email" value={email} onChange={setEmail} autoComplete="email" placeholder="demo@nexa.ai" />
+            <Field label="Email" type="email" value={email} onChange={setEmail} autoComplete="email" placeholder="Nexa@clearvision-ai.co.za" />
             <Field label="Password" type="password" value={password} onChange={setPassword} autoComplete="current-password" placeholder="••••••••" />
 
             {error && (
@@ -102,7 +102,7 @@ export default function Login() {
           </form>
 
           <p style={{ marginTop: 20, fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', textAlign: 'center', letterSpacing: '0.08em' }}>
-            Demo: demo@nexa.ai / nexa2024
+            Demo: Nexa@clearvision-ai.co.za / nexa2024
           </p>
         </div>
 
