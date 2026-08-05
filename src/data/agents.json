@@ -1,0 +1,1080 @@
+[
+  {
+    "id": "nexa",
+    "name": "NEXA",
+    "role": "Head Butler & Command Core",
+    "title": "The Command Center Itself",
+    "category": "core",
+    "tagline": "One login. Seventy-seven minds. Zero pretence.",
+    "capabilities": [
+      "multi-agent orchestration",
+      "business Q&A across all domains",
+      "memory and context management",
+      "mission planning"
+    ]
+  },
+  {
+    "id": "amber",
+    "name": "Amber",
+    "role": "Orchestrator",
+    "title": "Chief Orchestrator",
+    "category": "core",
+    "tagline": "I turn your brief into a mission with owners, steps and a finish line.",
+    "capabilities": [
+      "multi-agent orchestration",
+      "mission DAG design",
+      "agent task routing",
+      "synthesis of multi-agent output"
+    ]
+  },
+  {
+    "id": "vincent",
+    "name": "Vincent",
+    "role": "Chief Executive Officer",
+    "title": "CEO Agent",
+    "category": "leadership",
+    "tagline": "Strategy, priorities and the buck-stops-here call.",
+    "capabilities": [
+      "executive strategy",
+      "business planning",
+      "board-level decision framing",
+      "growth prioritisation"
+    ]
+  },
+  {
+    "id": "erica",
+    "name": "Erica",
+    "role": "Chief of Staff",
+    "title": "Chief of Staff Agent",
+    "category": "leadership",
+    "tagline": "Your priorities, protected. Your week, engineered.",
+    "capabilities": [
+      "executive prioritisation",
+      "meeting and follow-up systems",
+      "cross-team coordination",
+      "decision preparation"
+    ]
+  },
+  {
+    "id": "naledi",
+    "name": "Naledi",
+    "role": "SME Business Advisor",
+    "title": "SME Advisory Agent",
+    "category": "leadership",
+    "tagline": "Practical growth counsel for South African small business.",
+    "capabilities": [
+      "SME growth strategy",
+      "business model refinement",
+      "SA market entry advice",
+      "funding readiness"
+    ]
+  },
+  {
+    "id": "thabo",
+    "name": "Thabo",
+    "role": "Business Starter",
+    "title": "Startup Launch Agent",
+    "category": "leadership",
+    "tagline": "From idea to registered, trading business \u2014 step by step.",
+    "capabilities": [
+      "business startup planning",
+      "CIPC registration guidance",
+      "lean launch checklists",
+      "first-customer playbooks"
+    ]
+  },
+  {
+    "id": "isabella",
+    "name": "Isabella",
+    "role": "Innovations Strategist",
+    "title": "Innovation Strategy Agent",
+    "category": "leadership",
+    "tagline": "New products, new models, new markets \u2014 responsibly bold.",
+    "capabilities": [
+      "innovation strategy",
+      "product opportunity mapping",
+      "business model innovation",
+      "trend-to-action translation"
+    ]
+  },
+  {
+    "id": "cornelius",
+    "name": "Cornelius",
+    "role": "Attorney",
+    "title": "Attorney Agent",
+    "category": "legal",
+    "tagline": "Contracts, disputes and commercial law \u2014 in plain language.",
+    "capabilities": [
+      "contract drafting and review",
+      "commercial dispute strategy",
+      "SA company law guidance",
+      "legal risk assessment"
+    ]
+  },
+  {
+    "id": "rebecca",
+    "name": "Rebecca",
+    "role": "High Court Advocate",
+    "title": "Advocacy Agent",
+    "category": "legal",
+    "tagline": "Courtroom-grade argumentation and litigation strategy.",
+    "capabilities": [
+      "litigation strategy",
+      "legal argument construction",
+      "case merit analysis",
+      "court procedure guidance"
+    ]
+  },
+  {
+    "id": "peter",
+    "name": "Peter",
+    "role": "HR & Labour Lawyer",
+    "title": "Labour Law Agent",
+    "category": "legal",
+    "tagline": "BCEA, LRA, dismissals and disputes \u2014 done fairly and lawfully.",
+    "capabilities": [
+      "SA labour law",
+      "disciplinary process design",
+      "employment contract review",
+      "retrenchment guidance"
+    ]
+  },
+  {
+    "id": "yolanda",
+    "name": "Yolanda",
+    "role": "Judge",
+    "title": "Judicial Perspective Agent",
+    "category": "legal",
+    "tagline": "See your dispute the way a bench would.",
+    "capabilities": [
+      "impartial case evaluation",
+      "judicial reasoning simulation",
+      "settlement vs litigation analysis",
+      "evidence weighing"
+    ]
+  },
+  {
+    "id": "andrew",
+    "name": "Andrew",
+    "role": "CCMA Specialist",
+    "title": "CCMA Process Agent",
+    "category": "legal",
+    "tagline": "Conciliation, arbitration and everything before and after.",
+    "capabilities": [
+      "CCMA process navigation",
+      "unfair dismissal claims",
+      "conciliation preparation",
+      "labour dispute resolution"
+    ]
+  },
+  {
+    "id": "charles",
+    "name": "Charles",
+    "role": "Sales Professional",
+    "title": "Sales Agent",
+    "category": "sales",
+    "tagline": "Conversations that convert, pipeline that predicts.",
+    "capabilities": [
+      "sales conversation frameworks",
+      "objection handling",
+      "pipeline management",
+      "proposal writing"
+    ]
+  },
+  {
+    "id": "samantha",
+    "name": "Samantha",
+    "role": "Sales Team Lead",
+    "title": "Sales Leadership Agent",
+    "category": "sales",
+    "tagline": "Coaching reps, running rhythms, hitting the number.",
+    "capabilities": [
+      "sales team coaching",
+      "target setting and forecasting",
+      "sales process design",
+      "performance reviews"
+    ]
+  },
+  {
+    "id": "steven",
+    "name": "Steven",
+    "role": "SDR",
+    "title": "Sales Development Agent",
+    "category": "sales",
+    "tagline": "Cold outreach that opens doors without burning bridges.",
+    "capabilities": [
+      "cold outreach scripts",
+      "prospect research",
+      "appointment setting",
+      "follow-up cadences"
+    ]
+  },
+  {
+    "id": "hannah",
+    "name": "Hannah",
+    "role": "Lead Generator",
+    "title": "Lead Generation Agent",
+    "category": "sales",
+    "tagline": "Filling the top of funnel with people who might actually buy.",
+    "capabilities": [
+      "lead generation strategy",
+      "ICP definition",
+      "lead magnet design",
+      "qualification frameworks"
+    ]
+  },
+  {
+    "id": "william",
+    "name": "William",
+    "role": "Business Development",
+    "title": "BizDev Agent",
+    "category": "sales",
+    "tagline": "Partnerships, channels and deals bigger than transactions.",
+    "capabilities": [
+      "partnership strategy",
+      "channel development",
+      "deal structuring",
+      "market expansion"
+    ]
+  },
+  {
+    "id": "rachel",
+    "name": "Rachel",
+    "role": "SEO Specialist",
+    "title": "SEO Agent",
+    "category": "marketing",
+    "tagline": "Found on Google for the searches that pay.",
+    "capabilities": [
+      "SEO strategy",
+      "keyword research",
+      "on-page optimisation",
+      "local SEO for SA"
+    ]
+  },
+  {
+    "id": "evan",
+    "name": "Evan",
+    "role": "Marketing Specialist",
+    "title": "Marketing Agent",
+    "category": "marketing",
+    "tagline": "Full-funnel campaigns from first impression to repeat purchase.",
+    "capabilities": [
+      "campaign planning",
+      "content marketing",
+      "email marketing",
+      "marketing analytics"
+    ]
+  },
+  {
+    "id": "brooke",
+    "name": "Brooke",
+    "role": "Brand Activation",
+    "title": "Brand Activation Agent",
+    "category": "marketing",
+    "tagline": "Bringing brands to life where customers actually are.",
+    "capabilities": [
+      "brand activation campaigns",
+      "event marketing",
+      "experiential concepts",
+      "brand consistency"
+    ]
+  },
+  {
+    "id": "eleanor",
+    "name": "Eleanor",
+    "role": "PR & Media",
+    "title": "PR & Media Agent",
+    "category": "marketing",
+    "tagline": "Stories the media wants, reputation you can bank.",
+    "capabilities": [
+      "PR strategy",
+      "press release writing",
+      "media relations",
+      "crisis communication"
+    ]
+  },
+  {
+    "id": "wendy",
+    "name": "Wendy",
+    "role": "Receptionist",
+    "title": "Front Desk Agent",
+    "category": "operations",
+    "tagline": "Every caller greeted, every message routed, nothing dropped.",
+    "capabilities": [
+      "call and message handling",
+      "visitor management scripts",
+      "front-desk workflows",
+      "professional communication"
+    ]
+  },
+  {
+    "id": "anthony",
+    "name": "Anthony",
+    "role": "Personal Assistant",
+    "title": "PA Agent",
+    "category": "operations",
+    "tagline": "Your admin, inbox and errands \u2014 quietly handled.",
+    "capabilities": [
+      "executive admin support",
+      "inbox triage systems",
+      "document preparation",
+      "errand coordination"
+    ]
+  },
+  {
+    "id": "paula",
+    "name": "Paula",
+    "role": "Scheduling",
+    "title": "Scheduling Agent",
+    "category": "operations",
+    "tagline": "Calendars that respect time zones, load-shedding and sanity.",
+    "capabilities": [
+      "calendar management",
+      "meeting scheduling",
+      "roster planning",
+      "appointment systems"
+    ]
+  },
+  {
+    "id": "ryan",
+    "name": "Ryan",
+    "role": "Client Support Lead",
+    "title": "Support Lead Agent",
+    "category": "operations",
+    "tagline": "Support that turns complaints into loyalty.",
+    "capabilities": [
+      "customer support systems",
+      "complaint resolution",
+      "support scripts and macros",
+      "escalation design"
+    ]
+  },
+  {
+    "id": "ronan",
+    "name": "Ronan",
+    "role": "Warehouse Manager",
+    "title": "Warehouse Agent",
+    "category": "operations",
+    "tagline": "Stock in, stock out, nothing lost, everything counted.",
+    "capabilities": [
+      "inventory management",
+      "warehouse layout and flow",
+      "stock take procedures",
+      "fulfilment optimisation"
+    ]
+  },
+  {
+    "id": "stella",
+    "name": "Stella",
+    "role": "QA Specialist",
+    "title": "Quality Assurance Agent",
+    "category": "operations",
+    "tagline": "Catching defects before your customers do.",
+    "capabilities": [
+      "quality assurance processes",
+      "checklist and SOP design",
+      "defect tracking",
+      "continuous improvement"
+    ]
+  },
+  {
+    "id": "melissa",
+    "name": "Melissa",
+    "role": "Customer Success",
+    "title": "Customer Success Agent",
+    "category": "operations",
+    "tagline": "Onboarding, adoption and renewals \u2014 customers who stay and grow.",
+    "capabilities": [
+      "customer onboarding",
+      "retention strategy",
+      "account health monitoring",
+      "upsell identification"
+    ]
+  },
+  {
+    "id": "rita",
+    "name": "Rita",
+    "role": "Operations Analyst",
+    "title": "Ops Analytics Agent",
+    "category": "operations",
+    "tagline": "Your operations, measured \u2014 bottlenecks found and fixed.",
+    "capabilities": [
+      "operations analysis",
+      "process mapping",
+      "efficiency metrics",
+      "workflow optimisation"
+    ]
+  },
+  {
+    "id": "karen",
+    "name": "Karen",
+    "role": "HR Director",
+    "title": "HR Director Agent",
+    "category": "hr",
+    "tagline": "People strategy, policy and compliance under one roof.",
+    "capabilities": [
+      "HR strategy",
+      "SA employment compliance",
+      "policy development",
+      "organisational design"
+    ]
+  },
+  {
+    "id": "marlene",
+    "name": "Marlene",
+    "role": "Health & Safety Officer",
+    "title": "H&S Agent",
+    "category": "hr",
+    "tagline": "OHS Act compliance and a workplace nobody gets hurt in.",
+    "capabilities": [
+      "workplace health and safety",
+      "OHS Act compliance",
+      "risk assessments",
+      "incident procedures"
+    ]
+  },
+  {
+    "id": "cory",
+    "name": "Cory",
+    "role": "Training & Development",
+    "title": "L&D Agent",
+    "category": "hr",
+    "tagline": "Growing your people so the business grows itself.",
+    "capabilities": [
+      "training programme design",
+      "skills gap analysis",
+      "onboarding curricula",
+      "performance development"
+    ]
+  },
+  {
+    "id": "tyler",
+    "name": "Tyler",
+    "role": "Project Manager",
+    "title": "PM Agent",
+    "category": "project",
+    "tagline": "Scope, schedule, budget \u2014 delivered with evidence.",
+    "capabilities": [
+      "project planning",
+      "risk management",
+      "stakeholder communication",
+      "delivery tracking"
+    ]
+  },
+  {
+    "id": "liza",
+    "name": "Liza",
+    "role": "Finance Director",
+    "title": "FD Agent",
+    "category": "finance",
+    "tagline": "The numbers, the story they tell, and the decisions they demand.",
+    "capabilities": [
+      "financial strategy",
+      "cash flow management",
+      "budgeting and forecasting",
+      "management reporting"
+    ]
+  },
+  {
+    "id": "colin",
+    "name": "Colin",
+    "role": "Accounts Receivable",
+    "title": "Debtors Agent",
+    "category": "finance",
+    "tagline": "Getting you paid \u2014 promptly, politely, persistently.",
+    "capabilities": [
+      "accounts receivable management",
+      "collections cadences",
+      "credit policy",
+      "invoice dispute handling"
+    ]
+  },
+  {
+    "id": "vanessa",
+    "name": "Vanessa",
+    "role": "Banker",
+    "title": "Banking Agent",
+    "category": "finance",
+    "tagline": "Banking, facilities and funding \u2014 decoded.",
+    "capabilities": [
+      "business banking guidance",
+      "loan and facility preparation",
+      "bank relationship management",
+      "financial product comparison"
+    ]
+  },
+  {
+    "id": "shawn",
+    "name": "Shawn",
+    "role": "Procurement Officer",
+    "title": "Procurement Agent",
+    "category": "finance",
+    "tagline": "Buying well: right supplier, right price, right terms.",
+    "capabilities": [
+      "procurement strategy",
+      "supplier evaluation",
+      "purchase negotiation",
+      "spend analysis"
+    ]
+  },
+  {
+    "id": "sipho",
+    "name": "Sipho",
+    "role": "SA Tax Consultant",
+    "title": "Tax Agent",
+    "category": "finance",
+    "tagline": "SARS-compliant, penalty-free, and never a Rand overpaid.",
+    "capabilities": [
+      "SA tax compliance",
+      "VAT and PAYE guidance",
+      "provisional tax planning",
+      "SARS dispute navigation"
+    ]
+  },
+  {
+    "id": "oscar",
+    "name": "Oscar",
+    "role": "Research Analyst",
+    "title": "Research Agent",
+    "category": "research",
+    "tagline": "Evidence-first answers with sources and confidence labels.",
+    "capabilities": [
+      "structured research",
+      "competitor analysis",
+      "market research",
+      "source evaluation"
+    ]
+  },
+  {
+    "id": "derek",
+    "name": "Derek",
+    "role": "Data Scraper",
+    "title": "Data Collection Agent",
+    "category": "research",
+    "tagline": "Public data, ethically gathered, cleanly structured.",
+    "capabilities": [
+      "web data collection",
+      "data extraction design",
+      "dataset structuring",
+      "ethical scraping practices"
+    ]
+  },
+  {
+    "id": "priscilla",
+    "name": "Priscilla",
+    "role": "Data Analyst",
+    "title": "Analytics Agent",
+    "category": "research",
+    "tagline": "From raw numbers to the decision they support.",
+    "capabilities": [
+      "data analysis",
+      "dashboard design",
+      "statistical interpretation",
+      "insight storytelling"
+    ]
+  },
+  {
+    "id": "albert",
+    "name": "Albert",
+    "role": "Data & Research Officer",
+    "title": "Research Ops Agent",
+    "category": "research",
+    "tagline": "The organised backbone of every research effort.",
+    "capabilities": [
+      "research operations",
+      "data management",
+      "literature reviews",
+      "report compilation"
+    ]
+  },
+  {
+    "id": "susan",
+    "name": "Susan",
+    "role": "Deep Search Specialist",
+    "title": "Deep Search Agent",
+    "category": "research",
+    "tagline": "Finding what page one of Google never shows you.",
+    "capabilities": [
+      "deep web research",
+      "advanced search techniques",
+      "information verification",
+      "obscure source discovery"
+    ]
+  },
+  {
+    "id": "nadia",
+    "name": "Nadia",
+    "role": "Python Specialist",
+    "title": "Python Agent",
+    "category": "technology",
+    "tagline": "Scripts, automation and clean Python that just works.",
+    "capabilities": [
+      "Python development",
+      "automation scripting",
+      "data pipelines",
+      "code review"
+    ]
+  },
+  {
+    "id": "warren",
+    "name": "Warren",
+    "role": "Technical Engineer",
+    "title": "Engineering Agent",
+    "category": "technology",
+    "tagline": "Systems, integrations and the plumbing between them.",
+    "capabilities": [
+      "systems engineering",
+      "API integration",
+      "technical troubleshooting",
+      "solution design"
+    ]
+  },
+  {
+    "id": "nathan",
+    "name": "Nathan",
+    "role": "IT Director",
+    "title": "IT Director Agent",
+    "category": "technology",
+    "tagline": "IT strategy, budgets and governance that serve the business.",
+    "capabilities": [
+      "IT strategy",
+      "technology budgeting",
+      "vendor management",
+      "IT governance"
+    ]
+  },
+  {
+    "id": "helen",
+    "name": "Helen",
+    "role": "Expert Technologist",
+    "title": "Deep Tech Agent",
+    "category": "technology",
+    "tagline": "The hard questions \u2014 architecture, scale, emerging tech.",
+    "capabilities": [
+      "deep technical analysis",
+      "emerging technology assessment",
+      "architecture review",
+      "technical due diligence"
+    ]
+  },
+  {
+    "id": "dylan",
+    "name": "Dylan",
+    "role": "Cloud & DevOps",
+    "title": "Cloud Agent",
+    "category": "technology",
+    "tagline": "Ship reliably, sleep at night, pay only for what you use.",
+    "capabilities": [
+      "cloud architecture",
+      "CI/CD pipelines",
+      "infrastructure as code",
+      "cost optimisation"
+    ]
+  },
+  {
+    "id": "natalie",
+    "name": "Natalie",
+    "role": "Network & Infrastructure",
+    "title": "Network Agent",
+    "category": "technology",
+    "tagline": "Connectivity that survives load-shedding and Monday mornings.",
+    "capabilities": [
+      "network design",
+      "infrastructure planning",
+      "connectivity troubleshooting",
+      "office IT setup"
+    ]
+  },
+  {
+    "id": "simon",
+    "name": "Simon",
+    "role": "Cybersecurity Specialist",
+    "title": "Cybersecurity Agent",
+    "category": "security",
+    "tagline": "Practical defence for real businesses, not Hollywood fears.",
+    "capabilities": [
+      "security posture assessment",
+      "threat protection planning",
+      "incident response",
+      "POPIA security compliance"
+    ]
+  },
+  {
+    "id": "samuel",
+    "name": "Samuel",
+    "role": "Ethical Hacker",
+    "title": "Offensive Security Agent",
+    "category": "security",
+    "tagline": "Thinking like an attacker so you can defend like a pro.",
+    "capabilities": [
+      "penetration testing concepts",
+      "vulnerability assessment",
+      "attack surface mapping",
+      "security awareness training"
+    ]
+  },
+  {
+    "id": "sonya",
+    "name": "Sonya",
+    "role": "Dark Web Educator",
+    "title": "Dark Web Awareness Agent",
+    "category": "security",
+    "tagline": "Demystifying the dark web \u2014 knowledge as protection.",
+    "capabilities": [
+      "dark web awareness education",
+      "data breach education",
+      "identity protection guidance",
+      "threat intelligence basics"
+    ]
+  },
+  {
+    "id": "frank",
+    "name": "Frank",
+    "role": "Identity & Fraud Specialist",
+    "title": "Anti-Fraud Agent",
+    "category": "security",
+    "tagline": "Spotting fraud before the money moves.",
+    "capabilities": [
+      "fraud prevention",
+      "identity verification",
+      "invoice fraud detection",
+      "scam analysis"
+    ]
+  },
+  {
+    "id": "sentinel-x",
+    "name": "Sentinel-X",
+    "role": "Cybersecurity AI",
+    "title": "Autonomous Security Monitor",
+    "category": "security",
+    "tagline": "Tireless monitoring logic with a machine's patience.",
+    "capabilities": [
+      "security monitoring logic",
+      "anomaly detection concepts",
+      "alert triage design",
+      "security automation"
+    ]
+  },
+  {
+    "id": "christopher",
+    "name": "Christopher",
+    "role": "Crew Chief",
+    "title": "Maintenance Crew Agent",
+    "category": "maintenance",
+    "tagline": "Crews coordinated, jobs scheduled, sites left better than found.",
+    "capabilities": [
+      "maintenance crew coordination",
+      "job scheduling",
+      "work order management",
+      "site safety practices"
+    ]
+  },
+  {
+    "id": "tanya",
+    "name": "Tanya",
+    "role": "Engineer",
+    "title": "Engineering Agent",
+    "category": "maintenance",
+    "tagline": "Root causes found, systems fixed, failures prevented.",
+    "capabilities": [
+      "engineering diagnostics",
+      "preventive maintenance design",
+      "equipment troubleshooting",
+      "technical specifications"
+    ]
+  },
+  {
+    "id": "carl",
+    "name": "Carl",
+    "role": "Web Designer",
+    "title": "Web Design Agent",
+    "category": "creative",
+    "tagline": "Websites that look expensive and load fast on SA data.",
+    "capabilities": [
+      "web design",
+      "UI/UX design",
+      "responsive layouts",
+      "conversion-focused design"
+    ]
+  },
+  {
+    "id": "penelope",
+    "name": "Penelope",
+    "role": "Graphics Designer",
+    "title": "Graphics Agent",
+    "category": "creative",
+    "tagline": "Visual identity that makes people stop scrolling.",
+    "capabilities": [
+      "graphic design",
+      "brand identity",
+      "social media visuals",
+      "print design"
+    ]
+  },
+  {
+    "id": "bernard",
+    "name": "Bernard",
+    "role": "Architect",
+    "title": "Architecture Agent",
+    "category": "creative",
+    "tagline": "Spaces designed for how people actually live and work.",
+    "capabilities": [
+      "architectural concepts",
+      "space planning",
+      "building regulation awareness",
+      "design development"
+    ]
+  },
+  {
+    "id": "adrian",
+    "name": "Adrian",
+    "role": "AI Architect & Interior Designer",
+    "title": "AI + Interiors Agent",
+    "category": "creative",
+    "tagline": "Where machine intelligence meets beautiful rooms.",
+    "capabilities": [
+      "interior design",
+      "AI-assisted design workflows",
+      "spatial visualisation concepts",
+      "design technology"
+    ]
+  },
+  {
+    "id": "coach-sizwe",
+    "name": "Coach Sizwe",
+    "role": "Personal Trainer",
+    "title": "PT Agent",
+    "category": "fitness",
+    "tagline": "Programmes that fit your life and actually get done.",
+    "capabilities": [
+      "personal training programmes",
+      "strength coaching",
+      "fitness goal setting",
+      "exercise technique guidance"
+    ]
+  },
+  {
+    "id": "coach-ryno",
+    "name": "Coach Ryno",
+    "role": "Gym Instructor",
+    "title": "Gym Agent",
+    "category": "fitness",
+    "tagline": "Form first, ego last \u2014 lift well for decades.",
+    "capabilities": [
+      "gym instruction",
+      "exercise form coaching",
+      "workout programming",
+      "gym safety"
+    ]
+  },
+  {
+    "id": "palesa",
+    "name": "Palesa",
+    "role": "Dietician",
+    "title": "Nutrition Agent",
+    "category": "fitness",
+    "tagline": "Eating well on a SA budget \u2014 no fads, no guilt.",
+    "capabilities": [
+      "nutrition planning",
+      "meal planning on a budget",
+      "dietary guidance",
+      "nutrition education"
+    ]
+  },
+  {
+    "id": "perry",
+    "name": "Perry",
+    "role": "Flipper Zero Specialist",
+    "title": "Hardware Hacking Agent",
+    "category": "specialist",
+    "tagline": "RFID, RF and hardware exploration \u2014 legally and ethically.",
+    "capabilities": [
+      "Flipper Zero usage",
+      "RF and RFID concepts",
+      "hardware security awareness",
+      "ethical hardware testing"
+    ]
+  },
+  {
+    "id": "martin",
+    "name": "Martin",
+    "role": "Health Advisor",
+    "title": "Health Advisory Agent",
+    "category": "specialist",
+    "tagline": "Sensible health guidance \u2014 and honest referrals to real doctors.",
+    "capabilities": [
+      "general health education",
+      "wellness planning",
+      "health system navigation",
+      "preventive care guidance"
+    ]
+  },
+  {
+    "id": "zoe",
+    "name": "Zoe",
+    "role": "Wellbeing Coach",
+    "title": "Wellbeing Agent",
+    "category": "specialist",
+    "tagline": "Stress, sleep, balance \u2014 the human behind the business.",
+    "capabilities": [
+      "wellbeing coaching",
+      "stress management",
+      "sleep improvement",
+      "work-life rhythm design"
+    ]
+  },
+  {
+    "id": "frederick",
+    "name": "Frederick",
+    "role": "Problem Solver",
+    "title": "General Problem-Solving Agent",
+    "category": "specialist",
+    "tagline": "The odd problems that don't fit any department.",
+    "capabilities": [
+      "structured problem solving",
+      "decision frameworks",
+      "root cause analysis",
+      "creative solutions"
+    ]
+  },
+  {
+    "id": "cody",
+    "name": "Cody",
+    "role": "Navigation & GPS Specialist",
+    "title": "Navigation Agent",
+    "category": "specialist",
+    "tagline": "Routes, GPS and logistics geography across SA and beyond.",
+    "capabilities": [
+      "route planning",
+      "GPS and mapping guidance",
+      "logistics geography",
+      "tracking system advice"
+    ]
+  },
+  {
+    "id": "marius",
+    "name": "Marius",
+    "role": "Master Mechanic",
+    "title": "Vehicle Agent",
+    "category": "specialist",
+    "tagline": "Diagnoses by sound, saves you from dodgy quotes.",
+    "capabilities": [
+      "vehicle diagnostics",
+      "maintenance planning",
+      "repair quote assessment",
+      "fleet vehicle care"
+    ]
+  },
+  {
+    "id": "miss-thandi",
+    "name": "Miss Thandi",
+    "role": "Nursery Teacher",
+    "title": "Early Childhood Agent",
+    "category": "specialist",
+    "tagline": "Little humans, big foundations \u2014 ages 2 to 6.",
+    "capabilities": [
+      "early childhood education",
+      "play-based learning",
+      "school readiness",
+      "toddler activity design"
+    ]
+  },
+  {
+    "id": "mr-pieterse",
+    "name": "Mr Pieterse",
+    "role": "Primary Teacher",
+    "title": "Foundation Phase Agent",
+    "category": "specialist",
+    "tagline": "CAPS-aligned primary schooling, explained kindly.",
+    "capabilities": [
+      "primary school teaching",
+      "CAPS curriculum support",
+      "homework help",
+      "reading and numeracy foundations"
+    ]
+  },
+  {
+    "id": "mrs-naidoo",
+    "name": "Mrs Naidoo",
+    "role": "High School Teacher",
+    "title": "Secondary Phase Agent",
+    "category": "specialist",
+    "tagline": "Grades 8\u201312, CAPS-aligned, matric-focused.",
+    "capabilities": [
+      "high school subject support",
+      "matric exam preparation",
+      "study method coaching",
+      "CAPS assessment guidance"
+    ]
+  },
+  {
+    "id": "prof-khumalo",
+    "name": "Prof Khumalo",
+    "role": "University Lecturer",
+    "title": "University Agent",
+    "category": "specialist",
+    "tagline": "University-level rigour with a mentor's patience.",
+    "capabilities": [
+      "university subject tutoring",
+      "academic writing",
+      "research methodology",
+      "exam and assignment preparation"
+    ]
+  },
+  {
+    "id": "mr-botha",
+    "name": "Mr Botha",
+    "role": "College Lecturer",
+    "title": "TVET Agent",
+    "category": "specialist",
+    "tagline": "TVET college N1\u2013N6 \u2014 trades, engineering and business studies.",
+    "capabilities": [
+      "TVET college subjects",
+      "NATED N1-N6 support",
+      "practical trade theory",
+      "career-focused learning"
+    ]
+  },
+  {
+    "id": "jesse",
+    "name": "Jesse",
+    "role": "Job Hunter",
+    "title": "Career Agent",
+    "category": "specialist",
+    "tagline": "CVs, interviews and the strategy to actually land the job.",
+    "capabilities": [
+      "CV and cover letter writing",
+      "interview preparation",
+      "job search strategy",
+      "LinkedIn optimisation"
+    ]
+  },
+  {
+    "id": "dexter",
+    "name": "Dexter",
+    "role": "Dropshipping Specialist",
+    "title": "E-commerce Agent",
+    "category": "specialist",
+    "tagline": "Dropshipping without the guru nonsense \u2014 honest margins in Rand.",
+    "capabilities": [
+      "dropshipping business setup",
+      "product research",
+      "supplier sourcing",
+      "e-commerce margins"
+    ]
+  },
+  {
+    "id": "bongani",
+    "name": "Bongani",
+    "role": "Learning Monitor",
+    "title": "Study Accountability Agent",
+    "category": "specialist",
+    "tagline": "Keeping learners on track, one check-in at a time.",
+    "capabilities": [
+      "study accountability",
+      "learning progress tracking",
+      "motivation systems",
+      "parent progress reporting"
+    ]
+  }
+]

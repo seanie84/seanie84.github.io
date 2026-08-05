@@ -1,1 +1,0 @@
-import{j as t,e as n}from"./index-lBYgIZHn.js";function i({children:s,nested:a,interactive:r,className:o,...e}){return t.jsx("div",{"code-path":"src/components/GlassCard.tsx:16:5",className:n(a?"glass-2":"glass",r&&"transition-all duration-200 hover:-translate-y-[3px] hover:border-[var(--line-strong)] hover:shadow-[var(--elev-glow)]",o),...e,children:s})}export{i as G};
