@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Core palette */
+  --void: #050d1f;
+  --navy: #0b1e3d;
+  --navy-2: #0e2547;
+  --glass: rgba(16, 38, 74, 0.55);
+  --glass-2: rgba(23, 51, 96, 0.45);
+  --line: rgba(94, 200, 255, 0.14);
+  --line-strong: rgba(94, 200, 255, 0.32);
+
+  /* Text */
+  --ink: #eaf4ff;
+  --ink-2: #9db8d6;
+  --ink-3: #5f7a9e;
+
+  /* Accent */
+  --cyan: #22d3ee;
+  --cyan-bright: #00e5ff;
+  --cyan-dim: #0e7490;
+  --gold: #f5c542;
+  --gold-deep: #d4af37;
+
+  /* Status */
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --danger: #fb7185;
+  --violet: #a78bfa;
+
+  /* Category colours */
+  --cat-core: #f5c542;
+  --cat-leadership: #fcd34d;
+  --cat-legal: #93c5fd;
+  --cat-sales: #34d399;
+  --cat-marketing: #f472b6;
+  --cat-operations: #38bdf8;
+  --cat-hr: #fb923c;
+  --cat-project: #2dd4bf;
+  --cat-finance: #a3e635;
+  --cat-research: #a78bfa;
+  --cat-technology: #22d3ee;
+  --cat-security: #fb7185;
+  --cat-maintenance: #94a3b8;
+
+  /* Elevation */
+  --elev-card: 0 4px 32px rgba(0,0,0,.45);
+  --elev-glow: 0 0 0 1px rgba(94,200,255,.18), 0 4px 32px rgba(0,0,0,.45);
+
+  /* Sidebar */
+  --sidebar-w: 220px;
+}
+
+html, body {
+  height: 100%;
+  background: var(--void);
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Typography helpers */
+.font-heading   { font-family: 'Rajdhani', sans-serif; }
+.font-hud       { font-family: 'Orbitron', sans-serif; }
+.font-mono-hud  { font-family: 'JetBrains Mono', monospace; }
+
+/* Glass card */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+}
+.glass-2 {
+  background: var(--glass-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
