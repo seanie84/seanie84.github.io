@@ -1,0 +1,20 @@
+# =============================================================================
+# DO NOT DELETE until GitHub Pages is switched to deploy from "GitHub Actions".
+#
+# This repository deploys through .github/workflows/deploy.yml, which builds
+# the Vite app and publishes the dist/ folder to GitHub Pages.
+#
+# The repo's Pages settings are still on "Deploy from a branch", so GitHub
+# ALSO runs a legacy Jekyll build ("pages build and deployment") on every
+# push. That legacy build publishes the RAW SOURCE CODE of this branch and,
+# because it finishes last, overwrites the real app — taking the site down.
+#
+# The intentionally invalid YAML below makes the legacy Jekyll build fail
+# before it can deploy, so the app deployed by deploy.yml stays live. The
+# legacy workflow run will show as failed — that is expected and harmless.
+#
+# Permanent fix (then this file can be deleted):
+#   GitHub repo -> Settings -> Pages -> "Build and deployment" ->
+#   Source: "GitHub Actions"
+# =============================================================================
+intentionally-invalid-yaml: [ this unclosed list stops the legacy Jekyll build
