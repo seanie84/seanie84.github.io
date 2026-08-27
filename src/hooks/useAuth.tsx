@@ -22,8 +22,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   function login(name: string, email: string, password: string): boolean {
-    if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
-      const u = { name: name || 'Operator', email };
+    // Email match is case-insensitive; trim both fields so autofill/paste
+    // whitespace can't fail the login.
+    if (email.trim().toLowerCase() === DEMO_EMAIL.toLowerCase() && password.trim() === DEMO_PASSWORD) {
+      const u = { name: name.trim() || 'Operator', email: email.trim() };
       setUser(u);
       sessionStorage.setItem('nexa_user', JSON.stringify(u));
       return true;

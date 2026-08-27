@@ -30,6 +30,17 @@ npm run dev     # local dev server
 npm run build   # production build into dist/
 ```
 
+## Claude plugin: nexas-render
+
+This repo also ships `claude-plugins/nexas-render/` — the Render (render.com)
+plugin customised for ClearVision AI, and doubles as a Claude Code plugin
+marketplace (`.claude-plugin/marketplace.json`). It teaches Claude the
+company's Render conventions (fleet naming, regions, the NEXA deploy recipe)
+and adds `/nexas-render:deploy`, `/nexas-render:status`, `/nexas-render:logs`
+and the `dylan` DevOps agent. See
+[claude-plugins/nexas-render/README.md](claude-plugins/nexas-render/README.md).
+Neither directory affects the Vite build or the deployed site.
+
 ---
 
 This project was scaffolded from the React + TypeScript + Vite template with HMR and some Oxlint rules.
