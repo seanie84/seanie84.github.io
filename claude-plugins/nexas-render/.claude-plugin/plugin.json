@@ -1,0 +1,19 @@
+{
+  "name": "nexas-render",
+  "version": "1.0.0",
+  "description": "Render (render.com) deployment and operations, customised for ClearVision AI's Nexas AI command center — company service naming, Frankfurt-first regions, the NEXA app deploy recipe, cost and secrets rules, and Dylan, the Cloud & DevOps agent.",
+  "author": {
+    "name": "ClearVision AI",
+    "url": "https://seanie84.github.io"
+  },
+  "homepage": "https://github.com/seanie84/seanie84.github.io",
+  "repository": "https://github.com/seanie84/seanie84.github.io",
+  "keywords": [
+    "render",
+    "deploy",
+    "devops",
+    "nexas",
+    "clearvision-ai",
+    "south-africa"
+  ]
+}

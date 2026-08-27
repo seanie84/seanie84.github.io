@@ -1,0 +1,27 @@
+{
+  "name": "clearvision-ai",
+  "owner": {
+    "name": "ClearVision AI",
+    "url": "https://seanie84.github.io"
+  },
+  "plugins": [
+    {
+      "name": "nexas-render",
+      "source": "./claude-plugins/nexas-render",
+      "description": "Render (render.com) deployment and operations, customised for ClearVision AI's Nexas AI command center — fleet naming, Frankfurt-first regions, the NEXA app deploy recipe, cost and secrets rules, and Dylan, the Cloud & DevOps agent.",
+      "version": "1.0.0",
+      "author": {
+        "name": "ClearVision AI"
+      },
+      "homepage": "https://github.com/seanie84/seanie84.github.io",
+      "category": "deployment",
+      "keywords": [
+        "render",
+        "deploy",
+        "devops",
+        "nexas",
+        "clearvision-ai"
+      ]
+    }
+  ]
+}
