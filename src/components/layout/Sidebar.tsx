@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import {
   LayoutDashboard, Swords, Target, Users2, FileText,
   BarChart2, BookOpen, Cpu, Package, FileSpreadsheet,
-  Settings, Palette, LogOut, Bot,
+  Settings, Palette, LogOut, Bot, ScrollText,
 } from 'lucide-react';
 
 const NAV = [
@@ -18,6 +18,7 @@ const NAV = [
   { to: '/memory',     label: 'Memory',           Icon: Cpu },
   { to: '/plugins',    label: 'Plugins',          Icon: Package },
   { to: '/quotes',     label: 'Quotes',           Icon: FileSpreadsheet },
+  { to: '/profile',    label: 'Profile',          Icon: ScrollText },
   { to: '/studio',     label: 'Theme Studio',     Icon: Palette },
   { to: '/settings',   label: 'Settings',         Icon: Settings },
 ];
