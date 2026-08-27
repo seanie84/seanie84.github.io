@@ -15,6 +15,7 @@ import Plugins from './pages/Plugins';
 import Quotes from './pages/Quotes';
 import Settings from './pages/Settings';
 import Studio from './pages/Studio';
+import Profile from './pages/Profile';
 
 function PrivateRoutes() {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ function PrivateRoutes() {
         <Route path="/memory" element={<Memory />} />
         <Route path="/plugins" element={<Plugins />} />
         <Route path="/quotes" element={<Quotes />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/studio" element={<Studio />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
