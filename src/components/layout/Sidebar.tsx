@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import {
   LayoutDashboard, Swords, Target, Users2, FileText,
   BarChart2, BookOpen, Cpu, Package, FileSpreadsheet,
-  Settings, Palette, LogOut, Bot, ScrollText,
+  Settings, Palette, LogOut, Bot, ScrollText, X,
 } from 'lucide-react';
 
 const NAV = [
@@ -23,7 +23,7 @@ const NAV = [
   { to: '/settings',   label: 'Settings',         Icon: Settings },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ open = true, onClose }: { open?: boolean; onClose?: () => void }) {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
 
@@ -41,9 +41,11 @@ export default function Sidebar() {
       left: 0,
       bottom: 0,
       zIndex: 40,
+      transform: open ? 'translateX(0)' : 'translateX(-100%)',
+      transition: 'transform 0.2s',
     }}>
-      {/* Logo */}
-      <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid var(--line)' }}>
+      {/* Header with close button */}
+      <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid var(--line)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
             width: 32, height: 32, borderRadius: 8,
@@ -56,6 +58,20 @@ export default function Sidebar() {
             <div style={{ fontFamily: 'JetBrains Mono', fontSize: 9, color: 'var(--cyan)', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Command Center</div>
           </div>
         </div>
+        {onClose && (
+          <button
+            onClick={onClose}
+            style={{
+              padding: 4, background: 'transparent', border: 'none', color: 'var(--ink-3)',
+              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'color 0.15s',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--cyan)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--ink-3)'; }}
+          >
+            <X size={16} />
+          </button>
+        )}
       </div>
 
       {/* Nav */}
@@ -64,6 +80,7 @@ export default function Sidebar() {
           <NavLink
             key={to}
             to={to}
+            onClick={onClose}
             style={({ isActive }) => ({
               display: 'flex',
               alignItems: 'center',
