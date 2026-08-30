@@ -1,3 +1,4 @@
+/* eslint-disable react/only-export-components */
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 interface User { name: string; email: string; }
@@ -10,9 +11,6 @@ interface AuthCtx {
 
 const Ctx = createContext<AuthCtx | null>(null);
 
-const DEMO_EMAIL = 'Nexa@clearvision-ai.co.za';
-const DEMO_PASSWORD = 'nexa2024';
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
     try {
@@ -22,6 +20,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   function login(name: string, email: string, password: string): boolean {
+    const DEMO_EMAIL = 'Nexa@clearvision-ai.co.za';
+    const DEMO_PASSWORD = 'nexa2024';
     // Email match is case-insensitive; trim both fields so autofill/paste
     // whitespace can't fail the login.
     if (email.trim().toLowerCase() === DEMO_EMAIL.toLowerCase() && password.trim() === DEMO_PASSWORD) {

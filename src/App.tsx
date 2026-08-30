@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './hooks/useAuth';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import AppShell from './components/layout/AppShell';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -46,12 +47,14 @@ function PrivateRoutes() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Routes>
-        <Route path="/login" element={<LoginGuard />} />
-        <Route path="/*" element={<PrivateRoutes />} />
-      </Routes>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<LoginGuard />} />
+          <Route path="/*" element={<PrivateRoutes />} />
+        </Routes>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

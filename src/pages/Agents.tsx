@@ -34,6 +34,7 @@ export default function Agents() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search agents…"
+            aria-label="Search agents by name, role, or tagline"
             style={{
               width: '100%', padding: '9px 12px 9px 36px',
               background: 'var(--glass)', border: '1px solid var(--line)',
@@ -45,6 +46,7 @@ export default function Agents() {
         <select
           value={category}
           onChange={e => setCategory(e.target.value)}
+          aria-label="Filter agents by category"
           style={{
             padding: '9px 12px', background: 'var(--glass)', border: '1px solid var(--line)',
             borderRadius: 8, color: 'var(--ink)', fontFamily: 'Inter', fontSize: 13, cursor: 'pointer', outline: 'none',
@@ -54,14 +56,20 @@ export default function Agents() {
           {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
         </select>
 
-        <div style={{ display: 'flex', gap: 4, marginLeft: 'auto' }}>
+        <div style={{ display: 'flex', gap: 4, marginLeft: 'auto' }} role="group" aria-label="View layout options">
           {(['grid', 'list'] as const).map(v => (
-            <button key={v} onClick={() => setView(v)} style={{
-              padding: '8px 10px', borderRadius: 8, cursor: 'pointer',
-              background: view === v ? 'rgba(34,211,238,0.12)' : 'var(--glass)',
-              border: `1px solid ${view === v ? 'rgba(34,211,238,0.3)' : 'var(--line)'}`,
-              color: view === v ? 'var(--cyan)' : 'var(--ink-3)',
-            }}>
+            <button
+              key={v}
+              onClick={() => setView(v)}
+              aria-pressed={view === v}
+              aria-label={`Switch to ${v} view`}
+              style={{
+                padding: '8px 10px', borderRadius: 8, cursor: 'pointer',
+                background: view === v ? 'rgba(34,211,238,0.12)' : 'var(--glass)',
+                border: `1px solid ${view === v ? 'rgba(34,211,238,0.3)' : 'var(--line)'}`,
+                color: view === v ? 'var(--cyan)' : 'var(--ink-3)',
+              }}
+            >
               {v === 'grid' ? <LayoutGrid size={15} /> : <List size={15} />}
             </button>
           ))}
@@ -93,6 +101,10 @@ function GridCard({ agent, onSelect }: { agent: Agent; onSelect: () => void }) {
     <div
       className="glass"
       onClick={onSelect}
+      onKeyDown={e => e.key === 'Enter' && onSelect()}
+      role="button"
+      tabIndex={0}
+      aria-label={`${agent.name}, ${agent.role}`}
       style={{ padding: '18px', cursor: 'pointer', transition: 'border-color 0.15s, box-shadow 0.15s' }}
       onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--line-strong)'; el.style.boxShadow = 'var(--elev-glow)'; }}
       onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--line)'; el.style.boxShadow = 'none'; }}
@@ -125,6 +137,10 @@ function ListRow({ agent, onSelect }: { agent: Agent; onSelect: () => void }) {
     <div
       className="glass"
       onClick={onSelect}
+      onKeyDown={e => e.key === 'Enter' && onSelect()}
+      role="button"
+      tabIndex={0}
+      aria-label={`${agent.name}, ${agent.role}`}
       style={{ padding: '12px 16px', cursor: 'pointer', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 14, transition: 'border-color 0.15s' }}
       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--line-strong)'; }}
       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--line)'; }}
@@ -151,9 +167,12 @@ function ListRow({ agent, onSelect }: { agent: Agent; onSelect: () => void }) {
 
 function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
   const color = getCategoryColor(agent.category);
+  const modalId = `agent-modal-${agent.id}`;
+  const headingId = `agent-heading-${agent.id}`;
   return (
     <div
       onClick={onClose}
+      role="presentation"
       style={{
         position: 'fixed', inset: 0, zIndex: 100, display: 'flex',
         alignItems: 'center', justifyContent: 'center', padding: 24,
@@ -161,7 +180,11 @@ function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
       }}
     >
       <div
+        id={modalId}
         onClick={e => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={headingId}
         className="glass"
         style={{ width: '100%', maxWidth: 520, padding: 32, boxShadow: 'var(--elev-glow)' }}
       >
@@ -173,10 +196,10 @@ function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
             fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 20, color,
           }}>{agent.name.slice(0, 2).toUpperCase()}</div>
           <div>
-            <h2 style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 22, color: 'var(--ink)' }}>{agent.name}</h2>
+            <h2 id={headingId} style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 22, color: 'var(--ink)' }}>{agent.name}</h2>
             <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)' }}>{agent.role}</p>
           </div>
-          <button onClick={onClose} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--ink-3)', cursor: 'pointer', fontSize: 20 }}>✕</button>
+          <button onClick={onClose} aria-label={`Close ${agent.name} details`} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--ink-3)', cursor: 'pointer', fontSize: 20, padding: '4px' }}>✕</button>
         </div>
         <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)', fontStyle: 'italic', marginBottom: 20, lineHeight: 1.6 }}>"{agent.tagline}"</p>
         <div style={{ marginBottom: 16 }}>
