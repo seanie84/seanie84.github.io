@@ -1,4 +1,15 @@
-# NEXA — AI-Agent Business Command Center
+# NEXAS — AI-agent HUD
+
+This repository is **NEXAS** (also published under the older names NEXA / NEXUS).
+
+It is a **different application** from **NEXORA**.
+
+| App | What | Live |
+|---|---|---|
+| **NEXAS** (this repo) | Agent HUD / room | https://seanie84.github.io |
+| **NEXORA** | Command center + desk | https://nexora-desk.onrender.com |
+
+Do not point this site at `nexora-postgres`. Do not share NEXORA sessions, env groups, or `DATABASE_URL`.
 
 React + TypeScript + Vite app, deployed to GitHub Pages at https://seanie84.github.io.
 
@@ -35,41 +46,8 @@ npm run build   # production build into dist/
 This repo also ships `claude-plugins/nexas-render/` — the Render (render.com)
 plugin customised for ClearVision AI, and doubles as a Claude Code plugin
 marketplace (`.claude-plugin/marketplace.json`). It teaches Claude the
-company's Render conventions (fleet naming, regions, the NEXA deploy recipe)
+company's Render conventions (fleet naming, regions, the NEXAS deploy recipe)
 and adds `/nexas-render:deploy`, `/nexas-render:status`, `/nexas-render:logs`
 and the `dylan` DevOps agent. See
 [claude-plugins/nexas-render/README.md](claude-plugins/nexas-render/README.md).
 Neither directory affects the Vite build or the deployed site.
-
----
-
-This project was scaffolded from the React + TypeScript + Vite template with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
