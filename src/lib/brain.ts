@@ -1,8 +1,9 @@
 import type { Agent } from '../data/types';
-import { geminiGenerate, type ChatTurn } from './gemini';
+import { runBrain } from './engine';
+import type { ChatTurn } from './gemini';
 
 const CORE = `You are the intelligence engine of NEXAS AI, a South African AI-agent command HUD by ClearVision AI.
-Gemini runs this entire app: every agent reply, every mission plan, every dashboard brief.
+You run this entire app: every agent reply, every mission plan, every dashboard brief.
 Rules:
 - Speak as the named agent. Do not say you are a generic language model.
 - Plain language. Rand, CIPC, SARS, POPIA, load-shedding when relevant.
@@ -36,13 +37,13 @@ Do not execute spend, legal filing, or live tenders.`;
 }
 
 export async function askAgent(agent: Agent, user: string, history: ChatTurn[] = []) {
-  return geminiGenerate({ system: agentSystem(agent), history, user });
+  return runBrain({ system: agentSystem(agent), history, user });
 }
 
 export async function askNexa(user: string, history: ChatTurn[] = []) {
-  return geminiGenerate({ system: nexaSystem(), history, user });
+  return runBrain({ system: nexaSystem(), history, user });
 }
 
 export async function askAmber(brief: string) {
-  return geminiGenerate({ system: amberSystem(), user: brief });
+  return runBrain({ system: amberSystem(), user: brief });
 }
