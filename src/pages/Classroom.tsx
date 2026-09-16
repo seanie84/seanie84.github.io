@@ -1,14 +1,12 @@
-import { BookOpen } from 'lucide-react';
-import ComingSoon from '../components/ComingSoon';
+import GeneratePage from '../components/GeneratePage';
 
 export default function Classroom() {
   return (
-    <ComingSoon
-      icon={BookOpen}
+    <GeneratePage
       title="Classroom"
-      description="AI-powered training and learning modules"
-      step={5}
-      totalSteps={14}
+      kicker="CAPS / TVET · STUDY HELP"
+      system={`You are a South African tutor. CAPS-aligned where relevant. Explain clearly. Do not sit the exam for the learner.`}
+      placeholder="e.g. explain Grade 11 accounting debtors control in plain language"
     />
   );
 }

@@ -1,14 +1,12 @@
-import { FileCheck } from 'lucide-react';
-import ComingSoon from '../components/ComingSoon';
+import GeneratePage from '../components/GeneratePage';
 
 export default function Quotes() {
   return (
-    <ComingSoon
-      icon={FileCheck}
+    <GeneratePage
       title="Quotes"
-      description="Generate professional quotes and proposals"
-      step={9}
-      totalSteps={14}
+      kicker="DRAFT ONLY · NOT A TENDER"
+      system={`You draft South African-style quote outlines in Rand. Mark DRAFT. Do not invent client prices as if they were approved. Flag VAT as 15% unless told otherwise. NEXAS is not NEXORA.`}
+      placeholder="e.g. draft a CCTV + display quote outline for a 12-camera site"
     />
   );
 }

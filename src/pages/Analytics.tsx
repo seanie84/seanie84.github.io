@@ -1,14 +1,12 @@
-import { BarChart2 } from 'lucide-react';
-import ComingSoon from '../components/ComingSoon';
+import GeneratePage from '../components/GeneratePage';
 
 export default function Analytics() {
   return (
-    <ComingSoon
-      icon={BarChart2}
+    <GeneratePage
       title="Analytics"
-      description="Business intelligence and performance dashboards. Connect your AI API keys in Settings to unlock full functionality."
-      step={7}
-      totalSteps={14}
+      kicker="ASK FOR A READ, NOT A FAKE DASHBOARD"
+      system={`You turn rough numbers or a business question into a short analytic brief. If no numbers were given, say so and ask for them. Do not invent KPIs.`}
+      placeholder="e.g. we quoted 12 jobs and won 3 — what should I look at?"
     />
   );
 }
