@@ -1,5 +1,4 @@
-import { Component } from 'react';
-import type { ReactNode } from 'react';
+import { Component, type CSSProperties, type ReactNode } from 'react';
 
 interface Props { children: ReactNode; }
 interface State { hasError: boolean; error: Error | null; }
@@ -30,6 +29,30 @@ async function purgeAndReload() {
   url.searchParams.set('_nexas_reload', String(Date.now()));
   window.location.replace(url.toString());
 }
+
+const btnPrimary: CSSProperties = {
+  width: '100%',
+  minHeight: 44,
+  borderRadius: 16,
+  border: 'none',
+  background: '#FFA23A',
+  color: '#1B2A4A',
+  fontWeight: 600,
+  cursor: 'pointer',
+  marginBottom: 10,
+};
+
+const btnGhost: CSSProperties = {
+  width: '100%',
+  minHeight: 44,
+  borderRadius: 16,
+  border: '1px solid rgba(255,255,255,0.25)',
+  background: 'transparent',
+  color: 'rgba(255,255,255,0.85)',
+  fontSize: 14,
+  cursor: 'pointer',
+  marginBottom: 10,
+};
 
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
@@ -77,28 +100,16 @@ export class ErrorBoundary extends Component<Props, State> {
           </p>
 
           {stale ? (
-            <button
-              type="button"
-              onClick={() => { void purgeAndReload(); }}
-              style={btnPrimary}
-            >
+            <button type="button" onClick={() => { void purgeAndReload(); }} style={btnPrimary}>
               Update and reload
             </button>
           ) : (
-            <button
-              type="button"
-              onClick={() => this.setState({ hasError: false, error: null })}
-              style={btnPrimary}
-            >
+            <button type="button" onClick={() => this.setState({ hasError: false, error: null })} style={btnPrimary}>
               Try again
             </button>
           )}
 
-          <button
-            type="button"
-            onClick={() => { void purgeAndReload(); }}
-            style={btnGhost}
-          >
+          <button type="button" onClick={() => { void purgeAndReload(); }} style={btnGhost}>
             Clear cached data and restart
           </button>
 
@@ -123,27 +134,3 @@ export class ErrorBoundary extends Component<Props, State> {
     );
   }
 }
-
-const btnPrimary: React.CSSProperties = {
-  width: '100%',
-  minHeight: 44,
-  borderRadius: 16,
-  border: 'none',
-  background: '#FFA23A',
-  color: '#1B2A4A',
-  fontWeight: 600,
-  cursor: 'pointer',
-  marginBottom: 10,
-};
-
-const btnGhost: React.CSSProperties = {
-  width: '100%',
-  minHeight: 44,
-  borderRadius: 16,
-  border: '1px solid rgba(255,255,255,0.25)',
-  background: 'transparent',
-  color: 'rgba(255,255,255,0.85)',
-  fontSize: 14,
-  cursor: 'pointer',
-  marginBottom: 10,
-};
