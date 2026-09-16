@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import {
   DEFAULT_MODEL,
   MODELS,
@@ -51,8 +51,7 @@ export default function Settings() {
           GOOGLE AI STUDIO API KEY
         </div>
         <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)', marginBottom: 12, lineHeight: 1.5 }}>
-          Create a key at aistudio.google.com/apikey. It is stored in this browser only.
-          Do not paste it into a public repo or chat.
+          Create a key at aistudio.google.com/apikey. It stays in this browser only.
         </p>
         <input
           type="password"
@@ -66,10 +65,7 @@ export default function Settings() {
             color: 'var(--ink)', fontFamily: 'JetBrains Mono', fontSize: 13, outline: 'none',
           }}
         />
-
-        <div style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.1em', marginBottom: 8 }}>
-          MODEL
-        </div>
+        <div style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.1em', marginBottom: 8 }}>MODEL</div>
         <select
           value={model}
           onChange={(e) => setModel(e.target.value)}
@@ -81,25 +77,18 @@ export default function Settings() {
         >
           {MODELS.map((m) => <option key={m} value={m}>{m}</option>)}
         </select>
-
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <button type="button" onClick={save} style={btn}>Save</button>
-          <button type="button" onClick={() => void test()} disabled={busy} style={btn}>
-            {busy ? 'Testing…' : 'Test Gemini'}
-          </button>
-          <button type="button" onClick={() => { clearGeminiKey(); setKey(''); setStatus('Key removed from this device.'); }} style={{ ...btn, background: 'transparent', color: 'var(--ink-2)', border: '1px solid var(--line)' }}>
-            Remove key
-          </button>
+          <button type="button" onClick={() => void test()} disabled={busy} style={btn}>{busy ? 'Testing…' : 'Test Gemini'}</button>
+          <button type="button" onClick={() => { clearGeminiKey(); setKey(''); setStatus('Key removed from this device.'); }} style={{ ...btn, background: 'transparent', color: 'var(--ink-2)', border: '1px solid var(--line)' }}>Remove key</button>
         </div>
-        {status && (
-          <p style={{ marginTop: 16, fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)', whiteSpace: 'pre-wrap' }}>{status}</p>
-        )}
+        {status && <p style={{ marginTop: 16, fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)', whiteSpace: 'pre-wrap' }}>{status}</p>}
       </div>
     </div>
   );
 }
 
-const btn: React.CSSProperties = {
+const btn: CSSProperties = {
   padding: '10px 16px',
   borderRadius: 8,
   border: 'none',

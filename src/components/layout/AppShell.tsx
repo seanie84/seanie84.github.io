@@ -1,12 +1,14 @@
 import { type ReactNode, useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import { Menu } from 'lucide-react';
+import GeminiChat from '../GeminiChat';
 
 export default function AppShell({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     if (typeof window === 'undefined') return true;
     return window.innerWidth >= 1024;
   });
+  const [dock, setDock] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,7 +27,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         minHeight: '100vh',
         overflowY: 'auto',
         background: 'var(--void)',
-        padding: '28px 32px',
+        padding: '28px 32px 96px',
         transition: 'margin-left 0.2s',
       }}>
         {!sidebarOpen && (
@@ -44,6 +46,28 @@ export default function AppShell({ children }: { children: ReactNode }) {
         )}
         {children}
       </main>
+      <button
+        type="button"
+        onClick={() => setDock((v) => !v)}
+        style={{
+          position: 'fixed', right: 20, bottom: 20, zIndex: 80,
+          padding: '10px 14px', borderRadius: 999,
+          border: '1px solid var(--cyan)', background: 'rgba(5,13,31,0.92)',
+          color: 'var(--cyan)', fontFamily: 'Rajdhani', fontWeight: 700,
+          letterSpacing: '0.08em', cursor: 'pointer',
+        }}
+      >
+        {dock ? 'CLOSE NEXA' : 'ASK NEXA'}
+      </button>
+      {dock && (
+        <div className="glass" style={{
+          position: 'fixed', right: 20, bottom: 72, zIndex: 80,
+          width: 'min(420px, calc(100vw - 40px))', padding: 16,
+          boxShadow: 'var(--elev-glow)',
+        }}>
+          <GeminiChat />
+        </div>
+      )}
     </div>
   );
 }
