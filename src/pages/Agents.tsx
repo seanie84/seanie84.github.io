@@ -3,6 +3,7 @@ import agentsRaw from '../data/agents.json';
 import { type Agent } from '../data/types';
 import { CATEGORIES, getCategoryColor } from '../data/categories';
 import { Search, LayoutGrid, List } from 'lucide-react';
+import GeminiChat from '../components/GeminiChat';
 
 const agents = agentsRaw as Agent[];
 
@@ -23,10 +24,9 @@ export default function Agents() {
     <div>
       <div style={{ marginBottom: 28 }}>
         <h1 style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 28, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--ink)', marginBottom: 4 }}>Agent Directory</h1>
-        <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.15em' }}>77 SPECIALISED AI AGENTS · STANDING BY</p>
+        <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.15em' }}>77 SPECIALISED AI AGENTS · POWERED BY GEMINI</p>
       </div>
 
-      {/* Toolbar */}
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24, alignItems: 'center' }}>
         <div style={{ position: 'relative', flex: '1 1 260px', maxWidth: 360 }}>
           <Search size={14} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-3)' }} />
@@ -186,7 +186,7 @@ function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
         aria-modal="true"
         aria-labelledby={headingId}
         className="glass"
-        style={{ width: '100%', maxWidth: 520, padding: 32, boxShadow: 'var(--elev-glow)' }}
+        style={{ width: '100%', maxWidth: 520, padding: 32, boxShadow: 'var(--elev-glow)', maxHeight: '90vh', overflowY: 'auto' }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
           <div style={{
@@ -214,11 +214,7 @@ function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
             ))}
           </div>
         </div>
-        <div style={{ padding: '12px 14px', background: 'rgba(34,211,238,0.06)', borderRadius: 8, border: '1px solid var(--line)' }}>
-          <p style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--cyan)', letterSpacing: '0.1em' }}>
-            CONNECT YOUR AI API KEY IN SETTINGS TO CHAT WITH {agent.name.toUpperCase()}
-          </p>
-        </div>
+        <GeminiChat agent={agent} />
       </div>
     </div>
   );
