@@ -1,6 +1,6 @@
 import { geminiGenerate, getGeminiKey, type ChatTurn } from './gemini';
 
-export type EngineId = 'gemini' | 'ollama' | 'lmstudio' | 'groq' | 'deepseek';
+export type EngineId = 'gemini' | 'ollama' | 'lmstudio' | 'groq' | 'deepseek' | 'qwen';
 
 const ENGINE = 'nexas_engine';
 const LOCAL_URL = 'nexas_local_url';
@@ -8,28 +8,54 @@ const LOCAL_MODEL = 'nexas_local_model';
 const GROQ_KEY = 'nexas_groq_key';
 const DEEPSEEK_KEY = 'nexas_deepseek_key';
 const DEEPSEEK_MODEL = 'nexas_deepseek_model';
+const QWEN_KEY = 'nexas_qwen_key';
+const QWEN_MODEL = 'nexas_qwen_model';
+const FAILOVER = 'nexas_failover';
 
 export const DEFAULT_DEEPSEEK_MODEL = 'deepseek-flash';
 export const DEEPSEEK_MODELS = ['deepseek-flash', 'deepseek-v4-pro'] as const;
+export const DEFAULT_QWEN_MODEL = 'qwen-flash';
+export const QWEN_MODELS = ['qwen-flash', 'qwen-plus', 'qwen-max', 'qwen-turbo'] as const;
+export const QWEN_BASE = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1';
 
 export const ENGINE_LABEL: Record<EngineId, string> = {
   gemini: 'Gemini (Google AI Studio — free quota)',
   groq: 'Groq (cloud, free tier)',
   deepseek: 'DeepSeek Flash (thinking, high effort)',
+  qwen: 'Qwen (DashScope international)',
   ollama: 'Ollama (local, free)',
   lmstudio: 'LM Studio (local, free)',
 };
 
+export type BrainRoute = { engine: EngineId; failover: boolean };
+
+let lastRoute: BrainRoute | null = null;
+export function getLastBrainRoute(): BrainRoute | null {
+  return lastRoute;
+}
+
 export function getEngine(): EngineId {
   try {
     const v = localStorage.getItem(ENGINE);
-    if (v === 'ollama' || v === 'lmstudio' || v === 'groq' || v === 'gemini' || v === 'deepseek') return v;
+    if (v === 'ollama' || v === 'lmstudio' || v === 'groq' || v === 'gemini' || v === 'deepseek' || v === 'qwen') return v;
   } catch { /* ignore */ }
   return 'gemini';
 }
 
 export function setEngine(id: EngineId) {
   localStorage.setItem(ENGINE, id);
+}
+
+export function getFailover(): boolean {
+  try {
+    const v = localStorage.getItem(FAILOVER);
+    if (v === '0') return false;
+  } catch { /* ignore */ }
+  return true;
+}
+
+export function setFailover(on: boolean) {
+  localStorage.setItem(FAILOVER, on ? '1' : '0');
 }
 
 export function getLocalUrl(): string {
@@ -80,12 +106,47 @@ export function setDeepseekModel(model: string) {
   localStorage.setItem(DEEPSEEK_MODEL, model.trim() || DEFAULT_DEEPSEEK_MODEL);
 }
 
-export function hasEngine(): boolean {
-  const e = getEngine();
-  if (e === 'gemini') return getGeminiKey().length > 20;
-  if (e === 'groq') return getGroqKey().length > 10;
-  if (e === 'deepseek') return getDeepseekKey().length > 10;
+export function getQwenKey(): string {
+  try { return localStorage.getItem(QWEN_KEY)?.trim() || ''; } catch { return ''; }
+}
+
+export function setQwenKey(key: string) {
+  localStorage.setItem(QWEN_KEY, key.trim());
+}
+
+export function clearQwenKey() {
+  localStorage.removeItem(QWEN_KEY);
+}
+
+export function getQwenModel(): string {
+  try { return localStorage.getItem(QWEN_MODEL) || DEFAULT_QWEN_MODEL; } catch { return DEFAULT_QWEN_MODEL; }
+}
+
+export function setQwenModel(model: string) {
+  localStorage.setItem(QWEN_MODEL, model.trim() || DEFAULT_QWEN_MODEL);
+}
+
+export function engineReady(id: EngineId): boolean {
+  if (id === 'gemini') return getGeminiKey().length > 20;
+  if (id === 'groq') return getGroqKey().length > 10;
+  if (id === 'deepseek') return getDeepseekKey().length > 10;
+  if (id === 'qwen') return getQwenKey().length > 10;
   return true;
+}
+
+export function hasEngine(): boolean {
+  if (engineReady(getEngine())) return true;
+  if (!getFailover()) return false;
+  return engineReady('gemini') || engineReady('qwen');
+}
+
+function failoverChain(primary: EngineId): EngineId[] {
+  const chain: EngineId[] = [primary];
+  if (!getFailover()) return chain;
+  for (const id of ['gemini', 'qwen'] as const) {
+    if (!chain.includes(id)) chain.push(id);
+  }
+  return chain;
 }
 
 async function openaiChat(opts: {
@@ -128,16 +189,15 @@ async function openaiChat(opts: {
   return text;
 }
 
-export async function runBrain(opts: {
+async function callEngine(id: EngineId, opts: {
   system: string;
   history?: ChatTurn[];
   user: string;
 }): Promise<string> {
-  const engine = getEngine();
-  if (engine === 'gemini') return geminiGenerate(opts);
-  if (engine === 'groq') {
+  if (id === 'gemini') return geminiGenerate(opts);
+  if (id === 'groq') {
     const key = getGroqKey();
-    if (!key) throw new Error('No Groq key. Get a free key at console.groq.com and paste it in Settings.');
+    if (!key) throw new Error('No Groq key.');
     return openaiChat({
       base: 'https://api.groq.com/openai/v1',
       key,
@@ -147,9 +207,9 @@ export async function runBrain(opts: {
       user: opts.user,
     });
   }
-  if (engine === 'deepseek') {
+  if (id === 'deepseek') {
     const key = getDeepseekKey();
-    if (!key) throw new Error('No DeepSeek key. Create one at platform.deepseek.com and paste it in Settings.');
+    if (!key) throw new Error('No DeepSeek key.');
     return openaiChat({
       base: 'https://api.deepseek.com',
       key,
@@ -162,6 +222,18 @@ export async function runBrain(opts: {
         thinking: { type: 'enabled' },
         reasoning_effort: 'high',
       },
+    });
+  }
+  if (id === 'qwen') {
+    const key = getQwenKey();
+    if (!key) throw new Error('No Qwen / DashScope key.');
+    return openaiChat({
+      base: QWEN_BASE,
+      key,
+      model: getQwenModel() || DEFAULT_QWEN_MODEL,
+      system: opts.system,
+      history: opts.history,
+      user: opts.user,
     });
   }
   const base = getLocalUrl();
@@ -185,9 +257,37 @@ export async function runBrain(opts: {
   }
 }
 
+export async function runBrain(opts: {
+  system: string;
+  history?: ChatTurn[];
+  user: string;
+}): Promise<string> {
+  const primary = getEngine();
+  const errors: string[] = [];
+  for (const id of failoverChain(primary)) {
+    if (!engineReady(id)) {
+      errors.push(`${id}: no key`);
+      continue;
+    }
+    try {
+      const text = await callEngine(id, opts);
+      lastRoute = { engine: id, failover: id !== primary };
+      return text;
+    } catch (e) {
+      errors.push(`${id}: ${e instanceof Error ? e.message : String(e)}`);
+    }
+  }
+  lastRoute = null;
+  throw new Error('All engines failed. ' + errors.join(' · '));
+}
+
 export async function pingEngine(): Promise<string> {
-  return runBrain({
+  const text = await runBrain({
     system: 'You are the NEXAS AI engine. Reply in one short sentence.',
     user: 'Confirm you are online and name yourself.',
   });
+  const route = getLastBrainRoute();
+  if (!route) return text;
+  const via = route.failover ? `${route.engine} failover` : route.engine;
+  return `[${via}] ${text}`;
 }
