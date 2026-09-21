@@ -1,6 +1,6 @@
 import { geminiGenerate, getGeminiKey, type ChatTurn } from './gemini';
 
-export type EngineId = 'gemini' | 'deepseek' | 'groq' | 'ollama' | 'lmstudio';
+export type EngineId = 'gemini' | 'ollama' | 'lmstudio' | 'groq' | 'deepseek';
 
 const ENGINE = 'nexas_engine';
 const LOCAL_URL = 'nexas_local_url';
@@ -9,10 +9,13 @@ const GROQ_KEY = 'nexas_groq_key';
 const DEEPSEEK_KEY = 'nexas_deepseek_key';
 const DEEPSEEK_MODEL = 'nexas_deepseek_model';
 
+export const DEFAULT_DEEPSEEK_MODEL = 'deepseek-flash';
+export const DEEPSEEK_MODELS = ['deepseek-flash', 'deepseek-v4-pro'] as const;
+
 export const ENGINE_LABEL: Record<EngineId, string> = {
   gemini: 'Gemini (Google AI Studio — free quota)',
-  deepseek: 'DeepSeek (deepseek-flash)',
   groq: 'Groq (cloud, free tier)',
+  deepseek: 'DeepSeek Flash (thinking, high effort)',
   ollama: 'Ollama (local, free)',
   lmstudio: 'LM Studio (local, free)',
 };
@@ -65,12 +68,16 @@ export function setDeepseekKey(key: string) {
   localStorage.setItem(DEEPSEEK_KEY, key.trim());
 }
 
+export function clearDeepseekKey() {
+  localStorage.removeItem(DEEPSEEK_KEY);
+}
+
 export function getDeepseekModel(): string {
-  try { return localStorage.getItem(DEEPSEEK_MODEL) || 'deepseek-flash'; } catch { return 'deepseek-flash'; }
+  try { return localStorage.getItem(DEEPSEEK_MODEL) || DEFAULT_DEEPSEEK_MODEL; } catch { return DEFAULT_DEEPSEEK_MODEL; }
 }
 
 export function setDeepseekModel(model: string) {
-  localStorage.setItem(DEEPSEEK_MODEL, model.trim() || 'deepseek-flash');
+  localStorage.setItem(DEEPSEEK_MODEL, model.trim() || DEFAULT_DEEPSEEK_MODEL);
 }
 
 export function hasEngine(): boolean {
@@ -89,6 +96,7 @@ async function openaiChat(opts: {
   history?: ChatTurn[];
   user: string;
   extra?: Record<string, unknown>;
+  skipTemperature?: boolean;
 }): Promise<string> {
   const messages = [
     { role: 'system', content: opts.system },
@@ -100,20 +108,22 @@ async function openaiChat(opts: {
   ];
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (opts.key) headers.Authorization = `Bearer ${opts.key}`;
+  const body: Record<string, unknown> = {
+    model: opts.model,
+    messages,
+    stream: false,
+    ...(opts.extra || {}),
+  };
+  if (!opts.skipTemperature) body.temperature = 0.6;
   const res = await fetch(`${opts.base.replace(/\/$/, '')}/chat/completions`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      model: opts.model,
-      messages,
-      temperature: 0.6,
-      stream: false,
-      ...opts.extra,
-    }),
+    body: JSON.stringify(body),
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data?.error?.message || data?.error || res.statusText || 'Engine failed');
-  const text = data?.choices?.[0]?.message?.content?.trim();
+  const msg = data?.choices?.[0]?.message;
+  const text = (msg?.content || '').trim();
   if (!text) throw new Error('Engine returned an empty reply.');
   return text;
 }
@@ -125,22 +135,6 @@ export async function runBrain(opts: {
 }): Promise<string> {
   const engine = getEngine();
   if (engine === 'gemini') return geminiGenerate(opts);
-  if (engine === 'deepseek') {
-    const key = getDeepseekKey();
-    if (!key) throw new Error('No DeepSeek key. Create one at platform.deepseek.com and paste it in Settings.');
-    return openaiChat({
-      base: 'https://api.deepseek.com',
-      key,
-      model: getDeepseekModel() || 'deepseek-flash',
-      system: opts.system,
-      history: opts.history,
-      user: opts.user,
-      extra: {
-        thinking: { type: 'enabled' },
-        reasoning_effort: 'high',
-      },
-    });
-  }
   if (engine === 'groq') {
     const key = getGroqKey();
     if (!key) throw new Error('No Groq key. Get a free key at console.groq.com and paste it in Settings.');
@@ -151,6 +145,23 @@ export async function runBrain(opts: {
       system: opts.system,
       history: opts.history,
       user: opts.user,
+    });
+  }
+  if (engine === 'deepseek') {
+    const key = getDeepseekKey();
+    if (!key) throw new Error('No DeepSeek key. Create one at platform.deepseek.com and paste it in Settings.');
+    return openaiChat({
+      base: 'https://api.deepseek.com',
+      key,
+      model: getDeepseekModel() || DEFAULT_DEEPSEEK_MODEL,
+      system: opts.system,
+      history: opts.history,
+      user: opts.user,
+      skipTemperature: true,
+      extra: {
+        thinking: { type: 'enabled' },
+        reasoning_effort: 'high',
+      },
     });
   }
   const base = getLocalUrl();

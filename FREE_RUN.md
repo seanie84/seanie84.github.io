@@ -79,6 +79,7 @@ Minimum, all free:
 - One of:
   - Google AI Studio key, or
   - Groq key, or
+  - DeepSeek key (`deepseek-flash`, thinking on), or
   - Ollama + a 4–8B model, or
   - LM Studio + a GGUF file
 
@@ -87,7 +88,21 @@ Optional for the most reliable local setup:
 - Node.js 20 LTS (to run `npm run dev`)
 - 8 GB RAM minimum, 16 GB comfortable
 
-You do not need Render, Stripe, Anthropic, or a paid Gemini plan for NEXAS.
+## 6. DeepSeek Flash (thinking, high effort)
+
+1. Create a key at https://platform.deepseek.com
+2. NEXAS → Settings → Engine = DeepSeek Flash
+3. Paste the key. Model: `deepseek-flash` (or `deepseek-v4-pro`)
+4. Save → Test.
+
+NEXAS calls `POST https://api.deepseek.com/chat/completions` with:
+
+- `thinking: { type: "enabled" }`
+- `reasoning_effort: "high"`
+- no `temperature` (thinking mode forbids it)
+
+The key stays in this browser. NEXAS does not commit it to git.
+
 
 ## Do not do
 
