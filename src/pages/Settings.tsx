@@ -1,11 +1,15 @@
 import { useState, type CSSProperties } from 'react';
 import {
   ENGINE_LABEL,
+  getDeepseekKey,
+  getDeepseekModel,
   getEngine,
   getGroqKey,
   getLocalModel,
   getLocalUrl,
   pingEngine,
+  setDeepseekKey,
+  setDeepseekModel,
   setEngine,
   setGroqKey,
   setLocalModel,
@@ -27,6 +31,8 @@ export default function Settings() {
   const [key, setKey] = useState(() => getGeminiKey());
   const [gmodel, setGmodel] = useState(() => getGeminiModel() || DEFAULT_MODEL);
   const [groq, setGroq] = useState(() => getGroqKey());
+  const [deepseek, setDeepseek] = useState(() => getDeepseekKey());
+  const [dmodel, setDmodel] = useState(() => getDeepseekModel());
   const [localUrl, setUrl] = useState(() => getLocalUrl());
   const [localModel, setLmodel] = useState(() => getLocalModel());
   const [status, setStatus] = useState('');
@@ -37,6 +43,8 @@ export default function Settings() {
     setGeminiKey(key);
     setGeminiModel(gmodel);
     setGroqKey(groq);
+    setDeepseekKey(deepseek);
+    setDeepseekModel(dmodel);
     setLocalUrl(localUrl);
     setLocalModel(localModel);
     setStatus('Saved on this device only.');
@@ -58,7 +66,9 @@ export default function Settings() {
   return (
     <div>
       <h1 style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 28, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--ink)', marginBottom: 4 }}>Settings</h1>
-      <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.12em', marginBottom: 28 }}>FREE ENGINES · GEMINI QUOTA · GROQ · OLLAMA · LM STUDIO</p>
+      <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.12em', marginBottom: 28 }}>
+        GEMINI · DEEPSEEK · GROQ · OLLAMA · LM STUDIO
+      </p>
 
       <div className="glass" style={{ padding: 24, maxWidth: 560, boxShadow: 'var(--elev-card)' }}>
         <div style={label}>ENGINE</div>
@@ -70,7 +80,7 @@ export default function Settings() {
 
         {engine === 'gemini' && (
           <>
-            <div style={label}>GOOGLE AI STUDIO KEY (FREE)</div>
+            <div style={label}>GOOGLE AI STUDIO KEY</div>
             <input type="password" value={key} onChange={(e) => setKey(e.target.value)} placeholder="AIza…" autoComplete="off" style={field} />
             <div style={label}>GEMINI MODEL</div>
             <select value={gmodel} onChange={(e) => setGmodel(e.target.value)} style={field}>
@@ -79,9 +89,19 @@ export default function Settings() {
           </>
         )}
 
+        {engine === 'deepseek' && (
+          <>
+            <div style={label}>DEEPSEEK API KEY</div>
+            <p style={{ fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-2)', marginBottom: 8 }}>platform.deepseek.com — stored in this browser only.</p>
+            <input type="password" value={deepseek} onChange={(e) => setDeepseek(e.target.value)} placeholder="sk-…" autoComplete="off" style={field} />
+            <div style={label}>DEEPSEEK MODEL</div>
+            <input value={dmodel} onChange={(e) => setDmodel(e.target.value)} placeholder="deepseek-flash" style={field} />
+          </>
+        )}
+
         {engine === 'groq' && (
           <>
-            <div style={label}>GROQ KEY (FREE TIER)</div>
+            <div style={label}>GROQ KEY</div>
             <input type="password" value={groq} onChange={(e) => setGroq(e.target.value)} placeholder="gsk_…" autoComplete="off" style={field} />
             <div style={label}>GROQ MODEL</div>
             <input value={localModel} onChange={(e) => setLmodel(e.target.value)} placeholder="llama-3.3-70b-versatile" style={field} />
@@ -94,9 +114,6 @@ export default function Settings() {
             <input value={localUrl} onChange={(e) => setUrl(e.target.value)} style={field} />
             <div style={label}>LOCAL MODEL</div>
             <input value={localModel} onChange={(e) => setLmodel(e.target.value)} placeholder="qwen3:8b" style={field} />
-            <p style={{ fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-2)', marginBottom: 12, lineHeight: 1.5 }}>
-              GitHub Pages may block localhost. Fastest free path: run NEXAS with npm run dev on this PC, or set OLLAMA_ORIGINS=https://seanie84.github.io
-            </p>
           </>
         )}
 

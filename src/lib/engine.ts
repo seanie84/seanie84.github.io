@@ -1,14 +1,17 @@
 import { geminiGenerate, getGeminiKey, type ChatTurn } from './gemini';
 
-export type EngineId = 'gemini' | 'ollama' | 'lmstudio' | 'groq';
+export type EngineId = 'gemini' | 'deepseek' | 'groq' | 'ollama' | 'lmstudio';
 
 const ENGINE = 'nexas_engine';
 const LOCAL_URL = 'nexas_local_url';
 const LOCAL_MODEL = 'nexas_local_model';
 const GROQ_KEY = 'nexas_groq_key';
+const DEEPSEEK_KEY = 'nexas_deepseek_key';
+const DEEPSEEK_MODEL = 'nexas_deepseek_model';
 
 export const ENGINE_LABEL: Record<EngineId, string> = {
   gemini: 'Gemini (Google AI Studio — free quota)',
+  deepseek: 'DeepSeek (deepseek-flash)',
   groq: 'Groq (cloud, free tier)',
   ollama: 'Ollama (local, free)',
   lmstudio: 'LM Studio (local, free)',
@@ -17,7 +20,7 @@ export const ENGINE_LABEL: Record<EngineId, string> = {
 export function getEngine(): EngineId {
   try {
     const v = localStorage.getItem(ENGINE);
-    if (v === 'ollama' || v === 'lmstudio' || v === 'groq' || v === 'gemini') return v;
+    if (v === 'ollama' || v === 'lmstudio' || v === 'groq' || v === 'gemini' || v === 'deepseek') return v;
   } catch { /* ignore */ }
   return 'gemini';
 }
@@ -54,10 +57,27 @@ export function setGroqKey(key: string) {
   localStorage.setItem(GROQ_KEY, key.trim());
 }
 
+export function getDeepseekKey(): string {
+  try { return localStorage.getItem(DEEPSEEK_KEY)?.trim() || ''; } catch { return ''; }
+}
+
+export function setDeepseekKey(key: string) {
+  localStorage.setItem(DEEPSEEK_KEY, key.trim());
+}
+
+export function getDeepseekModel(): string {
+  try { return localStorage.getItem(DEEPSEEK_MODEL) || 'deepseek-flash'; } catch { return 'deepseek-flash'; }
+}
+
+export function setDeepseekModel(model: string) {
+  localStorage.setItem(DEEPSEEK_MODEL, model.trim() || 'deepseek-flash');
+}
+
 export function hasEngine(): boolean {
   const e = getEngine();
   if (e === 'gemini') return getGeminiKey().length > 20;
   if (e === 'groq') return getGroqKey().length > 10;
+  if (e === 'deepseek') return getDeepseekKey().length > 10;
   return true;
 }
 
@@ -68,6 +88,7 @@ async function openaiChat(opts: {
   system: string;
   history?: ChatTurn[];
   user: string;
+  extra?: Record<string, unknown>;
 }): Promise<string> {
   const messages = [
     { role: 'system', content: opts.system },
@@ -82,10 +103,16 @@ async function openaiChat(opts: {
   const res = await fetch(`${opts.base.replace(/\/$/, '')}/chat/completions`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ model: opts.model, messages, temperature: 0.6 }),
+    body: JSON.stringify({
+      model: opts.model,
+      messages,
+      temperature: 0.6,
+      stream: false,
+      ...opts.extra,
+    }),
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.error?.message || data?.error || res.statusText || 'Local engine failed');
+  if (!res.ok) throw new Error(data?.error?.message || data?.error || res.statusText || 'Engine failed');
   const text = data?.choices?.[0]?.message?.content?.trim();
   if (!text) throw new Error('Engine returned an empty reply.');
   return text;
@@ -98,6 +125,22 @@ export async function runBrain(opts: {
 }): Promise<string> {
   const engine = getEngine();
   if (engine === 'gemini') return geminiGenerate(opts);
+  if (engine === 'deepseek') {
+    const key = getDeepseekKey();
+    if (!key) throw new Error('No DeepSeek key. Create one at platform.deepseek.com and paste it in Settings.');
+    return openaiChat({
+      base: 'https://api.deepseek.com',
+      key,
+      model: getDeepseekModel() || 'deepseek-flash',
+      system: opts.system,
+      history: opts.history,
+      user: opts.user,
+      extra: {
+        thinking: { type: 'enabled' },
+        reasoning_effort: 'high',
+      },
+    });
+  }
   if (engine === 'groq') {
     const key = getGroqKey();
     if (!key) throw new Error('No Groq key. Get a free key at console.groq.com and paste it in Settings.');
