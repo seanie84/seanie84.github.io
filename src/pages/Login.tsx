@@ -18,47 +18,48 @@ export default function Login() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--void)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div style={{
-        position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0,
-        backgroundImage: 'linear-gradient(rgba(34,211,238,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.04) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-      }} />
-      <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: 420 }}>
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-            width: 64, height: 64, borderRadius: 16,
-            background: 'linear-gradient(135deg, var(--cyan), var(--gold))',
-            marginBottom: 16, boxShadow: '0 0 40px rgba(34,211,238,0.3)',
-          }}>
-            <span style={{ fontFamily: 'Orbitron', fontWeight: 900, fontSize: 22, color: '#000' }}>NX</span>
-          </div>
-          <h1 style={{ fontFamily: 'Orbitron', fontWeight: 700, fontSize: 22, color: 'var(--ink)', letterSpacing: '0.12em', marginBottom: 6 }}>NEXAS AI</h1>
-          <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.18em', textTransform: 'uppercase' }}>
-            77 AGENTS · FREE ENGINE · NOT NEXORA
+    <div style={{ minHeight: '100vh', display: 'flex', background: 'var(--void)' }}>
+      <aside className="login-rail" style={{
+        width: '42%', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+        padding: '48px 40px',
+        background:
+          'linear-gradient(180deg, rgba(14,16,19,0.2), rgba(14,16,19,0.92)), radial-gradient(800px 400px at 20% 10%, rgba(61,154,140,0.18), transparent 50%), #12151a',
+        borderRight: '1px solid var(--line)',
+      }}>
+        <div>
+          <div className="nexa-mark" style={{ width: 40, height: 40, fontSize: 12 }}>NX</div>
+          <h1 style={{ marginTop: 28, fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 700, fontSize: 28, letterSpacing: '0.08em', color: 'var(--ink)' }}>NEXAS</h1>
+          <p style={{ marginTop: 8, fontFamily: 'IBM Plex Mono, monospace', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.16em' }}>
+            AGENT DESK · 77 SPECIALISTS
           </p>
         </div>
-        <div className="glass" style={{ padding: 32, boxShadow: 'var(--elev-glow)' }}>
-          <h2 style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 18, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--ink)', marginBottom: 24 }}>Operator Sign-In</h2>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <p style={{ fontFamily: 'IBM Plex Sans', fontSize: 14, color: 'var(--ink-2)', lineHeight: 1.6, maxWidth: 360 }}>
+          Operator sign-in for the ClearVision AI tenant. One HUD. Local keys. Not Nexora.
+        </p>
+        <p style={{ fontFamily: 'IBM Plex Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.08em' }}>
+          Groq · Gemini · DeepSeek · Qwen · failover chain
+        </p>
+      </aside>
+
+      <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32 }}>
+        <div style={{ width: '100%', maxWidth: 400 }}>
+          <div style={{ fontFamily: 'IBM Plex Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.16em', marginBottom: 10 }}>CHECKPOINT</div>
+          <h2 style={{ fontFamily: 'IBM Plex Sans', fontWeight: 700, fontSize: 22, color: 'var(--ink)', marginBottom: 24 }}>Operator sign-in</h2>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <Field label="Name" type="text" value={name} onChange={setName} autoComplete="name" placeholder="Your name" />
             <Field label="Email" type="email" value={email} onChange={setEmail} autoComplete="email" placeholder="operator@yourdomain" />
             <Field label="Password" type="password" value={password} onChange={setPassword} autoComplete="current-password" placeholder="••••••••" />
             {error && (
-              <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--danger)', padding: '10px 12px', background: 'rgba(251,113,133,0.08)', borderRadius: 8, border: '1px solid rgba(251,113,133,0.2)' }}>{error}</p>
+              <p style={{ fontFamily: 'IBM Plex Mono', fontSize: 11, color: 'var(--danger)', padding: '10px 12px', background: 'rgba(196,92,92,0.1)', border: '1px solid rgba(196,92,92,0.35)' }}>{error}</p>
             )}
             <button type="submit" style={{
-              marginTop: 8, padding: '12px', borderRadius: 10, border: '1px solid var(--cyan)',
-              background: 'rgba(34,211,238,0.12)', color: 'var(--cyan)', fontFamily: 'Rajdhani',
-              fontWeight: 700, fontSize: 14, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer',
+              marginTop: 8, padding: '12px', borderRadius: 2, border: '1px solid var(--cyan)',
+              background: 'var(--cyan)', color: '#0e1013', fontFamily: 'IBM Plex Sans',
+              fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', cursor: 'pointer',
             }}>Authenticate</button>
           </form>
         </div>
-        <p style={{ textAlign: 'center', marginTop: 24, fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.1em' }}>
-          NEXAS · ClearVision AI · Different app from NEXORA
-        </p>
-      </div>
+      </main>
     </div>
   );
 }
@@ -69,10 +70,10 @@ function Field({ label, type, value, onChange, autoComplete, placeholder }: {
 }) {
   return (
     <label style={{ display: 'block' }}>
-      <span style={{ display: 'block', marginBottom: 6, fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</span>
+      <span style={{ display: 'block', marginBottom: 6, fontFamily: 'IBM Plex Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.14em', textTransform: 'uppercase' }}>{label}</span>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} autoComplete={autoComplete} placeholder={placeholder} style={{
-        width: '100%', padding: '11px 14px', background: 'rgba(14,37,71,0.6)', border: '1px solid var(--line)',
-        borderRadius: 8, color: 'var(--ink)', fontFamily: 'Inter', fontSize: 14, outline: 'none',
+        width: '100%', padding: '11px 14px', background: 'var(--navy-2)', border: '1px solid var(--line)',
+        borderRadius: 2, color: 'var(--ink)', fontFamily: 'IBM Plex Sans', fontSize: 14, outline: 'none',
       }} />
     </label>
   );

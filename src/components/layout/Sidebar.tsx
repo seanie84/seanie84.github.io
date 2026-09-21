@@ -29,22 +29,20 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
 
   return (
     <aside style={{
-      width: 'var(--sidebar-w)', minHeight: '100vh', background: 'rgba(5,13,31,0.92)',
-      borderRight: '1px solid var(--line)', display: 'flex', flexDirection: 'column',
-      backdropFilter: 'blur(16px)', position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 40,
+      width: 'var(--sidebar-w)', minHeight: '100vh',
+      background: 'linear-gradient(#14171b, #0e1013)',
+      borderRight: '1px solid #0a0c0e',
+      boxShadow: '1px 0 0 rgba(255,255,255,.04)',
+      display: 'flex', flexDirection: 'column',
+      position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 40,
       transform: open ? 'translateX(0)' : 'translateX(-100%)', transition: 'transform 0.2s',
     }}>
-      <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid var(--line)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: '16px 14px 14px', borderBottom: '1px solid var(--line)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{
-            width: 32, height: 32, borderRadius: 8,
-            background: 'linear-gradient(135deg, var(--cyan), var(--gold))',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'Orbitron', fontWeight: 900, fontSize: 10, color: '#000',
-          }}>NX</div>
+          <div className="nexa-mark">NX</div>
           <div>
-            <div style={{ fontFamily: 'Orbitron', fontWeight: 700, fontSize: 13, color: 'var(--ink)', letterSpacing: '0.12em' }}>NEXAS</div>
-            <div style={{ fontFamily: 'JetBrains Mono', fontSize: 9, color: 'var(--cyan)', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Agent HUD</div>
+            <div style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 700, fontSize: 13, color: 'var(--ink)', letterSpacing: '0.14em' }}>NEXAS</div>
+            <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 9, color: 'var(--ink-3)', letterSpacing: '0.16em', textTransform: 'uppercase' }}>Agent desk</div>
           </div>
         </div>
         {onClose && (
@@ -53,17 +51,17 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
           </button>
         )}
       </div>
-      <nav style={{ flex: 1, overflowY: 'auto', padding: '8px 8px' }}>
+      <nav style={{ flex: 1, overflowY: 'auto', padding: '8px 6px' }}>
         {NAV.map(({ to, label, Icon }) => (
           <NavLink key={to} to={to} onClick={onClose} style={({ isActive }) => ({
-            display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 8,
-            marginBottom: 2, textDecoration: 'none', fontFamily: 'Rajdhani, sans-serif', fontWeight: 600,
-            fontSize: 13, letterSpacing: '0.04em',
-            color: isActive ? 'var(--cyan)' : 'var(--ink-2)',
-            background: isActive ? 'rgba(34,211,238,0.08)' : 'transparent',
-            border: isActive ? '1px solid rgba(34,211,238,0.2)' : '1px solid transparent',
+            display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', borderRadius: 2,
+            marginBottom: 1, textDecoration: 'none', fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 500,
+            fontSize: 13, letterSpacing: '0.02em',
+            color: isActive ? 'var(--ink)' : 'var(--ink-2)',
+            background: isActive ? 'rgba(61,154,140,0.12)' : 'transparent',
+            borderLeft: isActive ? '2px solid var(--cyan)' : '2px solid transparent',
           })}>
-            <Icon size={15} />
+            <Icon size={14} />
             {label}
           </NavLink>
         ))}
@@ -71,20 +69,20 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
       <div style={{ padding: '12px 8px', borderTop: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', marginBottom: 4 }}>
           <div style={{
-            width: 28, height: 28, borderRadius: '50%', background: 'var(--navy-2)', border: '1px solid var(--line-strong)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontFamily: 'Rajdhani', fontWeight: 700, color: 'var(--cyan)',
+            width: 28, height: 28, borderRadius: 2, background: 'var(--navy-2)', border: '1px solid var(--line-strong)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontFamily: 'IBM Plex Mono', fontWeight: 600, color: 'var(--cyan)',
           }}>{(user?.name ?? 'O')[0].toUpperCase()}</div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 12, fontFamily: 'Rajdhani', fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.name}</div>
-            <div style={{ fontSize: 10, fontFamily: 'JetBrains Mono', color: 'var(--ink-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.email}</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.name}</div>
+            <div style={{ fontSize: 10, fontFamily: 'IBM Plex Mono', color: 'var(--ink-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.email}</div>
           </div>
         </div>
         <button onClick={() => { logout(); navigate('/login'); }} style={{
-          width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 8,
+          width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px', borderRadius: 2,
           border: '1px solid transparent', background: 'transparent', cursor: 'pointer', color: 'var(--ink-3)',
-          fontFamily: 'Rajdhani', fontWeight: 600, fontSize: 13,
+          fontFamily: 'IBM Plex Sans', fontWeight: 500, fontSize: 13,
         }}>
-          <LogOut size={14} /> Sign Out
+          <LogOut size={14} /> Sign out
         </button>
       </div>
     </aside>

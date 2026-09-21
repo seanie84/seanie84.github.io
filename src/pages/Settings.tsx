@@ -83,8 +83,8 @@ export default function Settings() {
 
   return (
     <div>
-      <h1 style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 28, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--ink)', marginBottom: 4 }}>Settings</h1>
-      <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.12em', marginBottom: 28 }}>PRIMARY · FAILOVER GEMINI → QWEN</p>
+      <h1 style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em', color: 'var(--ink)', marginBottom: 4 }}>Settings</h1>
+      <p style={{ fontFamily: 'IBM Plex Mono', fontSize: 11, color: 'var(--ink-3)', letterSpacing: '0.12em', marginBottom: 28 }}>PRIMARY ENGINE · FAILOVER GEMINI → QWEN</p>
 
       <div className="glass" style={{ padding: 24, maxWidth: 560, boxShadow: 'var(--elev-card)', marginBottom: 16 }}>
         <div style={label}>PRIMARY ENGINE</div>

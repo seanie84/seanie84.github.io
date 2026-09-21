@@ -18,6 +18,15 @@ export const DEFAULT_QWEN_MODEL = 'qwen-flash';
 export const QWEN_MODELS = ['qwen-flash', 'qwen-plus', 'qwen-max', 'qwen-turbo'] as const;
 export const QWEN_BASE = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1';
 
+export const ENGINE_SHORT: Record<EngineId, string> = {
+  gemini: 'GEMINI',
+  groq: 'GROQ',
+  deepseek: 'DEEPSEEK',
+  qwen: 'QWEN',
+  ollama: 'OLLAMA',
+  lmstudio: 'LM STUDIO',
+};
+
 export const ENGINE_LABEL: Record<EngineId, string> = {
   gemini: 'Gemini (Google AI Studio — free quota)',
   groq: 'Groq (cloud, free tier)',
