@@ -30,7 +30,8 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
   return (
     <aside style={{
       width: 'var(--sidebar-w)', minHeight: '100vh',
-      background: '#0c0c0e',
+      background: 'rgba(12,12,14,.78)',
+      backdropFilter: 'blur(22px)',
       borderRight: '1px solid var(--line)',
       display: 'flex', flexDirection: 'column',
       position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 40,

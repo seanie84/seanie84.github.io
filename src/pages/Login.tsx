@@ -18,13 +18,12 @@ export default function Login() {
   }
 
   return (
-    <div style={{
+    <div className="bg-plate bg-login" style={{
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: 24,
-      background: 'radial-gradient(900px 500px at 50% -10%, rgba(45,212,191,.16), transparent 50%), var(--void)',
     }}>
       <div style={{ width: '100%', maxWidth: 400 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 36, justifyContent: 'center' }}>

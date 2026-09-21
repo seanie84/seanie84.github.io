@@ -20,7 +20,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--void)' }}>
+    <div className="bg-plate bg-desk" style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div style={{
         marginLeft: sidebarOpen ? 'var(--sidebar-w)' : 0,
@@ -49,7 +49,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           flex: 1,
           overflowY: 'auto',
           padding: '32px 36px 112px',
-          background: 'radial-gradient(900px 420px at 100% 0%, rgba(45,212,191,.08), transparent 50%)',
+          background: 'transparent',
         }}>
           {children}
         </main>

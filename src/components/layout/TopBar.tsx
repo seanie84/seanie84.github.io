@@ -24,7 +24,7 @@ export default function TopBar() {
   const ready = engineReady(primary) || (failoverOn && (engineReady('gemini') || engineReady('qwen')));
 
   return (
-    <header className="rack-bar">
+    <header className="rack-bar" style={{ background: 'rgba(9,9,11,.55)' }}>
       <span className={ready ? 'rack-dot' : 'rack-dot off'} />
       <span style={{ color: 'var(--ink)', fontWeight: 700, letterSpacing: '-0.02em' }}>NEXAS</span>
       <span className="chip" style={viaFailover ? { color: 'var(--warn)', borderColor: 'rgba(251,191,36,.3)', background: 'rgba(251,191,36,.1)' } : undefined}>
