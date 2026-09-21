@@ -23,8 +23,8 @@ export default function Agents() {
   return (
     <div>
       <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em', color: 'var(--ink)', marginBottom: 4 }}>Agent directory</h1>
-        <p style={{ fontFamily: 'IBM Plex Mono', fontSize: 11, color: 'var(--ink-3)', letterSpacing: '0.12em' }}>77 SPECIALISTS · PRIMARY ENGINE + GEMINI/QWEN FAILOVER</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)', marginBottom: 6 }}>Agents</h1>
+        <p style={{ fontSize: 14, color: 'var(--ink-2)' }}>77 specialists. Primary engine with Gemini → Qwen failover.</p>
       </div>
 
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24, alignItems: 'center' }}>

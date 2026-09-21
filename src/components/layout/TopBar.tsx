@@ -4,22 +4,15 @@ import { ENGINE_SHORT, engineReady, getEngine, getFailover, getLastBrainRoute } 
 
 function clockParts() {
   const d = new Date();
-  return {
-    time: d.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }),
-    date: d.toLocaleDateString('en-ZA', { weekday: 'short', day: '2-digit', month: 'short' }).toUpperCase(),
-  };
+  return d.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit', hour12: false });
 }
 
 export default function TopBar() {
   const { user } = useAuth();
-  const [now, setNow] = useState(clockParts);
-  const [tick, setTick] = useState(0);
+  const [time, setTime] = useState(clockParts);
 
   useEffect(() => {
-    const id = window.setInterval(() => {
-      setNow(clockParts());
-      setTick((n) => n + 1);
-    }, 1000);
+    const id = window.setInterval(() => setTime(clockParts()), 1000);
     return () => window.clearInterval(id);
   }, []);
 
@@ -31,25 +24,15 @@ export default function TopBar() {
   const ready = engineReady(primary) || (failoverOn && (engineReady('gemini') || engineReady('qwen')));
 
   return (
-    <header className="rack-bar" style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 30,
-      margin: '-28px -32px 24px',
-    }}>
+    <header className="rack-bar">
       <span className={ready ? 'rack-dot' : 'rack-dot off'} />
-      <span style={{ color: 'var(--ink)', fontWeight: 600 }}>NEXAS HUD</span>
-      <span style={{ opacity: 0.35 }}>|</span>
-      <span>{now.date} · {now.time} SAST</span>
-      <span style={{ opacity: 0.35 }}>|</span>
-      <span style={{ color: viaFailover ? 'var(--warn)' : 'var(--cyan)' }}>
-        {ENGINE_SHORT[live]}{viaFailover ? ' FAILOVER' : ''}
+      <span style={{ color: 'var(--ink)', fontWeight: 700, letterSpacing: '-0.02em' }}>NEXAS</span>
+      <span className="chip" style={viaFailover ? { color: 'var(--warn)', borderColor: 'rgba(251,191,36,.3)', background: 'rgba(251,191,36,.1)' } : undefined}>
+        {ENGINE_SHORT[live]}{viaFailover ? ' · failover' : ''}
       </span>
-      <span style={{ opacity: 0.35 }}>|</span>
-      <span>77 AGENTS</span>
-      <span style={{ marginLeft: 'auto', color: 'var(--ink-3)' }}>
-        {user?.name || 'OPERATOR'}
-        <span style={{ marginLeft: 10, opacity: 0.5 }}>{String(tick % 2 === 0 ? '●' : '○')}</span>
+      <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'IBM Plex Mono, monospace', fontSize: 12 }}>
+        <span>{time} SAST</span>
+        <span style={{ color: 'var(--ink)' }}>{user?.name || 'Operator'}</span>
       </span>
     </header>
   );

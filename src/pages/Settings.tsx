@@ -83,8 +83,8 @@ export default function Settings() {
 
   return (
     <div>
-      <h1 style={{ fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em', color: 'var(--ink)', marginBottom: 4 }}>Settings</h1>
-      <p style={{ fontFamily: 'IBM Plex Mono', fontSize: 11, color: 'var(--ink-3)', letterSpacing: '0.12em', marginBottom: 28 }}>PRIMARY ENGINE · FAILOVER GEMINI → QWEN</p>
+      <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)', marginBottom: 6 }}>Settings</h1>
+      <p style={{ fontSize: 14, color: 'var(--ink-2)', marginBottom: 28 }}>Primary engine and Gemini → Qwen failover.</p>
 
       <div className="glass" style={{ padding: 24, maxWidth: 560, boxShadow: 'var(--elev-card)', marginBottom: 16 }}>
         <div style={label}>PRIMARY ENGINE</div>
@@ -191,14 +191,14 @@ export default function Settings() {
 }
 
 const label: CSSProperties = {
-  fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', letterSpacing: '0.1em', marginBottom: 8,
+  fontSize: 12, fontWeight: 600, color: 'var(--ink-2)', marginBottom: 8,
 };
 const field: CSSProperties = {
-  width: '100%', padding: '10px 12px', marginBottom: 14,
-  background: 'var(--void)', border: '1px solid var(--line)', borderRadius: 8,
-  color: 'var(--ink)', fontFamily: 'Inter', fontSize: 13, outline: 'none',
+  width: '100%', padding: '12px 14px', marginBottom: 14,
+  background: 'var(--void)', border: '1px solid var(--line)', borderRadius: 12,
+  color: 'var(--ink)', fontSize: 14, outline: 'none',
 };
 const btn: CSSProperties = {
-  padding: '10px 16px', borderRadius: 8, border: 'none',
-  background: 'var(--cyan)', color: 'var(--bg)', fontWeight: 700, cursor: 'pointer',
+  padding: '10px 16px', borderRadius: 12, border: 'none',
+  background: 'var(--cyan)', color: '#042f2e', fontWeight: 700, cursor: 'pointer',
 };
