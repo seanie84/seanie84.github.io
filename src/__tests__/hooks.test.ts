@@ -10,14 +10,14 @@ describe('Authentication Logic', () => {
   });
 
   it('should validate demo credentials (case-insensitive)', () => {
-    const DEMO_EMAIL = 'Nexa@clearvision-ai.co.za';
+    const DEMO_EMAIL = 'seanm@clearvisionai.co.za';
     const DEMO_PASSWORD = 'nexa2024';
 
     const testCases = [
-      { email: 'nexa@clearvision-ai.co.za', password: 'nexa2024', expected: true },
-      { email: 'NEXA@CLEARVISION-AI.CO.ZA', password: 'nexa2024', expected: true },
-      { email: 'Nexa@ClearVision-AI.co.za', password: 'nexa2024', expected: true },
-      { email: 'wrong@clearvision-ai.co.za', password: 'nexa2024', expected: false },
+      { email: 'seanm@clearvisionai.co.za', password: 'nexa2024', expected: true },
+      { email: 'SEANM@CLEARVISIONAI.CO.ZA', password: 'nexa2024', expected: true },
+      { email: 'SeanM@ClearVisionAI.co.za', password: 'nexa2024', expected: true },
+      { email: 'wrong@clearvisionai.co.za', password: 'nexa2024', expected: false },
       { email: 'nexa@clearvision-ai.co.za', password: 'wrongpass', expected: false },
     ];
 
@@ -28,10 +28,10 @@ describe('Authentication Logic', () => {
   });
 
   it('should handle whitespace in credentials', () => {
-    const DEMO_EMAIL = 'Nexa@clearvision-ai.co.za';
+    const DEMO_EMAIL = 'seanm@clearvisionai.co.za';
     const DEMO_PASSWORD = 'nexa2024';
 
-    const emailWithSpaces = '  nexa@clearvision-ai.co.za  ';
+    const emailWithSpaces = '  seanm@clearvisionai.co.za  ';
     const passwordWithSpaces = '  nexa2024  ';
 
     const result = emailWithSpaces.trim().toLowerCase() === DEMO_EMAIL.toLowerCase() &&
@@ -40,7 +40,7 @@ describe('Authentication Logic', () => {
   });
 
   it('should persist user data to session storage', () => {
-    const user = { name: 'Test Operator', email: 'nexa@clearvision-ai.co.za' };
+    const user = { name: 'Test Operator', email: 'seanm@clearvisionai.co.za' };
     sessionStorage.setItem('nexa_user', JSON.stringify(user));
 
     const stored = sessionStorage.getItem('nexa_user');

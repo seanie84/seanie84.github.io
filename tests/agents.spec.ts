@@ -1,12 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { signIn } from './helpers';
 
 test.describe('Agent Directory', () => {
   test.beforeEach(async ({ page }) => {
     // Login first
     await page.goto('http://localhost:5173/login');
-    await page.fill('input[type="email"]', 'Nexa@clearvision-ai.co.za');
-    await page.fill('input[type="password"]', 'nexa2024');
-    await page.click('button:has-text("Sign In")');
+    await signIn(page);
     await page.goto('http://localhost:5173/agents');
   });
 
@@ -85,9 +84,7 @@ test.describe('Agent Directory', () => {
 test.describe('Agent Directory - Accessibility', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:5173/login');
-    await page.fill('input[type="email"]', 'Nexa@clearvision-ai.co.za');
-    await page.fill('input[type="password"]', 'nexa2024');
-    await page.click('button:has-text("Sign In")');
+    await signIn(page);
     await page.goto('http://localhost:5173/agents');
   });
 

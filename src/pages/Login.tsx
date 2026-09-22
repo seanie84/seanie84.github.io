@@ -1,21 +1,29 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { OPERATOR_EMAIL, useAuth } from '../hooks/useAuth';
 import BackgroundPlate from '../components/layout/BackgroundPlate';
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, hasPassword } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('Nexa@clearvision-ai.co.za');
-  const [password, setPassword] = useState('nexa2024');
+  const [email, setEmail] = useState(OPERATOR_EMAIL);
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError('');
-    if (login(name, email, password)) navigate('/dashboard');
-    else setError('Sign-in refused. Check the operator email and password.');
+    setBusy(true);
+    try {
+      const result = await login(name, email, password, hasPassword ? undefined : confirm);
+      if (result.ok) navigate('/dashboard');
+      else setError(result.error);
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -38,22 +46,31 @@ export default function Login() {
           </div>
         </div>
         <div className="glass" style={{ padding: 28 }}>
-          <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.04em', marginBottom: 6 }}>Welcome back</h1>
-          <p style={{ fontSize: 14, color: 'var(--ink-2)', marginBottom: 22 }}>Sign in to the ClearVision tenant.</p>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.04em', marginBottom: 6 }}>
+            {hasPassword ? 'Welcome back' : 'Set your desk'}
+          </h1>
+          <p style={{ fontSize: 14, color: 'var(--ink-2)', marginBottom: 22 }}>
+            {hasPassword
+              ? 'Sign in with the password you chose.'
+              : 'First visit: choose a password for this browser. Min 8 characters.'}
+          </p>
+          <form onSubmit={(e) => void handleSubmit(e)} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <Field label="Name" type="text" value={name} onChange={setName} autoComplete="name" placeholder="Your name" />
-            <Field label="Email" type="email" value={email} onChange={setEmail} autoComplete="email" placeholder="you@company" />
-            <Field label="Password" type="password" value={password} onChange={setPassword} autoComplete="current-password" placeholder="••••••••" />
+            <Field label="Email" type="email" value={email} onChange={setEmail} autoComplete="email" placeholder={OPERATOR_EMAIL} />
+            <Field label={hasPassword ? 'Password' : 'Choose password'} type="password" value={password} onChange={setPassword} autoComplete={hasPassword ? 'current-password' : 'new-password'} placeholder="••••••••" />
+            {!hasPassword && (
+              <Field label="Confirm password" type="password" value={confirm} onChange={setConfirm} autoComplete="new-password" placeholder="••••••••" />
+            )}
             {error && (
               <p style={{ fontSize: 13, color: 'var(--danger)', padding: '10px 12px', background: 'rgba(251,113,133,.08)', borderRadius: 10 }}>{error}</p>
             )}
-            <button type="submit" style={{
+            <button type="submit" disabled={busy} style={{
               marginTop: 6, padding: '12px', borderRadius: 12, border: 'none',
               background: 'var(--cyan)', color: '#042f2e', fontWeight: 800, fontSize: 14, cursor: 'pointer',
-            }}>Continue</button>
+            }}>{busy ? 'Please wait…' : hasPassword ? 'Sign in' : 'Save password and enter'}</button>
           </form>
           <p style={{ marginTop: 16, fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>
-            Demo desk: Nexa@clearvision-ai.co.za · nexa2024
+            Operator: {OPERATOR_EMAIL}
           </p>
         </div>
       </div>
