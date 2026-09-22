@@ -1,6 +1,7 @@
 import { type ReactNode, useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
+import BackgroundPlate from './BackgroundPlate';
 import { Menu } from 'lucide-react';
 import GeminiChat from '../GeminiChat';
 
@@ -20,7 +21,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div className="bg-plate bg-desk" style={{ display: 'flex', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
+      <BackgroundPlate src1080="/bg-desk-1080.jpg" src4k="/bg-desk.jpg" dim={0.48} />
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div style={{
         marginLeft: sidebarOpen ? 'var(--sidebar-w)' : 0,
@@ -29,6 +31,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
         display: 'flex',
         flexDirection: 'column',
         transition: 'margin-left 0.2s ease',
+        position: 'relative',
+        zIndex: 1,
       }}>
         {!sidebarOpen && (
           <button

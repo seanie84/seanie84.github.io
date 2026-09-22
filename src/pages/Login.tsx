@@ -1,13 +1,14 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import BackgroundPlate from '../components/layout/BackgroundPlate';
 
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('Nexa@clearvision-ai.co.za');
+  const [password, setPassword] = useState('nexa2024');
   const [error, setError] = useState('');
 
   function handleSubmit(e: FormEvent) {
@@ -18,19 +19,22 @@ export default function Login() {
   }
 
   return (
-    <div className="bg-plate bg-login" style={{
+    <div style={{
+      position: 'relative',
+      zIndex: 1,
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: 24,
     }}>
-      <div style={{ width: '100%', maxWidth: 400 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 36, justifyContent: 'center' }}>
+      <BackgroundPlate src1080="/bg-login-1080.jpg" src4k="/bg-login.jpg" dim={0.38} />
+      <div style={{ width: '100%', maxWidth: 400, position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28, justifyContent: 'center' }}>
           <div className="nexa-mark" style={{ width: 40, height: 40, fontSize: 13 }}>NX</div>
           <div>
             <div style={{ fontWeight: 800, fontSize: 20, letterSpacing: '-0.04em' }}>NEXAS</div>
-            <div style={{ fontSize: 12, color: 'var(--ink-3)' }}>77 agents · one workspace</div>
+            <div style={{ fontSize: 12, color: 'var(--ink-2)' }}>77 agents · one workspace</div>
           </div>
         </div>
         <div className="glass" style={{ padding: 28 }}>
@@ -48,6 +52,9 @@ export default function Login() {
               background: 'var(--cyan)', color: '#042f2e', fontWeight: 800, fontSize: 14, cursor: 'pointer',
             }}>Continue</button>
           </form>
+          <p style={{ marginTop: 16, fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>
+            Demo desk: Nexa@clearvision-ai.co.za · nexa2024
+          </p>
         </div>
       </div>
     </div>
@@ -62,7 +69,7 @@ function Field({ label, type, value, onChange, autoComplete, placeholder }: {
     <label style={{ display: 'block' }}>
       <span style={{ display: 'block', marginBottom: 6, fontSize: 12, fontWeight: 600, color: 'var(--ink-2)' }}>{label}</span>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} autoComplete={autoComplete} placeholder={placeholder} style={{
-        width: '100%', padding: '12px 14px', background: 'var(--void)', border: '1px solid var(--line)',
+        width: '100%', padding: '12px 14px', background: 'rgba(9,9,11,.65)', border: '1px solid var(--line-strong)',
         borderRadius: 12, color: 'var(--ink)', fontSize: 14, outline: 'none',
       }} />
     </label>

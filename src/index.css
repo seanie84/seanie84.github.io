@@ -68,10 +68,11 @@ html, body {
 .font-mono-hud { font-family: 'IBM Plex Mono', monospace; }
 
 .glass {
-  background: var(--panel);
+  background: rgba(20, 20, 24, 0.86);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--elev-card);
+  backdrop-filter: blur(18px);
 }
 .glass-2 {
   background: var(--navy-2);
@@ -141,20 +142,4 @@ input, select, textarea, button { font-family: inherit; }
   .login-rail { display: none !important; }
 }
 
-.bg-plate {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.bg-login {
-  background-image:
-    linear-gradient(180deg, rgba(9,9,11,.28) 0%, rgba(9,9,11,.62) 48%, rgba(9,9,11,.92) 100%),
-    image-set(url('/bg-login.jpg') 1x, url('/bg-login.jpg') 2x);
-}
-.bg-desk {
-  background-image:
-    linear-gradient(180deg, rgba(9,9,11,.82) 0%, rgba(9,9,11,.9) 100%),
-    image-set(url('/bg-desk.jpg') 1x, url('/bg-desk.jpg') 2x);
-  background-attachment: fixed;
-}
 
