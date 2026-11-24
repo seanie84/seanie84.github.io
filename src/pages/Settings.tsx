@@ -37,6 +37,17 @@ import {
   setGeminiKey,
   setGeminiModel,
 } from '../lib/gemini';
+import {
+  AG_UI_ENDPOINT_KEY,
+  AG_UI_FLAG_KEY,
+  DEFAULT_LOCAL_OLLAMA_MODELS,
+  DEFAULT_LOCAL_OLLAMA_URL,
+  LOCAL_OLLAMA_MODEL_KEY,
+  LOCAL_OLLAMA_URL_KEY,
+  getAgUiEndpoint,
+  getLocalOllamaConfig,
+  isAgUiEnabled,
+} from '../lib/nexa-ag-ui';
 
 export default function Settings() {
   const [engine, setEng] = useState<EngineId>(() => getEngine());
@@ -51,6 +62,11 @@ export default function Settings() {
   const [localUrl, setUrl] = useState(() => getLocalUrl());
   const [localModel, setLmodel] = useState(() => getLocalModel());
   const [status, setStatus] = useState('');
+  const [agUiOn, setAgUiOn] = useState(() => isAgUiEnabled());
+  const [agUiEndpoint, setAgUiEndpoint] = useState(() => getAgUiEndpoint());
+  const initialOllama = getLocalOllamaConfig();
+  const [ollamaUrl, setOllamaUrl] = useState(initialOllama.baseUrl || DEFAULT_LOCAL_OLLAMA_URL);
+  const [ollamaModel, setOllamaModel] = useState(initialOllama.models[0] || DEFAULT_LOCAL_OLLAMA_MODELS[0]);
   const [busy, setBusy] = useState(false);
 
   function save() {
@@ -185,6 +201,31 @@ export default function Settings() {
           <button type="button" onClick={() => { clearQwenKey(); setQwen(''); setStatus('Qwen key removed.'); }} style={{ ...btn, background: 'transparent', color: 'var(--ink-2)', border: '1px solid var(--line)' }}>Remove Qwen</button>
           <button type="button" onClick={() => { clearDeepseekKey(); setDeepseek(''); setStatus('DeepSeek key removed.'); }} style={{ ...btn, background: 'transparent', color: 'var(--ink-2)', border: '1px solid var(--line)' }}>Remove DeepSeek</button>
         </div>
+      </div>
+
+      <div className="nexa-card" style={{ padding: 22, marginTop: 18 }}>
+        <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>AG-UI and local Ollama</h2>
+        <p style={{ margin: '0 0 14px', color: 'var(--ink-2)', fontSize: 13 }}>
+          Optional. The chat widget stays off and the endpoint starts empty so this site never talks to NEXORA unless you set a URL. Local Ollama values are stored in this browser only.
+        </p>
+        <label style={label} htmlFor="agui-flag">Enable AG-UI widget</label>
+        <select id="agui-flag" value={agUiOn ? 'on' : 'off'} onChange={(e) => setAgUiOn(e.target.value === 'on')} style={field}>
+          <option value="off">Off (default)</option>
+          <option value="on">On</option>
+        </select>
+        <label style={label} htmlFor="agui-endpoint">AG-UI endpoint</label>
+        <input id="agui-endpoint" value={agUiEndpoint} onChange={(e) => setAgUiEndpoint(e.target.value)} placeholder="Leave empty by default" style={field} />
+        <label style={label} htmlFor="ollama-url">Local Ollama base URL</label>
+        <input id="ollama-url" value={ollamaUrl} onChange={(e) => setOllamaUrl(e.target.value)} placeholder={DEFAULT_LOCAL_OLLAMA_URL} style={field} />
+        <label style={label} htmlFor="ollama-model">Preferred local model</label>
+        <input id="ollama-model" value={ollamaModel} onChange={(e) => setOllamaModel(e.target.value)} placeholder={DEFAULT_LOCAL_OLLAMA_MODELS[0]} style={field} />
+        <button type="button" onClick={() => {
+          localStorage.setItem(AG_UI_FLAG_KEY, agUiOn ? 'on' : 'off');
+          localStorage.setItem(AG_UI_ENDPOINT_KEY, agUiEndpoint.trim());
+          localStorage.setItem(LOCAL_OLLAMA_URL_KEY, ollamaUrl.trim() || DEFAULT_LOCAL_OLLAMA_URL);
+          localStorage.setItem(LOCAL_OLLAMA_MODEL_KEY, ollamaModel.trim() || DEFAULT_LOCAL_OLLAMA_MODELS[0]);
+          setStatus('AG-UI settings saved in this browser.');
+        }} style={btn}>Save AG-UI settings</button>
       </div>
     </div>
   );

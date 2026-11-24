@@ -15,6 +15,7 @@ import Memory from './pages/Memory';
 import Plugins from './pages/Plugins';
 import Quotes from './pages/Quotes';
 import Settings from './pages/Settings';
+import AgUiChat from './pages/AgUiChat';
 import Studio from './pages/Studio';
 import Profile from './pages/Profile';
 
@@ -38,6 +39,7 @@ function PrivateRoutes() {
         <Route path="/quotes" element={<Quotes />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/ag-ui" element={<AgUiChat />} />
         <Route path="/studio" element={<Studio />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
