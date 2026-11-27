@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OPERATOR_EMAIL, useAuth } from '../hooks/useAuth';
-import BackgroundPlate from '../components/layout/BackgroundPlate';
 
 export default function Login() {
   const { login, hasPassword } = useAuth();
@@ -28,25 +27,23 @@ export default function Login() {
 
   return (
     <div style={{
-      position: 'relative',
-      zIndex: 1,
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: 24,
+      background: 'linear-gradient(180deg, #f6f7f9 0%, #eef2f6 100%)',
     }}>
-      <BackgroundPlate src1080="/bg-login-1080.jpg" src4k="/bg-login.jpg" dim={0.38} />
-      <div style={{ width: '100%', maxWidth: 400, position: 'relative', zIndex: 1 }}>
+      <div style={{ width: '100%', maxWidth: 420 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28, justifyContent: 'center' }}>
-          <div className="nexa-mark" style={{ width: 40, height: 40, fontSize: 13 }}>NX</div>
+          <div className="nexa-mark" style={{ width: 44, height: 44, fontSize: 14 }}>NX</div>
           <div>
-            <div style={{ fontWeight: 800, fontSize: 20, letterSpacing: '-0.04em' }}>NEXAS</div>
-            <div style={{ fontSize: 12, color: 'var(--ink-2)' }}>77 agents · one workspace</div>
+            <div style={{ fontWeight: 800, fontSize: 22, letterSpacing: '-0.04em', color: 'var(--ink)' }}>NEXAS</div>
+            <div style={{ fontSize: 13, color: 'var(--ink-2)' }}>77 agents · one workspace</div>
           </div>
         </div>
-        <div className="glass" style={{ padding: 28 }}>
-          <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.04em', marginBottom: 6 }}>
+        <div className="glass" style={{ padding: 32 }}>
+          <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.04em', marginBottom: 6, color: 'var(--ink)' }}>
             {hasPassword ? 'Welcome back' : 'Set your desk'}
           </h1>
           <p style={{ fontSize: 14, color: 'var(--ink-2)', marginBottom: 22 }}>
@@ -62,11 +59,11 @@ export default function Login() {
               <Field label="Confirm password" type="password" value={confirm} onChange={setConfirm} autoComplete="new-password" placeholder="••••••••" />
             )}
             {error && (
-              <p style={{ fontSize: 13, color: 'var(--danger)', padding: '10px 12px', background: 'rgba(251,113,133,.08)', borderRadius: 10 }}>{error}</p>
+              <p style={{ fontSize: 13, color: 'var(--danger)', padding: '10px 12px', background: 'rgba(225,29,72,.06)', borderRadius: 10 }}>{error}</p>
             )}
             <button type="submit" disabled={busy} style={{
               marginTop: 6, padding: '12px', borderRadius: 12, border: 'none',
-              background: 'var(--cyan)', color: '#042f2e', fontWeight: 800, fontSize: 14, cursor: 'pointer',
+              background: 'var(--cyan)', color: '#ffffff', fontWeight: 700, fontSize: 14, cursor: 'pointer',
             }}>{busy ? 'Please wait…' : hasPassword ? 'Sign in' : 'Save password and enter'}</button>
           </form>
           <p style={{ marginTop: 16, fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.5 }}>
@@ -86,7 +83,7 @@ function Field({ label, type, value, onChange, autoComplete, placeholder }: {
     <label style={{ display: 'block' }}>
       <span style={{ display: 'block', marginBottom: 6, fontSize: 12, fontWeight: 600, color: 'var(--ink-2)' }}>{label}</span>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} autoComplete={autoComplete} placeholder={placeholder} style={{
-        width: '100%', padding: '12px 14px', background: 'rgba(9,9,11,.65)', border: '1px solid var(--line-strong)',
+        width: '100%', padding: '12px 14px', background: '#ffffff', border: '1px solid var(--line)',
         borderRadius: 12, color: 'var(--ink)', fontSize: 14, outline: 'none',
       }} />
     </label>
