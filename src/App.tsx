@@ -45,6 +45,29 @@ const Store = pick('Store');
 const Operator = pick('Operator');
 const Knowledge = pick('Knowledge');
 
+const Calendar = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Calendar })));
+const Diary = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Diary })));
+const Decisions = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Decisions })));
+const Files = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Files })));
+const Emails = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Emails })));
+const Projects = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Projects })));
+const Helpdesk = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Helpdesk })));
+const Leads = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Leads })));
+const Clients = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Clients })));
+const Budgets = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Budgets })));
+const Billing = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Billing })));
+const Accounting = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Accounting })));
+const Banking = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Banking })));
+const Payroll = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Payroll })));
+const Inventory = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Inventory })));
+const Contracts = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Contracts })));
+const JobHunter = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.JobHunter })));
+const ImageStudio = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.ImageStudio })));
+const Presentation = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Presentation })));
+const Voice = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Voice })));
+const WhatsApp = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.WhatsApp })));
+const ScamScanner = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.ScamScanner })));
+
 function PageFallback() {
   return <div style={{ padding: 32, color: 'var(--ink-2)' }}>Loading…</div>;
 }
@@ -78,6 +101,28 @@ function PrivateRoutes() {
           <Route path="/plugins" element={<Plugins />} />
           <Route path="/quotes" element={<Quotes />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/diary" element={<Diary />} />
+          <Route path="/decisions" element={<Decisions />} />
+          <Route path="/files" element={<Files />} />
+          <Route path="/emails" element={<Emails />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/helpdesk" element={<Helpdesk />} />
+          <Route path="/leads" element={<Leads />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/budgets" element={<Budgets />} />
+          <Route path="/billing" element={<Billing />} />
+          <Route path="/accounting" element={<Accounting />} />
+          <Route path="/banking" element={<Banking />} />
+          <Route path="/payroll" element={<Payroll />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/contracts" element={<Contracts />} />
+          <Route path="/job-hunter" element={<JobHunter />} />
+          <Route path="/image-studio" element={<ImageStudio />} />
+          <Route path="/presentation" element={<Presentation />} />
+          <Route path="/voice" element={<Voice />} />
+          <Route path="/whatsapp" element={<WhatsApp />} />
+          <Route path="/scam-scanner" element={<ScamScanner />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/ag-ui" element={<AgUiChat />} />
           <Route path="/studio" element={<Studio />} />
