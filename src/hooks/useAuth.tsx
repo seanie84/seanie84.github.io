@@ -4,6 +4,7 @@ import { createContext, useContext, useState, type ReactNode } from 'react';
 export const OPERATOR_EMAIL = 'seanm@clearvisionai.co.za';
 const HASH_KEY = 'nexas_pw_hash';
 const USER_KEY = 'nexa_user';
+const NAME_KEY = 'nexas_operator_name';
 
 interface User { name: string; email: string; }
 
@@ -23,6 +24,10 @@ const Ctx = createContext<AuthCtx | null>(null);
 
 function readHash(): string {
   try { return localStorage.getItem(HASH_KEY) || ''; } catch { return ''; }
+}
+
+export function savedName(): string {
+  try { return localStorage.getItem(NAME_KEY)?.trim() || ''; } catch { return ''; }
 }
 
 async function sha256(text: string): Promise<string> {
@@ -70,7 +75,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    const u = { name: name.trim() || 'Operator', email: OPERATOR_EMAIL };
+    const display = name.trim() || savedName() || 'Operator';
+    localStorage.setItem(NAME_KEY, display);
+    const u = { name: display, email: OPERATOR_EMAIL };
     setUser(u);
     sessionStorage.setItem(USER_KEY, JSON.stringify(u));
     return { ok: true };
