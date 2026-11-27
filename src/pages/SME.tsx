@@ -37,8 +37,13 @@ export default function SME() {
 
   return (
     <div>
-      <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)', marginBottom: 6 }}>SME Center</h1>
-      <p style={{ fontSize: 15, color: 'var(--ink-2)', marginBottom: 24 }}>Practical help for South African small business. Draft only — not legal or tax advice.</p>
+      <div className="glass" style={{ overflow: 'hidden', marginBottom: 24, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(200px, 320px)' }}>
+        <div style={{ padding: 28 }}>
+          <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)', marginBottom: 6 }}>SME Center</h1>
+          <p style={{ fontSize: 15, color: 'var(--ink-2)' }}>Practical help for South African small business. Draft only — not legal or tax advice.</p>
+        </div>
+        <img src="/finish/plans.jpg" alt="Site plans on a desk" style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: 160 }} />
+      </div>
 
       {!hasEngine() && (
         <p style={{ marginBottom: 16, fontSize: 14, color: 'var(--ink-2)' }}>
