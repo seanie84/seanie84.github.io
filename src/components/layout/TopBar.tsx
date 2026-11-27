@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { ENGINE_SHORT, engineReady, getEngine, getFailover, getLastBrainRoute } from '../../lib/engine';
+import { engineReady, getEngine, getFailover } from '../../lib/engine';
 
 function clockParts() {
   const d = new Date();
@@ -16,23 +16,19 @@ export default function TopBar() {
     return () => window.clearInterval(id);
   }, []);
 
-  const primary = getEngine();
-  const last = getLastBrainRoute();
-  const failoverOn = getFailover();
-  const live = last?.engine || primary;
-  const viaFailover = Boolean(last?.failover);
-  const ready = engineReady(primary) || (failoverOn && (engineReady('gemini') || engineReady('qwen')));
+  const ready = engineReady(getEngine()) || (getFailover() && (engineReady('gemini') || engineReady('qwen')));
+  const first = (user?.name || 'Operator').split(' ')[0];
 
   return (
     <header className="rack-bar">
       <span className={ready ? 'rack-dot' : 'rack-dot off'} aria-hidden="true" />
-      <span style={{ color: 'var(--ink)', fontWeight: 700, letterSpacing: '-0.02em' }}>NEXAS</span>
+      <span style={{ color: 'var(--ink)', fontWeight: 800, letterSpacing: '-0.03em' }}>NEXAS</span>
       <span className="chip" aria-live="polite" style={ready ? undefined : { color: 'var(--warn)', borderColor: 'rgba(180,83,9,.25)', background: 'rgba(180,83,9,.08)' }}>
-        {ready ? 'Connected' : 'Not connected'} · {ENGINE_SHORT[live]}{viaFailover ? ' · failover' : ''}
+        {ready ? 'Desk connected' : 'Not connected'}
       </span>
       <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'IBM Plex Mono, monospace', fontSize: 12, color: 'var(--ink-2)' }}>
         <span>{time} SAST</span>
-        <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{user?.name || 'Operator'}</span>
+        <span style={{ color: 'var(--ink)', fontWeight: 700 }}>{first}</span>
       </span>
     </header>
   );
