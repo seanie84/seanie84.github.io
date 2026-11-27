@@ -29,7 +29,7 @@ export default function Dashboard() {
     <div>
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1.1 }}>
+          <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1.1, color: 'var(--ink)' }}>
             {greeting}, {firstName}
           </h1>
           <p style={{ fontSize: 15, color: 'var(--ink-2)', marginTop: 8 }}>
@@ -41,7 +41,7 @@ export default function Dashboard() {
           onClick={() => navigate('/missions')}
           style={{
             display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px',
-            borderRadius: 12, border: 'none', background: 'var(--cyan)', color: '#042f2e',
+            borderRadius: 12, border: 'none', background: 'var(--cyan)', color: '#ffffff',
             fontWeight: 700, fontSize: 14, cursor: 'pointer',
           }}
         >
@@ -56,14 +56,14 @@ export default function Dashboard() {
               <span style={{ fontSize: 12, fontWeight: 600 }}>{label}</span>
               <Icon size={15} />
             </div>
-            <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.04em' }}>{value}</div>
+            <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)' }}>{value}</div>
           </div>
         ))}
       </div>
 
       <section>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em' }}>On duty</h2>
+          <h2 style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--ink)' }}>On duty</h2>
           <button onClick={() => navigate('/agents')} style={{ background: 'none', border: 'none', color: 'var(--cyan)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
             View all
           </button>
@@ -85,14 +85,14 @@ function AgentCard({ agent, onClick }: { agent: Agent; onClick: () => void }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <div style={{
           width: 40, height: 40, borderRadius: 12,
-          background: `${color}22`,
+          background: `${color}18`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontWeight: 800, fontSize: 13, color, flexShrink: 0,
         }}>
           {agent.name.slice(0, 2).toUpperCase()}
         </div>
         <div style={{ minWidth: 0, flex: 1 }}>
-          <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: '-0.02em' }}>{agent.name}</div>
+          <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: '-0.02em', color: 'var(--ink)' }}>{agent.name}</div>
           <div style={{ fontSize: 12, color: 'var(--ink-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{agent.role}</div>
         </div>
         <span style={{ fontSize: 11, color: 'var(--ink-3)', textTransform: 'capitalize' }}>{agent.category}</span>
