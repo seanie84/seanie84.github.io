@@ -108,6 +108,37 @@ const PrivacyCenter = lazy(() => import('./pages/RestoredDesks2').then(m => ({ d
 const Social = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Social })));
 const Onboarding = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Onboarding })));
 const Language = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Language })));
+const Admin = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Admin })));
+const AgentsRoom = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.AgentsRoom })));
+const AiPrompts = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.AiPrompts })));
+const Apex = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Apex })));
+const ApiPage = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.ApiPage })));
+const Ascension = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Ascension })));
+const Classic = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Classic })));
+const CommandDeck = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.CommandDeck })));
+const Company = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Company })));
+const Connections = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Connections })));
+const DataServers = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.DataServers })));
+const DatabaseUpload = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.DatabaseUpload })));
+const Ecosystems = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Ecosystems })));
+const FirstRun = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.FirstRun })));
+const FullDesk = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.FullDesk })));
+const Install = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Install })));
+const Jarvis = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Jarvis })));
+const MasterAgent = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.MasterAgent })));
+const Pos = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Pos })));
+const Quantum = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Quantum })));
+const Rooms = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Rooms })));
+const SovereignBrain = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.SovereignBrain })));
+const Startup = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Startup })));
+const Status = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Status })));
+const Supervisor = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Supervisor })));
+const Terms = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Terms })));
+const Upload = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Upload })));
+const UsersAdmin = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.UsersAdmin })));
+const Vote = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Vote })));
+const Welcome = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Welcome })));
+const Get = lazy(() => import('./pages/RestoredDesks3').then(m => ({ default: m.Get })));
 
 function PageFallback() {
   return <div style={{ padding: 32, color: 'var(--ink-2)' }}>Loading…</div>;
@@ -205,6 +236,37 @@ function PrivateRoutes() {
           <Route path="/social" element={<Social />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/language" element={<Language />} />
+                    <Route path="/admin" element={<Admin />} />
+          <Route path="/agents-room" element={<AgentsRoom />} />
+          <Route path="/prompts" element={<AiPrompts />} />
+          <Route path="/apex" element={<Apex />} />
+          <Route path="/api" element={<ApiPage />} />
+          <Route path="/ascension" element={<Ascension />} />
+          <Route path="/classic" element={<Classic />} />
+          <Route path="/command-deck" element={<CommandDeck />} />
+          <Route path="/company" element={<Company />} />
+          <Route path="/connections" element={<Connections />} />
+          <Route path="/data-servers" element={<DataServers />} />
+          <Route path="/database-upload" element={<DatabaseUpload />} />
+          <Route path="/ecosystems" element={<Ecosystems />} />
+          <Route path="/first-run" element={<FirstRun />} />
+          <Route path="/full-desk" element={<FullDesk />} />
+          <Route path="/install" element={<Install />} />
+          <Route path="/jarvis" element={<Jarvis />} />
+          <Route path="/master-agent" element={<MasterAgent />} />
+          <Route path="/pos" element={<Pos />} />
+          <Route path="/quantum" element={<Quantum />} />
+          <Route path="/rooms" element={<Rooms />} />
+          <Route path="/sovereign-brain" element={<SovereignBrain />} />
+          <Route path="/startup" element={<Startup />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/supervisor" element={<Supervisor />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/users" element={<UsersAdmin />} />
+          <Route path="/vote" element={<Vote />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/get" element={<Get />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/ag-ui" element={<AgUiChat />} />
           <Route path="/studio" element={<Studio />} />
