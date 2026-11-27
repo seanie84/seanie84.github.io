@@ -24,15 +24,15 @@ export default function TopBar() {
   const ready = engineReady(primary) || (failoverOn && (engineReady('gemini') || engineReady('qwen')));
 
   return (
-    <header className="rack-bar" style={{ background: 'rgba(9,9,11,.55)' }}>
+    <header className="rack-bar">
       <span className={ready ? 'rack-dot' : 'rack-dot off'} />
       <span style={{ color: 'var(--ink)', fontWeight: 700, letterSpacing: '-0.02em' }}>NEXAS</span>
-      <span className="chip" style={viaFailover ? { color: 'var(--warn)', borderColor: 'rgba(251,191,36,.3)', background: 'rgba(251,191,36,.1)' } : undefined}>
+      <span className="chip" style={viaFailover ? { color: 'var(--warn)', borderColor: 'rgba(217,119,6,.25)', background: 'rgba(217,119,6,.08)' } : undefined}>
         {ENGINE_SHORT[live]}{viaFailover ? ' · failover' : ''}
       </span>
-      <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'IBM Plex Mono, monospace', fontSize: 12 }}>
+      <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'IBM Plex Mono, monospace', fontSize: 12, color: 'var(--ink-2)' }}>
         <span>{time} SAST</span>
-        <span style={{ color: 'var(--ink)' }}>{user?.name || 'Operator'}</span>
+        <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{user?.name || 'Operator'}</span>
       </span>
     </header>
   );
