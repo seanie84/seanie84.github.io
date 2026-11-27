@@ -31,18 +31,18 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
   return (
     <aside style={{
       width: 'var(--sidebar-w)', minHeight: '100vh',
-      background: 'rgba(12,12,14,.78)',
-      backdropFilter: 'blur(22px)',
+      background: '#ffffff',
       borderRight: '1px solid var(--line)',
       display: 'flex', flexDirection: 'column',
       position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 40,
       transform: open ? 'translateX(0)' : 'translateX(-100%)', transition: 'transform 0.2s ease',
+      boxShadow: '1px 0 0 var(--line)',
     }}>
-      <div style={{ padding: '18px 16px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: '20px 16px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div className="nexa-mark">NX</div>
           <div>
-            <div style={{ fontWeight: 800, fontSize: 14, letterSpacing: '-0.03em' }}>NEXAS</div>
+            <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: '-0.03em', color: 'var(--ink)' }}>NEXAS</div>
             <div style={{ fontSize: 11, color: 'var(--ink-3)' }}>Agent workspace</div>
           </div>
         </div>
@@ -58,8 +58,8 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
             display: 'flex', alignItems: 'center', gap: 10, padding: '9px 12px', borderRadius: 10,
             marginBottom: 2, textDecoration: 'none', fontWeight: 600,
             fontSize: 13.5,
-            color: isActive ? 'var(--ink)' : 'var(--ink-2)',
-            background: isActive ? 'var(--navy-2)' : 'transparent',
+            color: isActive ? 'var(--cyan)' : 'var(--ink-2)',
+            background: isActive ? 'rgba(13,148,136,.08)' : 'transparent',
           })}>
             <Icon size={16} />
             {label}
@@ -69,17 +69,17 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
       <div style={{ padding: '12px 10px 16px', borderTop: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 8px 12px' }}>
           <div style={{
-            width: 32, height: 32, borderRadius: 10, background: 'var(--navy-2)', border: '1px solid var(--line)',
+            width: 32, height: 32, borderRadius: 10, background: 'rgba(13,148,136,.1)', border: '1px solid rgba(13,148,136,.2)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--cyan)',
           }}>{(user?.name ?? 'O')[0].toUpperCase()}</div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.name}</div>
+            <div style={{ fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--ink)' }}>{user?.name}</div>
             <div style={{ fontSize: 11, color: 'var(--ink-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.email}</div>
           </div>
         </div>
         <button onClick={() => { logout(); navigate('/login'); }} style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 10,
-          border: '1px solid var(--line)', background: 'transparent', cursor: 'pointer', color: 'var(--ink-3)',
+          border: '1px solid var(--line)', background: '#ffffff', cursor: 'pointer', color: 'var(--ink-2)',
           fontWeight: 600, fontSize: 13,
         }}>
           <LogOut size={14} /> Sign out
