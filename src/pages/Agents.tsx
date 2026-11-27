@@ -24,7 +24,7 @@ export default function Agents() {
     <div>
       <div style={{ marginBottom: 28 }}>
         <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)', marginBottom: 6 }}>Agents</h1>
-        <p style={{ fontSize: 14, color: 'var(--ink-2)' }}>77 specialists. Primary engine with Gemini → Qwen failover.</p>
+        <p style={{ fontSize: 14, color: 'var(--ink-2)' }}>77 specialists, ready when you are.</p>
       </div>
 
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24, alignItems: 'center' }}>
