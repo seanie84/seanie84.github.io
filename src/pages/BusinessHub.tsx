@@ -21,9 +21,12 @@ export default function BusinessHub() {
   const navigate = useNavigate();
   return (
     <div>
-      <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)' }}>Business Hub</h1>
-        <p style={{ fontSize: 15, color: 'var(--ink-2)', marginTop: 8 }}>ClearVision AI operations in one place. NEXAS runs the agents. NEXORA stays separate.</p>
+      <div className="glass" style={{ overflow: 'hidden', marginBottom: 24, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(200px, 340px)' }}>
+        <div style={{ padding: 28 }}>
+          <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)' }}>Business Hub</h1>
+          <p style={{ fontSize: 15, color: 'var(--ink-2)', marginTop: 8 }}>ClearVision AI operations in one place. NEXAS runs the agents. NEXORA stays separate.</p>
+        </div>
+        <img src="/finish/hub.jpg" alt="Business park model" style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: 180 }} />
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12, marginBottom: 32 }}>
