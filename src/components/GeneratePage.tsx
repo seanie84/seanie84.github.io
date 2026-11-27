@@ -21,7 +21,7 @@ export default function GeneratePage(props: {
     try {
       setOut(await runBrain({ system: props.system, user: input.trim() }));
     } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
+      setErr((e instanceof Error ? e.message : String(e)).replace(/gemini|qwen/gi, 'engine'));
     } finally {
       setBusy(false);
     }
@@ -33,7 +33,7 @@ export default function GeneratePage(props: {
       <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.12em', marginBottom: 24 }}>{props.kicker}</p>
       {!hasEngine() && (
         <p style={{ marginBottom: 16, fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)' }}>
-          Pick a free engine in <Link to="/settings" style={{ color: 'var(--cyan)' }}>Settings</Link>.
+          Connect the desk in <Link to="/settings" style={{ color: 'var(--cyan)' }}>Settings</Link>.
         </p>
       )}
       <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder={props.placeholder} rows={5} style={{
