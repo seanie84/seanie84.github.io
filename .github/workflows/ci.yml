@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc -b --pretty false
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Size report
+        run: |
+          BYTES=$(du -sb dist | cut -f1)
+          MB=$(awk "BEGIN { printf \"%.2f\", $BYTES/1048576 }")
+          echo "Bundle size: ${MB} MB (${BYTES} bytes)"
+          echo "### Bundle size" >> "$GITHUB_STEP_SUMMARY"
+          echo "${MB} MB" >> "$GITHUB_STEP_SUMMARY"
+          # Soft gate: warn above 2 MB, fail above 8 MB.
+          if [ "$BYTES" -gt 8388608 ]; then
+            echo "Bundle exceeds 8 MB."
+            exit 1
+          fi
+          if [ "$BYTES" -gt 2097152 ]; then
+            echo "::warning::Bundle is over 2 MB (${MB} MB)."
+          fi
+
+      - name: Upload preview artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-dist
+          path: dist
+          retention-days: 3
