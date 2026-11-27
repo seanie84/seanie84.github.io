@@ -7,14 +7,14 @@
 }
 
 :root {
-  --void: #f3efe6;
-  --panel: #fffdf8;
-  --navy: #fffdf8;
-  --navy-2: #ebe6dc;
-  --glass: #fffdf8;
-  --glass-2: #f7f3ea;
-  --line: #e4ddd0;
-  --line-strong: #d4cbbd;
+  --void: #f6f1e6;
+  --panel: #fffaf2;
+  --navy: #fffaf2;
+  --navy-2: #f0e7d8;
+  --glass: #fffaf2;
+  --glass-2: #fbf4e8;
+  --line: #eadfcd;
+  --line-strong: #dccdb8;
 
   --ink: #1c1915;
   --ink-2: #4a453e;
@@ -45,7 +45,7 @@
   --cat-security: #be123c;
   --cat-maintenance: #475569;
 
-  --elev-card: 0 1px 2px rgba(28,25,21,.04), 0 8px 24px rgba(28,25,21,.06);
+  --elev-card: 0 1px 2px rgba(159,18,57,.04), 0 10px 28px rgba(92,48,24,.08);
   --elev-glow: 0 0 0 3px rgba(159,18,57,.16);
 
   --sidebar-w: 248px;
@@ -57,7 +57,10 @@
 
 html, body {
   height: 100%;
-  background: var(--void);
+  background:
+    radial-gradient(900px 420px at 0% 0%, rgba(190,18,60,.07), transparent 60%),
+    radial-gradient(700px 380px at 100% 0%, rgba(180,83,9,.08), transparent 55%),
+    var(--void);
   color: var(--ink);
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -69,7 +72,7 @@ html, body {
 .font-mono-hud { font-family: 'IBM Plex Mono', monospace; }
 
 .glass {
-  background: #fffdf8;
+  background: linear-gradient(180deg, #fffdf8, #fff8ee);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--elev-card);
@@ -136,7 +139,7 @@ html, body {
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 480px);
-  background: #f3efe6;
+  background: linear-gradient(160deg, #f8f2e6, #f3e8d8);
 }
 
 input, select, textarea, button { font-family: inherit; }
