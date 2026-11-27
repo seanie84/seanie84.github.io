@@ -12,10 +12,10 @@ const QWEN_KEY = 'nexas_qwen_key';
 const QWEN_MODEL = 'nexas_qwen_model';
 const FAILOVER = 'nexas_failover';
 
-export const DEFAULT_DEEPSEEK_MODEL = 'deepseek-flash';
-export const DEEPSEEK_MODELS = ['deepseek-flash', 'deepseek-v4-pro'] as const;
-export const DEFAULT_QWEN_MODEL = 'qwen-flash';
-export const QWEN_MODELS = ['qwen-flash', 'qwen-plus', 'qwen-max', 'qwen-turbo'] as const;
+export const DEFAULT_DEEPSEEK_MODEL = 'deepseek-chat';
+export const DEEPSEEK_MODELS = ['deepseek-chat', 'deepseek-reasoner'] as const;
+export const DEFAULT_QWEN_MODEL = 'qwen-plus';
+export const QWEN_MODELS = ['qwen-plus', 'qwen-turbo', 'qwen-max'] as const;
 export const QWEN_BASE = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1';
 
 export const ENGINE_SHORT: Record<EngineId, string> = {
@@ -30,7 +30,7 @@ export const ENGINE_SHORT: Record<EngineId, string> = {
 export const ENGINE_LABEL: Record<EngineId, string> = {
   gemini: 'Gemini (Google AI Studio — free quota)',
   groq: 'Groq (cloud, free tier)',
-  deepseek: 'DeepSeek Flash (thinking, high effort)',
+  deepseek: 'DeepSeek',
   qwen: 'Qwen (DashScope international)',
   ollama: 'Ollama (local, free)',
   lmstudio: 'LM Studio (local, free)',
@@ -108,11 +108,12 @@ export function clearDeepseekKey() {
 }
 
 export function getDeepseekModel(): string {
-  try { return localStorage.getItem(DEEPSEEK_MODEL) || DEFAULT_DEEPSEEK_MODEL; } catch { return DEFAULT_DEEPSEEK_MODEL; }
+  const stored = (() => { try { return localStorage.getItem(DEEPSEEK_MODEL) || ''; } catch { return ''; } })();
+  return (DEEPSEEK_MODELS as readonly string[]).includes(stored) ? stored : DEFAULT_DEEPSEEK_MODEL;
 }
 
 export function setDeepseekModel(model: string) {
-  localStorage.setItem(DEEPSEEK_MODEL, model.trim() || DEFAULT_DEEPSEEK_MODEL);
+  localStorage.setItem(DEEPSEEK_MODEL, (DEEPSEEK_MODELS as readonly string[]).includes(model) ? model : DEFAULT_DEEPSEEK_MODEL);
 }
 
 export function getQwenKey(): string {
@@ -128,11 +129,12 @@ export function clearQwenKey() {
 }
 
 export function getQwenModel(): string {
-  try { return localStorage.getItem(QWEN_MODEL) || DEFAULT_QWEN_MODEL; } catch { return DEFAULT_QWEN_MODEL; }
+  const stored = (() => { try { return localStorage.getItem(QWEN_MODEL) || ''; } catch { return ''; } })();
+  return (QWEN_MODELS as readonly string[]).includes(stored) ? stored : DEFAULT_QWEN_MODEL;
 }
 
 export function setQwenModel(model: string) {
-  localStorage.setItem(QWEN_MODEL, model.trim() || DEFAULT_QWEN_MODEL);
+  localStorage.setItem(QWEN_MODEL, (QWEN_MODELS as readonly string[]).includes(model) ? model : DEFAULT_QWEN_MODEL);
 }
 
 export function engineReady(id: EngineId): boolean {
@@ -222,15 +224,10 @@ async function callEngine(id: EngineId, opts: {
     return openaiChat({
       base: 'https://api.deepseek.com',
       key,
-      model: getDeepseekModel() || DEFAULT_DEEPSEEK_MODEL,
+      model: getDeepseekModel(),
       system: opts.system,
       history: opts.history,
       user: opts.user,
-      skipTemperature: true,
-      extra: {
-        thinking: { type: 'enabled' },
-        reasoning_effort: 'high',
-      },
     });
   }
   if (id === 'qwen') {
@@ -239,7 +236,7 @@ async function callEngine(id: EngineId, opts: {
     return openaiChat({
       base: QWEN_BASE,
       key,
-      model: getQwenModel() || DEFAULT_QWEN_MODEL,
+      model: getQwenModel(),
       system: opts.system,
       history: opts.history,
       user: opts.user,
