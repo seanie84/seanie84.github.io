@@ -17,41 +17,42 @@
   --line-strong: #d4d7e0;
 
   --ink: #1a1d23;
-  --ink-2: #5c6370;
-  --ink-3: #8b919c;
+  --ink-2: #4b5160;
+  --ink-3: #5f6570;
 
-  --cyan: #0d9488;
-  --cyan-bright: #14b8a6;
-  --cyan-dim: #0f766e;
-  --gold: #d97706;
-  --gold-deep: #b45309;
+  --cyan: #0f766e;
+  --cyan-bright: #0d9488;
+  --cyan-dim: #115e59;
+  --gold: #b45309;
+  --gold-deep: #92400e;
 
-  --ok: #059669;
-  --warn: #d97706;
-  --danger: #e11d48;
-  --violet: #7c3aed;
+  --ok: #047857;
+  --warn: #b45309;
+  --danger: #be123c;
+  --violet: #6d28d9;
 
-  --cat-core: #d97706;
-  --cat-leadership: #b45309;
-  --cat-legal: #2563eb;
-  --cat-sales: #059669;
-  --cat-marketing: #db2777;
-  --cat-operations: #0284c7;
-  --cat-hr: #ea580c;
-  --cat-project: #0d9488;
-  --cat-finance: #65a30d;
-  --cat-research: #7c3aed;
-  --cat-technology: #0d9488;
-  --cat-security: #e11d48;
-  --cat-maintenance: #64748b;
+  --cat-core: #b45309;
+  --cat-leadership: #92400e;
+  --cat-legal: #1d4ed8;
+  --cat-sales: #047857;
+  --cat-marketing: #be185d;
+  --cat-operations: #0369a1;
+  --cat-hr: #c2410c;
+  --cat-project: #0f766e;
+  --cat-finance: #4d7c0f;
+  --cat-research: #6d28d9;
+  --cat-technology: #0f766e;
+  --cat-security: #be123c;
+  --cat-maintenance: #475569;
 
   --elev-card: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
-  --elev-glow: 0 0 0 3px rgba(13,148,136,.12);
+  --elev-glow: 0 0 0 3px rgba(15,118,110,.16);
 
   --sidebar-w: 248px;
   --rack-h: 60px;
   --radius: 16px;
   --radius-sm: 12px;
+  --focus: 0 0 0 3px rgba(15,118,110,.35);
 }
 
 html, body {
@@ -112,11 +113,11 @@ html, body {
   height: 8px;
   border-radius: 50%;
   background: var(--ok);
-  box-shadow: 0 0 0 4px rgba(5,150,105,.12);
+  box-shadow: 0 0 0 4px rgba(4,120,87,.12);
   flex-shrink: 0;
 }
-.rack-dot.warn { background: var(--warn); box-shadow: 0 0 0 4px rgba(217,119,6,.12); }
-.rack-dot.off { background: #cbd5e1; box-shadow: none; }
+.rack-dot.warn { background: var(--warn); box-shadow: 0 0 0 4px rgba(180,83,9,.12); }
+.rack-dot.off { background: #94a3b8; box-shadow: none; }
 
 .chip {
   display: inline-flex;
@@ -124,8 +125,8 @@ html, body {
   gap: 6px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(13,148,136,.08);
-  border: 1px solid rgba(13,148,136,.18);
+  background: rgba(15,118,110,.08);
+  border: 1px solid rgba(15,118,110,.22);
   color: var(--cyan);
   font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
@@ -139,10 +140,50 @@ input, select, textarea {
 }
 input::placeholder, textarea::placeholder { color: var(--ink-3); }
 
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  box-shadow: var(--focus);
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -40px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--cyan);
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #d4d7e0; border-radius: 99px; border: 2px solid var(--void); }
 
 @media (max-width: 800px) {
   .login-rail { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
