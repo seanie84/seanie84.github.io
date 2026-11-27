@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { loadList, saveList } from '../lib/localStore';
 import EmptyState from '../components/EmptyState';
+import { askNexa } from '../lib/brain';
+import { logAudit } from '../lib/audit';
 
 interface Contact { id: string; name: string; email: string; note: string; }
 
@@ -11,6 +13,8 @@ export default function CRM() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [note, setNote] = useState('');
+  const [draft, setDraft] = useState('');
+  const [busy, setBusy] = useState(false);
 
   function add() {
     if (!name.trim()) return;
@@ -18,6 +22,7 @@ export default function CRM() {
     setRows(next);
     saveList(KEY, next);
     setName(''); setEmail(''); setNote('');
+    logAudit('crm', `Added ${name.trim()}`);
   }
 
   function remove(id: string) {
@@ -26,27 +31,41 @@ export default function CRM() {
     saveList(KEY, next);
   }
 
+  async function followUp(r: Contact) {
+    if (busy) return;
+    setBusy(true);
+    try {
+      const text = await askNexa(`Draft a short follow-up email to ${r.name} (${r.email || 'no email'}). Note: ${r.note || 'none'}. Mark it DRAFT. Do not claim it was sent.`);
+      setDraft(text);
+      logAudit('follow-up', r.name);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <div>
       <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--ink)', marginBottom: 4 }}>CRM</h1>
-      <p style={{ fontSize: 13, color: 'var(--ink-2)', marginBottom: 24 }}>Local contacts. Not the NEXORA book.</p>
+      <p style={{ fontSize: 13, color: 'var(--ink-2)', marginBottom: 24 }}>Local contacts. Follow-ups are drafts. Nothing is sent.</p>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16, maxWidth: 720 }}>
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" aria-label="Contact name" style={inp} />
         <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" aria-label="Contact email" style={inp} />
         <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Note" aria-label="Note" style={{ ...inp, flex: '1 1 200px' }} />
         <button type="button" onClick={add} style={{ padding: '10px 16px', borderRadius: 8, border: 'none', background: 'var(--cyan)', color: '#fff', fontWeight: 700, cursor: 'pointer', minHeight: 40 }}>Add</button>
       </div>
-      {rows.length === 0 && (
-        <EmptyState title="No contacts yet" body="Add a name above. Contacts stay in this browser." />
-      )}
+      {rows.length === 0 && <EmptyState title="No contacts yet" body="Add a name above. Contacts stay in this browser." />}
       {rows.map((r) => (
         <div key={r.id} className="glass" style={{ padding: 14, marginBottom: 8, maxWidth: 720 }}>
           <strong style={{ color: 'var(--ink)' }}>{r.name}</strong>
           <div style={{ fontSize: 12, color: 'var(--ink-3)' }}>{r.email}</div>
           {r.note && <div style={{ marginTop: 6, color: 'var(--ink-2)' }}>{r.note}</div>}
-          <button type="button" onClick={() => remove(r.id)} style={{ marginTop: 8, background: 'none', border: 'none', color: 'var(--ink-3)', cursor: 'pointer' }}>Remove</button>
+          <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
+            <button type="button" onClick={() => void followUp(r)} disabled={busy} style={{ background: 'none', border: 'none', color: 'var(--cyan)', cursor: 'pointer', fontWeight: 700 }}>{busy ? 'Working…' : 'Draft follow-up'}</button>
+            <button type="button" onClick={() => remove(r.id)} style={{ background: 'none', border: 'none', color: 'var(--ink-3)', cursor: 'pointer' }}>Remove</button>
+          </div>
         </div>
       ))}
+      {draft && <pre className="glass" style={{ marginTop: 16, padding: 16, whiteSpace: 'pre-wrap', maxWidth: 720 }}>{draft}</pre>}
     </div>
   );
 }
