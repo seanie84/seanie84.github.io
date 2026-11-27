@@ -7,6 +7,9 @@ import {
   Building2, Briefcase, Landmark, FolderGit2, List,
   Gavel, Megaphone, GraduationCap, Shield, Store, ShoppingBag,
   Radar, Share2, ShieldCheck, Database,
+  Calendar, BookMarked, Scale, FolderOpen, Mail, Kanban, LifeBuoy,
+  UserPlus, Contact, Wallet, Receipt, Coins, Users, Boxes,
+  FileSignature, Crosshair, Image, Presentation, Mic, MessageCircle, ScanSearch,
 } from 'lucide-react';
 
 const NAV = [
@@ -40,6 +43,28 @@ const NAV = [
   { to: '/profile',    label: 'Profile',          Icon: ScrollText },
   { to: '/studio',     label: 'Theme',            Icon: Palette },
   { to: '/ag-ui',      label: 'AG-UI',            Icon: MessageSquare },
+  { to: '/calendar',   label: 'Calendar',         Icon: Calendar },
+  { to: '/diary',      label: 'Diary',            Icon: BookMarked },
+  { to: '/decisions',  label: 'Decisions',        Icon: Scale },
+  { to: '/files',      label: 'Files',            Icon: FolderOpen },
+  { to: '/emails',     label: 'Emails',           Icon: Mail },
+  { to: '/whatsapp',   label: 'WhatsApp',         Icon: MessageCircle },
+  { to: '/projects',   label: 'Projects',         Icon: Kanban },
+  { to: '/helpdesk',   label: 'Helpdesk',         Icon: LifeBuoy },
+  { to: '/leads',      label: 'Leads',            Icon: UserPlus },
+  { to: '/clients',    label: 'Clients',          Icon: Contact },
+  { to: '/budgets',    label: 'Budgets',          Icon: Wallet },
+  { to: '/billing',    label: 'Billing',          Icon: Receipt },
+  { to: '/accounting', label: 'Accounting',       Icon: Coins },
+  { to: '/banking',    label: 'Banking',          Icon: Coins },
+  { to: '/payroll',    label: 'Payroll',          Icon: Users },
+  { to: '/inventory',  label: 'Inventory',        Icon: Boxes },
+  { to: '/contracts',  label: 'Contracts',        Icon: FileSignature },
+  { to: '/job-hunter', label: 'Job hunter',       Icon: Crosshair },
+  { to: '/image-studio', label: 'Image studio',   Icon: Image },
+  { to: '/presentation', label: 'Presentations',  Icon: Presentation },
+  { to: '/voice',      label: 'Voice',            Icon: Mic },
+  { to: '/scam-scanner', label: 'Scam scanner',   Icon: ScanSearch },
   { to: '/settings',   label: 'Settings',         Icon: Settings },
 ];
 
