@@ -22,8 +22,13 @@ export default function CommandBar() {
       }
       if (e.key === 'Escape') setOpen(false);
     }
+    function onOpen() { setOpen(true); }
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('nexa-command', onOpen);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('nexa-command', onOpen);
+    };
   }, []);
 
   const matches = useMemo(() => {
