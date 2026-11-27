@@ -15,7 +15,7 @@ const FAILOVER = 'nexas_failover';
 export const DEFAULT_DEEPSEEK_MODEL = 'deepseek-chat';
 export const DEEPSEEK_MODELS = ['deepseek-chat', 'deepseek-reasoner'] as const;
 export const DEFAULT_QWEN_MODEL = 'qwen-plus';
-export const QWEN_MODELS = ['qwen-plus', 'qwen-turbo', 'qwen-max'] as const;
+export const QWEN_MODELS = ['qwen-plus', 'qwen-flash', 'qwen-max'] as const;
 export const QWEN_BASE = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1';
 
 export const ENGINE_SHORT: Record<EngineId, string> = {
