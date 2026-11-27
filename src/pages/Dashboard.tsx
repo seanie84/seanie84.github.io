@@ -22,6 +22,21 @@ const HUBS = [
   { to: '/centers', label: 'Centers', blurb: 'Sales, legal, finance, people', Icon: Landmark, img: '/finish/desk.jpg' },
 ];
 
+const DESKS = [
+  { to: '/leads', label: 'Leads' },
+  { to: '/clients', label: 'Clients' },
+  { to: '/quotes', label: 'Quotes' },
+  { to: '/tenders', label: 'Tenders' },
+  { to: '/calendar', label: 'Calendar' },
+  { to: '/emails', label: 'Emails' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/banking', label: 'Banking' },
+  { to: '/image-studio', label: 'Image studio' },
+  { to: '/presentation', label: 'Presentations' },
+  { to: '/job-hunter', label: 'Job hunter' },
+  { to: '/catalog', label: 'Full catalog' },
+];
+
 export default function Dashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -84,6 +99,19 @@ export default function Dashboard() {
           </button>
         ))}
       </div>
+
+      <section style={{ marginBottom: 28 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 12, color: 'var(--ink)' }}>Desks from the previous command center</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 10 }}>
+          {DESKS.map((d) => (
+            <button key={d.to} type="button" onClick={() => navigate(d.to)} className="glass" style={{
+              textAlign: 'left', padding: '14px 16px', cursor: 'pointer', border: '1px solid var(--line)', background: '#fffaf2',
+            }}>
+              <span style={{ fontWeight: 700, color: 'var(--ink)' }}>{d.label}</span>
+            </button>
+          ))}
+        </div>
+      </section>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 12, marginBottom: 40 }}>
         {STATS.map(({ label, value, icon: Icon }) => (
