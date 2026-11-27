@@ -25,7 +25,21 @@ const SME = lazy(() => import('./pages/SME'));
 const BusinessCenters = lazy(() => import('./pages/BusinessCenters'));
 const Repos = lazy(() => import('./pages/Repos'));
 const Catalog = lazy(() => import('./pages/Catalog'));
-const Prev = lazy(() => import('./pages/PreviousModules'));
+
+const pick = (name: string) => lazy(() => import('./pages/PreviousModules').then((m) => ({ default: (m as Record<string, React.ComponentType>)[name] })));
+const Tenders = pick('Tenders');
+const Scout = pick('Scout');
+const Procurement = pick('Procurement');
+const Campaigns = pick('Campaigns');
+const Government = pick('Government');
+const Education = pick('Education');
+const Security = pick('Security');
+const Architect = pick('Architect');
+const Trading = pick('Trading');
+const Sell = pick('Sell');
+const Store = pick('Store');
+const Operator = pick('Operator');
+const Knowledge = pick('Knowledge');
 
 function PageFallback() {
   return <div style={{ padding: 32, color: 'var(--ink-2)' }}>Loading…</div>;
@@ -59,19 +73,19 @@ function PrivateRoutes() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/ag-ui" element={<AgUiChat />} />
           <Route path="/studio" element={<Studio />} />
-          <Route path="/tenders" element={<Prev.Tenders />} />
-          <Route path="/scout" element={<Prev.Scout />} />
-          <Route path="/procurement" element={<Prev.Procurement />} />
-          <Route path="/campaigns" element={<Prev.Campaigns />} />
-          <Route path="/government" element={<Prev.Government />} />
-          <Route path="/education" element={<Prev.Education />} />
-          <Route path="/security" element={<Prev.Security />} />
-          <Route path="/architect" element={<Prev.Architect />} />
-          <Route path="/trading" element={<Prev.Trading />} />
-          <Route path="/sell" element={<Prev.Sell />} />
-          <Route path="/store" element={<Prev.Store />} />
-          <Route path="/operator" element={<Prev.Operator />} />
-          <Route path="/knowledge" element={<Prev.Knowledge />} />
+          <Route path="/tenders" element={<Tenders />} />
+          <Route path="/scout" element={<Scout />} />
+          <Route path="/procurement" element={<Procurement />} />
+          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/government" element={<Government />} />
+          <Route path="/education" element={<Education />} />
+          <Route path="/security" element={<Security />} />
+          <Route path="/architect" element={<Architect />} />
+          <Route path="/trading" element={<Trading />} />
+          <Route path="/sell" element={<Sell />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/operator" element={<Operator />} />
+          <Route path="/knowledge" element={<Knowledge />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Suspense>
