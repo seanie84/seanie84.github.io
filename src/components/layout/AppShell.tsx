@@ -60,7 +60,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <Breadcrumb />
-            <button type="button" onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))} style={{
+            <button type="button" onClick={() => window.dispatchEvent(new Event('nexa-command'))} style={{
               display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 10,
               border: '1px solid var(--line)', background: '#fff', color: 'var(--ink-2)', cursor: 'pointer', minHeight: 40,
             }}>
