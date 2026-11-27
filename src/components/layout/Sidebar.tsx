@@ -29,7 +29,7 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
   const navigate = useNavigate();
 
   return (
-    <aside style={{
+    <aside aria-label="Main navigation" style={{
       width: 'var(--sidebar-w)', minHeight: '100vh',
       background: '#ffffff',
       borderRight: '1px solid var(--line)',
@@ -40,36 +40,36 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
     }}>
       <div style={{ padding: '20px 16px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div className="nexa-mark">NX</div>
+          <div className="nexa-mark" aria-hidden="true">NX</div>
           <div>
             <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: '-0.03em', color: 'var(--ink)' }}>NEXAS</div>
             <div style={{ fontSize: 11, color: 'var(--ink-3)' }}>Agent workspace</div>
           </div>
         </div>
         {onClose && (
-          <button onClick={onClose} style={{ padding: 4, background: 'transparent', border: 'none', color: 'var(--ink-3)', cursor: 'pointer' }}>
+          <button type="button" onClick={onClose} aria-label="Close menu" style={{ padding: 8, minWidth: 32, minHeight: 32, background: 'transparent', border: 'none', color: 'var(--ink-2)', cursor: 'pointer' }}>
             <X size={16} />
           </button>
         )}
       </div>
-      <nav style={{ flex: 1, overflowY: 'auto', padding: '4px 10px 12px' }}>
+      <nav aria-label="Primary" style={{ flex: 1, overflowY: 'auto', padding: '4px 10px 12px' }}>
         {NAV.map(({ to, label, Icon }) => (
           <NavLink key={to} to={to} onClick={onClose} style={({ isActive }) => ({
             display: 'flex', alignItems: 'center', gap: 10, padding: '9px 12px', borderRadius: 10,
             marginBottom: 2, textDecoration: 'none', fontWeight: 600,
             fontSize: 13.5,
             color: isActive ? 'var(--cyan)' : 'var(--ink-2)',
-            background: isActive ? 'rgba(13,148,136,.08)' : 'transparent',
+            background: isActive ? 'rgba(15,118,110,.08)' : 'transparent',
           })}>
-            <Icon size={16} />
+            <Icon size={16} aria-hidden="true" />
             {label}
           </NavLink>
         ))}
       </nav>
       <div style={{ padding: '12px 10px 16px', borderTop: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 8px 12px' }}>
-          <div style={{
-            width: 32, height: 32, borderRadius: 10, background: 'rgba(13,148,136,.1)', border: '1px solid rgba(13,148,136,.2)',
+          <div aria-hidden="true" style={{
+            width: 32, height: 32, borderRadius: 10, background: 'rgba(15,118,110,.1)', border: '1px solid rgba(15,118,110,.2)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--cyan)',
           }}>{(user?.name ?? 'O')[0].toUpperCase()}</div>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -77,12 +77,12 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
             <div style={{ fontSize: 11, color: 'var(--ink-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.email}</div>
           </div>
         </div>
-        <button onClick={() => { logout(); navigate('/login'); }} style={{
-          width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 10,
+        <button type="button" onClick={() => { logout(); navigate('/login'); }} style={{
+          width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderRadius: 10,
           border: '1px solid var(--line)', background: '#ffffff', cursor: 'pointer', color: 'var(--ink-2)',
-          fontWeight: 600, fontSize: 13,
+          fontWeight: 600, fontSize: 13, minHeight: 40,
         }}>
-          <LogOut size={14} /> Sign out
+          <LogOut size={14} aria-hidden="true" /> Sign out
         </button>
       </div>
     </aside>
