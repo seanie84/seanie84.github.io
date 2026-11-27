@@ -43,7 +43,7 @@ export default function GeminiChat({ agent }: { agent?: Agent }) {
       const reply = agent ? await askAgent(agent, text, turns) : await askNexa(text, turns);
       setTurns([...next, { role: 'model', text: reply }]);
     } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
+      setErr((e instanceof Error ? e.message : String(e)).replace(/gemini|qwen/gi, 'engine'));
     } finally {
       setBusy(false);
     }
@@ -53,7 +53,7 @@ export default function GeminiChat({ agent }: { agent?: Agent }) {
     return (
       <div style={{ padding: '12px 14px', background: 'rgba(34,211,238,0.06)', borderRadius: 8, border: '1px solid var(--line)' }}>
         <p style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--cyan)', letterSpacing: '0.08em', lineHeight: 1.6 }}>
-          PICK A FREE ENGINE IN <Link to="/settings" style={{ color: 'var(--cyan)' }}>SETTINGS</Link> TO TALK TO {name.toUpperCase()}.
+          OPEN <Link to="/settings" style={{ color: 'var(--cyan)' }}>SETTINGS</Link> TO CONNECT THE DESK AND TALK TO {name.toUpperCase()}.
         </p>
       </div>
     );
@@ -62,7 +62,7 @@ export default function GeminiChat({ agent }: { agent?: Agent }) {
   return (
     <div>
       <div style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--cyan)', letterSpacing: '0.1em', marginBottom: 8 }}>
-        NEXAS ENGINE · {name.toUpperCase()}
+        NEXAS · {name.toUpperCase()}
       </div>
       <div style={{ maxHeight: 240, overflowY: 'auto', marginBottom: 10, display: 'flex', flexDirection: 'column', gap: 8 }}>
         {turns.map((t, i) => (
