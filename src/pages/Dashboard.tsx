@@ -3,7 +3,6 @@ import { useAuth } from '../hooks/useAuth';
 import agentsRaw from '../data/agents.json';
 import { type Agent } from '../data/types';
 import { getCategoryColor } from '../data/categories';
-import { ENGINE_SHORT, engineReady, getEngine, getFailover } from '../lib/engine';
 import { Bot, Target, Swords, Users2, BarChart2, Zap, Building2, Briefcase, Landmark } from 'lucide-react';
 
 const agents = agentsRaw as Agent[];
@@ -30,13 +29,11 @@ export default function Dashboard() {
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
   const firstName = (user?.name ?? 'Operator').split(' ')[0];
   const featured = agents.slice(0, 6);
-  const ready = engineReady(getEngine());
-
   const brief = [
     { label: 'Tenders due', value: 'None on the watch yet', to: '/watch' },
     { label: 'Follow-ups', value: 'CRM is empty', to: '/crm' },
     { label: 'Open drafts', value: '0 waiting in Approvals', to: '/catalog' },
-    { label: 'Engine', value: ready ? `${ENGINE_SHORT[getEngine()]} connected` : 'Not connected — open Settings', to: '/settings' },
+    { label: 'Desk', value: 'Open and ready', to: '/hub' },
   ];
 
   return (
@@ -46,9 +43,8 @@ export default function Dashboard() {
           <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1.1, color: 'var(--ink)' }}>
             {greeting}, {firstName}
           </h1>
-          <p style={{ fontSize: 15, color: 'var(--ink-2)', marginTop: 8, marginBottom: 16 }}>
-            {ENGINE_SHORT[getEngine()]}
-            {getFailover() ? ' with Gemini → Qwen failover' : ''} · 77 specialists ready
+          <p style={{ fontSize: 16, color: 'var(--ink-2)', marginTop: 10, marginBottom: 18, lineHeight: 1.45 }}>
+            Seventy-seven specialists are on the desk. What should we move today?
           </p>
           <button onClick={() => navigate('/missions')} style={{
             display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px',
