@@ -4,7 +4,8 @@ import {
   LayoutDashboard, Swords, Target, Users2, FileText,
   BarChart2, BookOpen, Cpu, Package, FileSpreadsheet,
   Settings, Palette, LogOut, Bot, ScrollText, X, MessageSquare,
-  Building2, Briefcase, Landmark,
+  Building2, Briefcase, Landmark, FolderGit2, List,
+  Gavel, Megaphone, Landmark as Gov, GraduationCap, Shield, Store, ShoppingBag,
 } from 'lucide-react';
 
 const NAV = [
@@ -12,6 +13,15 @@ const NAV = [
   { to: '/hub',        label: 'Business Hub',     Icon: Building2 },
   { to: '/sme',        label: 'SME',              Icon: Briefcase },
   { to: '/centers',    label: 'Centers',          Icon: Landmark },
+  { to: '/repos',      label: 'All repos',        Icon: FolderGit2 },
+  { to: '/catalog',    label: 'Full catalog',     Icon: List },
+  { to: '/tenders',    label: 'Tenders',          Icon: Gavel },
+  { to: '/campaigns',  label: 'Campaigns',        Icon: Megaphone },
+  { to: '/government', label: 'Government',       Icon: Gov },
+  { to: '/education',  label: 'Education',        Icon: GraduationCap },
+  { to: '/security',   label: 'Security',         Icon: Shield },
+  { to: '/sell',       label: 'Sell',             Icon: ShoppingBag },
+  { to: '/store',      label: 'Store',            Icon: Store },
   { to: '/warroom',    label: 'War Room',         Icon: Swords },
   { to: '/missions',   label: 'Missions',         Icon: Target },
   { to: '/agents',     label: 'Agents',           Icon: Bot },
