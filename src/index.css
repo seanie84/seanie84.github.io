@@ -177,6 +177,7 @@ textarea:focus-visible,
 
 @media (max-width: 800px) {
   .login-rail { display: none !important; }
+  .mobile-nav { display: block !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
