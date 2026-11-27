@@ -4,7 +4,7 @@ import agentsRaw from '../data/agents.json';
 import { type Agent } from '../data/types';
 import { getCategoryColor } from '../data/categories';
 import { ENGINE_SHORT, getEngine, getFailover } from '../lib/engine';
-import { Bot, Target, Swords, Users2, BarChart2, Zap } from 'lucide-react';
+import { Bot, Target, Swords, Users2, BarChart2, Zap, Building2, Briefcase, Landmark } from 'lucide-react';
 
 const agents = agentsRaw as Agent[];
 
@@ -15,6 +15,12 @@ const STATS = [
   { label: 'CRM', value: '0', icon: Users2 },
   { label: 'Analytics', value: '—', icon: BarChart2 },
   { label: 'Status', value: 'Live', icon: Zap },
+];
+
+const HUBS = [
+  { to: '/hub', label: 'Business Hub', blurb: 'Operations in one place', Icon: Building2 },
+  { to: '/sme', label: 'SME', blurb: 'SA small-business plans', Icon: Briefcase },
+  { to: '/centers', label: 'Centers', blurb: 'Sales, legal, finance, people', Icon: Landmark },
 ];
 
 export default function Dashboard() {
@@ -47,6 +53,20 @@ export default function Dashboard() {
         >
           <Target size={15} /> New mission
         </button>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 28 }}>
+        {HUBS.map(({ to, label, blurb, Icon }) => (
+          <button key={to} type="button" onClick={() => navigate(to)} className="glass" style={{
+            textAlign: 'left', padding: 18, cursor: 'pointer', border: '1px solid var(--line)', background: '#fff',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+              <Icon size={16} color="var(--cyan)" />
+              <span style={{ fontWeight: 700, color: 'var(--ink)' }}>{label}</span>
+            </div>
+            <p style={{ fontSize: 13, color: 'var(--ink-2)' }}>{blurb}</p>
+          </button>
+        ))}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 12, marginBottom: 40 }}>
