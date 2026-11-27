@@ -4,16 +4,16 @@ export const DEFAULT_MODEL = 'gemini-3.8-flash';
 export const MODELS = [
   'gemini-3.8-flash',
   'gemini-3.1-flash',
-  'gemini-2.5-pro',
 ] as const;
 
-const RETIRED = new Set([
-  'gemini-2.5-flash',
-  'gemini-2.0-flash',
-  'gemini-2.0-flash-lite',
-  'gemini-1.5-flash',
-  'gemini-1.5-pro',
-]);
+function clean(model: string) {
+  return model.replace(/^models\//, '').trim();
+}
+
+function live(model?: string | null) {
+  const name = clean(model || '');
+  return MODELS.includes(name as typeof MODELS[number]) ? name : DEFAULT_MODEL;
+}
 
 export function getGeminiKey(): string {
   try { return localStorage.getItem(KEY_STORE)?.trim() || ''; } catch { return ''; }
@@ -28,17 +28,11 @@ export function clearGeminiKey() {
 }
 
 export function getGeminiModel(): string {
-  try {
-    const stored = localStorage.getItem(MODEL_STORE);
-    if (!stored || RETIRED.has(stored)) return DEFAULT_MODEL;
-    return stored;
-  } catch {
-    return DEFAULT_MODEL;
-  }
+  try { return live(localStorage.getItem(MODEL_STORE)); } catch { return DEFAULT_MODEL; }
 }
 
 export function setGeminiModel(model: string) {
-  localStorage.setItem(MODEL_STORE, model);
+  localStorage.setItem(MODEL_STORE, live(model));
 }
 
 export function hasGeminiKey(): boolean {
@@ -59,7 +53,8 @@ export async function geminiGenerate(opts: {
   const key = getGeminiKey();
   if (!key) throw new Error('No Gemini API key. Open Settings and paste a Google AI Studio key.');
 
-  const model = opts.model || getGeminiModel();
+  const model = live(opts.model || getGeminiModel());
+  localStorage.setItem(MODEL_STORE, model);
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`;
 
   const contents = [
