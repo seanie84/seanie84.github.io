@@ -132,6 +132,13 @@ html, body {
   font-size: 11px;
 }
 
+.login-stage {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 480px);
+  background: #f6f7f9;
+}
+
 input, select, textarea, button { font-family: inherit; }
 input, select, textarea {
   background: #ffffff;
@@ -177,6 +184,7 @@ textarea:focus-visible,
 
 @media (max-width: 800px) {
   .login-rail { display: none !important; }
+  .login-stage { grid-template-columns: 1fr; }
   .mobile-nav { display: block !important; }
 }
 
