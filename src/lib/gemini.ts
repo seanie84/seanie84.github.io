@@ -53,7 +53,25 @@ export async function geminiGenerate(opts: {
   const key = getGeminiKey();
   if (!key) throw new Error('No Gemini API key. Open Settings and paste a Google AI Studio key.');
 
-  const model = live(opts.model || getGeminiModel());
+  const preferred = live(opts.model || getGeminiModel());
+  const order = [preferred, ...MODELS.filter((m) => m !== preferred)];
+  let last = 'Engine busy';
+  for (const model of order) {
+    try {
+      return await callGemini(key, model, opts);
+    } catch (e) {
+      last = e instanceof Error ? e.message : String(e);
+      if (!/high demand|unavailable|not found|no longer available|overloaded|503|429/i.test(last)) throw e;
+    }
+  }
+  throw new Error(last);
+}
+
+async function callGemini(key: string, model: string, opts: {
+  system: string;
+  history?: ChatTurn[];
+  user: string;
+}): Promise<string> {
   localStorage.setItem(MODEL_STORE, model);
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`;
 
