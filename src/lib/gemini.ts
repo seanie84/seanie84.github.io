@@ -1,11 +1,19 @@
 const KEY_STORE = 'nexas_gemini_key';
 const MODEL_STORE = 'nexas_gemini_model';
-export const DEFAULT_MODEL = 'gemini-2.5-flash';
+export const DEFAULT_MODEL = 'gemini-3.8-flash';
 export const MODELS = [
-  'gemini-2.5-flash',
+  'gemini-3.8-flash',
+  'gemini-3.1-flash',
   'gemini-2.5-pro',
-  'gemini-2.0-flash',
 ] as const;
+
+const RETIRED = new Set([
+  'gemini-2.5-flash',
+  'gemini-2.0-flash',
+  'gemini-2.0-flash-lite',
+  'gemini-1.5-flash',
+  'gemini-1.5-pro',
+]);
 
 export function getGeminiKey(): string {
   try { return localStorage.getItem(KEY_STORE)?.trim() || ''; } catch { return ''; }
@@ -20,7 +28,13 @@ export function clearGeminiKey() {
 }
 
 export function getGeminiModel(): string {
-  try { return localStorage.getItem(MODEL_STORE) || DEFAULT_MODEL; } catch { return DEFAULT_MODEL; }
+  try {
+    const stored = localStorage.getItem(MODEL_STORE);
+    if (!stored || RETIRED.has(stored)) return DEFAULT_MODEL;
+    return stored;
+  } catch {
+    return DEFAULT_MODEL;
+  }
 }
 
 export function setGeminiModel(model: string) {
