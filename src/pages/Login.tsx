@@ -26,15 +26,10 @@ export default function Login() {
   }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'grid',
-      gridTemplateColumns: 'minmax(0, 1.1fr) minmax(320px, 480px)',
-      background: '#f6f7f9',
-    }}>
+    <div className="login-stage">
       <div className="login-rail" style={{
         position: 'relative', overflow: 'hidden', minHeight: 320,
-        background: `url(/finish/desk.jpg) center/cover no-repeat`,
+        background: 'url(/finish/desk.jpg) center/cover no-repeat',
       }}>
         <div style={{
           position: 'absolute', inset: 0,
