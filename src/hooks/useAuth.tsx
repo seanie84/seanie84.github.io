@@ -16,6 +16,7 @@ interface AuthCtx {
   hasPassword: boolean;
   login: (name: string, email: string, password: string, confirm?: string) => Promise<LoginResult>;
   logout: () => void;
+  resetPassword: () => void;
 }
 
 const Ctx = createContext<AuthCtx | null>(null);
@@ -80,7 +81,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     sessionStorage.removeItem(USER_KEY);
   }
 
-  return <Ctx.Provider value={{ user, hasPassword, login, logout }}>{children}</Ctx.Provider>;
+  function resetPassword() {
+    localStorage.removeItem(HASH_KEY);
+    sessionStorage.removeItem(USER_KEY);
+    setHasPassword(false);
+    setUser(null);
+  }
+
+  return <Ctx.Provider value={{ user, hasPassword, login, logout, resetPassword }}>{children}</Ctx.Provider>;
 }
 
 export function useAuth() {
