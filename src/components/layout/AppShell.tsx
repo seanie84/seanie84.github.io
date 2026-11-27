@@ -89,7 +89,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           fontSize: 13,
           letterSpacing: '-0.01em',
           cursor: 'pointer',
-          boxShadow: '0 8px 24px rgba(13,148,136,.25)',
+          boxShadow: '0 10px 24px rgba(159,18,57,.28)',
           borderWidth: dock ? 1 : 0,
           borderStyle: 'solid',
           borderColor: 'var(--line)',
