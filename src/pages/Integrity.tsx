@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { engineReady, getEngine, ENGINE_SHORT } from '../lib/engine';
+import { engineReady, getEngine } from '../lib/engine';
 import { loadList } from '../lib/localStore';
 import { loadAudit, logAudit } from '../lib/audit';
 
@@ -9,7 +9,7 @@ export default function Integrity() {
 
   function run() {
     const issues: string[] = [];
-    if (!engineReady(getEngine())) issues.push(`Engine ${ENGINE_SHORT[getEngine()]} has no key.`);
+    if (!engineReady(getEngine())) issues.push('The desk is not connected. Open Settings.');
     if (loadList('nexas_crm').length === 0) issues.push('CRM is empty.');
     if (loadList('nexas_tender_watch').length === 0) issues.push('No tender watches saved.');
     if (loadAudit().length === 0) issues.push('Audit log is empty.');
