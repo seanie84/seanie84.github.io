@@ -1,22 +1,20 @@
-const CACHE = 'nexas-shell-v1';
-const CORE = ['/', '/index.html'];
+const CACHE = 'nexas-shell-v2';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting()));
+  event.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys()
+      .then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
+      .then(() => self.clients.claim()),
+  );
 });
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
-  event.respondWith(
-    fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
-      return res;
-    }).catch(() => caches.match(req).then((hit) => hit || caches.match('/index.html'))),
-  );
+  // Network first. Do not keep old app shells.
+  event.respondWith(fetch(req).catch(() => caches.match(req)));
 });
