@@ -18,9 +18,9 @@ const STATS = [
 ];
 
 const HUBS = [
-  { to: '/hub', label: 'Business Hub', blurb: 'Operations in one place', Icon: Building2 },
-  { to: '/sme', label: 'SME', blurb: 'SA small-business plans', Icon: Briefcase },
-  { to: '/centers', label: 'Centers', blurb: 'Sales, legal, finance, people', Icon: Landmark },
+  { to: '/hub', label: 'Business Hub', blurb: 'Operations in one place', Icon: Building2, img: '/finish/hub.jpg' },
+  { to: '/sme', label: 'SME', blurb: 'SA small-business plans', Icon: Briefcase, img: '/finish/plans.jpg' },
+  { to: '/centers', label: 'Centers', blurb: 'Sales, legal, finance, people', Icon: Landmark, img: '/finish/desk.jpg' },
 ];
 
 export default function Dashboard() {
@@ -33,7 +33,7 @@ export default function Dashboard() {
   const ready = engineReady(getEngine());
 
   const brief = [
-    { label: 'Tenders due', value: 'None on the watch yet', to: '/tenders' },
+    { label: 'Tenders due', value: 'None on the watch yet', to: '/watch' },
     { label: 'Follow-ups', value: 'CRM is empty', to: '/crm' },
     { label: 'Open drafts', value: '0 waiting in Approvals', to: '/catalog' },
     { label: 'Engine', value: ready ? `${ENGINE_SHORT[getEngine()]} connected` : 'Not connected — open Settings', to: '/settings' },
@@ -41,26 +41,24 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
-        <div>
+      <div className="glass" style={{ overflow: 'hidden', marginBottom: 24, display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) minmax(220px, 320px)' }}>
+        <div style={{ padding: 28 }}>
           <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1.1, color: 'var(--ink)' }}>
             {greeting}, {firstName}
           </h1>
-          <p style={{ fontSize: 15, color: 'var(--ink-2)', marginTop: 8 }}>
+          <p style={{ fontSize: 15, color: 'var(--ink-2)', marginTop: 8, marginBottom: 16 }}>
             {ENGINE_SHORT[getEngine()]}
             {getFailover() ? ' with Gemini → Qwen failover' : ''} · 77 specialists ready
           </p>
-        </div>
-        <button
-          onClick={() => navigate('/missions')}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px',
-            borderRadius: 12, border: 'none', background: 'var(--cyan)', color: '#ffffff',
+          <button onClick={() => navigate('/missions')} style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px',
+            borderRadius: 12, border: 'none', background: 'var(--cyan)', color: '#fff',
             fontWeight: 700, fontSize: 14, cursor: 'pointer', minHeight: 44,
-          }}
-        >
-          <Target size={15} /> New mission
-        </button>
+          }}>
+            <Target size={15} /> New mission
+          </button>
+        </div>
+        <img src="/finish/desk.jpg" alt="Bright desk" style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: 180 }} />
       </div>
 
       <section className="glass" style={{ padding: 20, marginBottom: 24 }}>
@@ -77,16 +75,16 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 28 }}>
-        {HUBS.map(({ to, label, blurb, Icon }) => (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, marginBottom: 28 }}>
+        {HUBS.map(({ to, label, blurb, img }) => (
           <button key={to} type="button" onClick={() => navigate(to)} className="glass" style={{
-            textAlign: 'left', padding: 18, cursor: 'pointer', border: '1px solid var(--line)', background: '#fff',
+            textAlign: 'left', padding: 0, cursor: 'pointer', border: '1px solid var(--line)', background: '#fff', overflow: 'hidden',
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-              <Icon size={16} color="var(--cyan)" />
+            <img src={img} alt="" style={{ width: '100%', height: 140, objectFit: 'cover', display: 'block' }} />
+            <div style={{ padding: 16 }}>
               <span style={{ fontWeight: 700, color: 'var(--ink)' }}>{label}</span>
+              <p style={{ fontSize: 13, color: 'var(--ink-2)', marginTop: 4 }}>{blurb}</p>
             </div>
-            <p style={{ fontSize: 13, color: 'var(--ink-2)' }}>{blurb}</p>
           </button>
         ))}
       </div>
