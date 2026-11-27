@@ -1,7 +1,6 @@
 import { type ReactNode, useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import BackgroundPlate from './BackgroundPlate';
 import { Menu } from 'lucide-react';
 import GeminiChat from '../GeminiChat';
 
@@ -21,8 +20,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
-      <BackgroundPlate src1080="/bg-desk-1080.jpg" src4k="/bg-desk.jpg" dim={0.48} />
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--void)' }}>
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div style={{
         marginLeft: sidebarOpen ? 'var(--sidebar-w)' : 0,
@@ -31,8 +29,6 @@ export default function AppShell({ children }: { children: ReactNode }) {
         display: 'flex',
         flexDirection: 'column',
         transition: 'margin-left 0.2s ease',
-        position: 'relative',
-        zIndex: 1,
       }}>
         {!sidebarOpen && (
           <button
@@ -41,8 +37,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
             style={{
               position: 'fixed', top: 12, left: 12, zIndex: 50,
               padding: 8, borderRadius: 10, border: '1px solid var(--line)',
-              background: 'var(--panel)', color: 'var(--ink-2)',
-              cursor: 'pointer', display: 'flex',
+              background: '#ffffff', color: 'var(--ink-2)',
+              cursor: 'pointer', display: 'flex', boxShadow: 'var(--elev-card)',
             }}
           >
             <Menu size={18} />
@@ -52,8 +48,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
         <main style={{
           flex: 1,
           overflowY: 'auto',
-          padding: '32px 36px 112px',
-          background: 'transparent',
+          padding: '28px 32px 112px',
+          background: 'var(--void)',
         }}>
           {children}
         </main>
@@ -66,13 +62,16 @@ export default function AppShell({ children }: { children: ReactNode }) {
           padding: '12px 18px',
           border: 'none',
           borderRadius: 999,
-          background: dock ? 'var(--navy-2)' : 'var(--cyan)',
-          color: dock ? 'var(--ink)' : '#042f2e',
+          background: dock ? '#ffffff' : 'var(--cyan)',
+          color: dock ? 'var(--ink)' : '#ffffff',
           fontWeight: 700,
           fontSize: 13,
           letterSpacing: '-0.01em',
           cursor: 'pointer',
-          boxShadow: '0 12px 32px rgba(0,0,0,.4)',
+          boxShadow: '0 8px 24px rgba(13,148,136,.25)',
+          borderWidth: dock ? 1 : 0,
+          borderStyle: 'solid',
+          borderColor: 'var(--line)',
         }}
       >
         {dock ? 'Close' : 'Ask NEXA'}
