@@ -84,3 +84,7 @@ export function Operator() {
 export function Knowledge() {
   return <Desk title="Knowledge" lead="Boards, import and export." prompt="Turn the brief into a short knowledge board: facts, gaps, next steps." />;
 }
+
+export default function PreviousModules() {
+  return <Tenders />;
+}
