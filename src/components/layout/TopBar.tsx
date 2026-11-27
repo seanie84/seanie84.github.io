@@ -25,10 +25,10 @@ export default function TopBar() {
 
   return (
     <header className="rack-bar">
-      <span className={ready ? 'rack-dot' : 'rack-dot off'} />
+      <span className={ready ? 'rack-dot' : 'rack-dot off'} aria-hidden="true" />
       <span style={{ color: 'var(--ink)', fontWeight: 700, letterSpacing: '-0.02em' }}>NEXAS</span>
-      <span className="chip" style={viaFailover ? { color: 'var(--warn)', borderColor: 'rgba(217,119,6,.25)', background: 'rgba(217,119,6,.08)' } : undefined}>
-        {ENGINE_SHORT[live]}{viaFailover ? ' · failover' : ''}
+      <span className="chip" aria-live="polite" style={ready ? undefined : { color: 'var(--warn)', borderColor: 'rgba(180,83,9,.25)', background: 'rgba(180,83,9,.08)' }}>
+        {ready ? 'Connected' : 'Not connected'} · {ENGINE_SHORT[live]}{viaFailover ? ' · failover' : ''}
       </span>
       <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'IBM Plex Mono, monospace', fontSize: 12, color: 'var(--ink-2)' }}>
         <span>{time} SAST</span>
