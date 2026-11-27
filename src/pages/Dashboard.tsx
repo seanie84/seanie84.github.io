@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import agentsRaw from '../data/agents.json';
 import { type Agent } from '../data/types';
 import { getCategoryColor } from '../data/categories';
-import { ENGINE_SHORT, getEngine, getFailover } from '../lib/engine';
+import { ENGINE_SHORT, engineReady, getEngine, getFailover } from '../lib/engine';
 import { Bot, Target, Swords, Users2, BarChart2, Zap, Building2, Briefcase, Landmark } from 'lucide-react';
 
 const agents = agentsRaw as Agent[];
@@ -30,10 +30,18 @@ export default function Dashboard() {
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
   const firstName = (user?.name ?? 'Operator').split(' ')[0];
   const featured = agents.slice(0, 6);
+  const ready = engineReady(getEngine());
+
+  const brief = [
+    { label: 'Tenders due', value: 'None on the watch yet', to: '/tenders' },
+    { label: 'Follow-ups', value: 'CRM is empty', to: '/crm' },
+    { label: 'Open drafts', value: '0 waiting in Approvals', to: '/catalog' },
+    { label: 'Engine', value: ready ? `${ENGINE_SHORT[getEngine()]} connected` : 'Not connected — open Settings', to: '/settings' },
+  ];
 
   return (
     <div>
-      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
+      <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
           <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1.1, color: 'var(--ink)' }}>
             {greeting}, {firstName}
@@ -48,12 +56,26 @@ export default function Dashboard() {
           style={{
             display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px',
             borderRadius: 12, border: 'none', background: 'var(--cyan)', color: '#ffffff',
-            fontWeight: 700, fontSize: 14, cursor: 'pointer',
+            fontWeight: 700, fontSize: 14, cursor: 'pointer', minHeight: 44,
           }}
         >
           <Target size={15} /> New mission
         </button>
       </div>
+
+      <section className="glass" style={{ padding: 20, marginBottom: 24 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 12, color: 'var(--ink)' }}>Morning brief</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
+          {brief.map((item) => (
+            <button key={item.label} type="button" onClick={() => navigate(item.to)} style={{
+              textAlign: 'left', padding: 12, borderRadius: 12, border: '1px solid var(--line)', background: '#fff', cursor: 'pointer',
+            }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink-3)', marginBottom: 4 }}>{item.label}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--ink)' }}>{item.value}</div>
+            </button>
+          ))}
+        </div>
+      </section>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 28 }}>
         {HUBS.map(({ to, label, blurb, Icon }) => (
