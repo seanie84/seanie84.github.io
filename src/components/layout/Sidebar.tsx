@@ -5,7 +5,7 @@ import {
   BarChart2, BookOpen, Cpu, Package, FileSpreadsheet,
   Settings, Palette, LogOut, Bot, ScrollText, X, MessageSquare,
   Building2, Briefcase, Landmark, FolderGit2, List,
-  Gavel, Megaphone, Landmark as Gov, GraduationCap, Shield, Store, ShoppingBag,
+  Gavel, Megaphone, GraduationCap, Shield, Store, ShoppingBag,
 } from 'lucide-react';
 
 const NAV = [
@@ -17,7 +17,7 @@ const NAV = [
   { to: '/catalog',    label: 'Full catalog',     Icon: List },
   { to: '/tenders',    label: 'Tenders',          Icon: Gavel },
   { to: '/campaigns',  label: 'Campaigns',        Icon: Megaphone },
-  { to: '/government', label: 'Government',       Icon: Gov },
+  { to: '/government', label: 'Government',       Icon: Landmark },
   { to: '/education',  label: 'Education',        Icon: GraduationCap },
   { to: '/security',   label: 'Security',         Icon: Shield },
   { to: '/sell',       label: 'Sell',             Icon: ShoppingBag },
