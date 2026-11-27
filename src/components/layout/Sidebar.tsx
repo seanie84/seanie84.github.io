@@ -6,6 +6,7 @@ import {
   Settings, Palette, LogOut, Bot, ScrollText, X, MessageSquare,
   Building2, Briefcase, Landmark, FolderGit2, List,
   Gavel, Megaphone, GraduationCap, Shield, Store, ShoppingBag,
+  Radar, Share2, ShieldCheck, Database,
 } from 'lucide-react';
 
 const NAV = [
@@ -13,6 +14,10 @@ const NAV = [
   { to: '/hub',        label: 'Business Hub',     Icon: Building2 },
   { to: '/sme',        label: 'SME',              Icon: Briefcase },
   { to: '/centers',    label: 'Centers',          Icon: Landmark },
+  { to: '/watch',      label: 'Tender watch',     Icon: Radar },
+  { to: '/handoff',    label: 'Handoff',          Icon: Share2 },
+  { to: '/integrity',  label: 'Integrity',        Icon: ShieldCheck },
+  { to: '/data',       label: 'Data desk',        Icon: Database },
   { to: '/repos',      label: 'All repos',        Icon: FolderGit2 },
   { to: '/catalog',    label: 'Full catalog',     Icon: List },
   { to: '/tenders',    label: 'Tenders',          Icon: Gavel },
