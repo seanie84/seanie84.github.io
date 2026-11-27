@@ -1,4 +1,5 @@
 import { useState, type CSSProperties } from 'react';
+import { useAuth } from '../hooks/useAuth';
 import {
   DEEPSEEK_MODELS,
   DEFAULT_DEEPSEEK_MODEL,
@@ -50,6 +51,7 @@ import {
 } from '../lib/nexa-ag-ui';
 
 export default function Settings() {
+  const { resetPassword } = useAuth();
   const [engine, setEng] = useState<EngineId>(() => getEngine());
   const [key, setKey] = useState(() => getGeminiKey());
   const [gmodel, setGmodel] = useState(() => getGeminiModel() || DEFAULT_MODEL);
@@ -226,6 +228,14 @@ export default function Settings() {
           localStorage.setItem(LOCAL_OLLAMA_MODEL_KEY, ollamaModel.trim() || DEFAULT_LOCAL_OLLAMA_MODELS[0]);
           setStatus('AG-UI settings saved in this browser.');
         }} style={btn}>Save AG-UI settings</button>
+      </div>
+
+      <div className="glass" style={{ padding: 24, maxWidth: 560, marginTop: 16 }}>
+        <div style={label}>OPERATOR PASSWORD</div>
+        <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)', marginBottom: 12, lineHeight: 1.5 }}>
+          Forgot the password? This clears the local hash so the next visit can set a new one. You will be signed out.
+        </p>
+        <button type="button" onClick={() => { resetPassword(); setStatus('Password cleared. Sign in again to set a new one.'); }} style={{ ...btn, background: 'transparent', color: 'var(--ink-2)', border: '1px solid var(--line)' }}>Reset password</button>
       </div>
     </div>
   );
