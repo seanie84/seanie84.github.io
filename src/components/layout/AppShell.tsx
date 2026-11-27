@@ -1,7 +1,11 @@
 import { type ReactNode, useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import { Menu } from 'lucide-react';
+import CommandBar from './CommandBar';
+import Breadcrumb from './Breadcrumb';
+import ApprovalTray from './ApprovalTray';
+import MobileNav from './MobileNav';
+import { Menu, Search } from 'lucide-react';
 import GeminiChat from '../GeminiChat';
 
 export default function AppShell({ children }: { children: ReactNode }) {
@@ -54,16 +58,28 @@ export default function AppShell({ children }: { children: ReactNode }) {
           background: 'var(--void)',
           outline: 'none',
         }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <Breadcrumb />
+            <button type="button" onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))} style={{
+              display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', borderRadius: 10,
+              border: '1px solid var(--line)', background: '#fff', color: 'var(--ink-2)', cursor: 'pointer', minHeight: 40,
+            }}>
+              <Search size={14} /> Search <span style={{ fontSize: 11, color: 'var(--ink-3)' }}>Ctrl K</span>
+            </button>
+          </div>
+          <ApprovalTray />
           {children}
         </main>
       </div>
+      <CommandBar />
+      <MobileNav />
       <button
         type="button"
         onClick={() => setDock((v) => !v)}
         aria-expanded={dock}
         aria-controls="nexa-dock"
         style={{
-          position: 'fixed', right: 24, bottom: 24, zIndex: 80,
+          position: 'fixed', right: 24, bottom: 84, zIndex: 80,
           padding: '12px 18px',
           border: 'none',
           borderRadius: 999,
@@ -84,7 +100,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
       </button>
       {dock && (
         <div id="nexa-dock" role="dialog" aria-label="Ask NEXA" className="glass" style={{
-          position: 'fixed', right: 24, bottom: 80, zIndex: 80,
+          position: 'fixed', right: 24, bottom: 140, zIndex: 80,
           width: 'min(400px, calc(100vw - 32px))', padding: 18,
         }}>
           <GeminiChat />
