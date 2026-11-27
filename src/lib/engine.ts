@@ -233,14 +233,27 @@ async function callEngine(id: EngineId, opts: {
   if (id === 'qwen') {
     const key = getQwenKey();
     if (!key) throw new Error('No Qwen / DashScope key.');
-    return openaiChat({
-      base: QWEN_BASE,
-      key,
-      model: getQwenModel(),
-      system: opts.system,
-      history: opts.history,
-      user: opts.user,
-    });
+    const stored = getQwenModel();
+    const order = [stored, ...QWEN_MODELS.filter((m) => m !== stored)];
+    let last = 'Model not exist';
+    for (const model of order) {
+      try {
+        const text = await openaiChat({
+          base: QWEN_BASE,
+          key,
+          model,
+          system: opts.system,
+          history: opts.history,
+          user: opts.user,
+        });
+        localStorage.setItem(QWEN_MODEL, model);
+        return text;
+      } catch (err) {
+        last = err instanceof Error ? err.message : String(err);
+        if (!/model not exist|not found|invalid model|does not exist/i.test(last)) throw err;
+      }
+    }
+    throw new Error(last);
   }
   const base = getLocalUrl();
   const model = getLocalModel();
@@ -284,7 +297,7 @@ export async function runBrain(opts: {
     }
   }
   lastRoute = null;
-  throw new Error('All engines failed. ' + errors.join(' · '));
+  throw new Error('The desk is busy. Try again in a moment.');
 }
 
 export async function pingEngine(): Promise<string> {
