@@ -20,6 +20,9 @@ const Settings = lazy(() => import('./pages/Settings'));
 const AgUiChat = lazy(() => import('./pages/AgUiChat'));
 const Studio = lazy(() => import('./pages/Studio'));
 const Profile = lazy(() => import('./pages/Profile'));
+const BusinessHub = lazy(() => import('./pages/BusinessHub'));
+const SME = lazy(() => import('./pages/SME'));
+const BusinessCenters = lazy(() => import('./pages/BusinessCenters'));
 
 function PageFallback() {
   return (
@@ -38,6 +41,9 @@ function PrivateRoutes() {
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/hub" element={<BusinessHub />} />
+          <Route path="/sme" element={<SME />} />
+          <Route path="/centers" element={<BusinessCenters />} />
           <Route path="/agents" element={<Agents />} />
           <Route path="/warroom" element={<WarRoom />} />
           <Route path="/missions" element={<Missions />} />
