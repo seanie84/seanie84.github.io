@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -26,7 +26,7 @@ const BusinessCenters = lazy(() => import('./pages/BusinessCenters'));
 const Repos = lazy(() => import('./pages/Repos'));
 const Catalog = lazy(() => import('./pages/Catalog'));
 
-const pick = (name: string) => lazy(() => import('./pages/PreviousModules').then((m) => ({ default: (m as Record<string, React.ComponentType>)[name] })));
+const pick = (name: string) => lazy(() => import('./pages/PreviousModules').then((m) => ({ default: (m as Record<string, ComponentType>)[name] })));
 const Tenders = pick('Tenders');
 const Scout = pick('Scout');
 const Procurement = pick('Procurement');
