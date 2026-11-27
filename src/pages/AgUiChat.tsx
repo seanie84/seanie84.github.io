@@ -1,9 +1,9 @@
-import { useMemo, useState, type CSSProperties, type FormEvent } from "react";
+import { useState, type CSSProperties, type FormEvent } from "react";
 import { getAgUiEndpoint, isAgUiEnabled, parseAgUiSse } from "../lib/nexa-ag-ui";
 
 export default function AgUiChat() {
   const enabled = isAgUiEnabled();
-  const endpoint = useMemo(() => getAgUiEndpoint(), []);
+  const endpoint = getAgUiEndpoint();
   const [message, setMessage] = useState("");
   const [output, setOutput] = useState("");
   const [status, setStatus] = useState("");
@@ -11,11 +11,12 @@ export default function AgUiChat() {
 
   async function send(event: FormEvent) {
     event.preventDefault();
-    if (!enabled) {
+    const current = getAgUiEndpoint();
+    if (!isAgUiEnabled()) {
       setStatus("AG-UI is off. Enable it in Settings or add ?agui=1.");
       return;
     }
-    if (!endpoint) {
+    if (!current) {
       setStatus("No AG-UI endpoint configured. This site does not share the NEXORA database. Set an endpoint in Settings first.");
       return;
     }
@@ -23,7 +24,7 @@ export default function AgUiChat() {
     setStatus("Streaming...");
     setOutput("");
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(current, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -77,6 +78,8 @@ export default function AgUiChat() {
       </form>
       {status && <p style={{ marginTop: 16, color: "var(--ink-2)" }}>{status}</p>}
       {output && <pre style={{ marginTop: 12, whiteSpace: "pre-wrap" }}>{output}</pre>}
+      {!enabled && <p style={{ marginTop: 12, color: "var(--ink-3)", fontSize: 13 }}>AG-UI is off. Enable it in Settings.</p>}
+      {enabled && !endpoint && <p style={{ marginTop: 12, color: "var(--ink-3)", fontSize: 13 }}>No endpoint set. Add one in Settings.</p>}
     </div>
   );
 }
