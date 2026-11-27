@@ -21,6 +21,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--void)' }}>
+      <a className="skip-link" href="#main">Skip to content</a>
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div style={{
         marginLeft: sidebarOpen ? 'var(--sidebar-w)' : 0,
@@ -32,24 +33,26 @@ export default function AppShell({ children }: { children: ReactNode }) {
       }}>
         {!sidebarOpen && (
           <button
+            type="button"
             onClick={() => setSidebarOpen(true)}
             aria-label="Open menu"
             style={{
               position: 'fixed', top: 12, left: 12, zIndex: 50,
-              padding: 8, borderRadius: 10, border: '1px solid var(--line)',
+              padding: 10, minWidth: 40, minHeight: 40, borderRadius: 10, border: '1px solid var(--line)',
               background: '#ffffff', color: 'var(--ink-2)',
-              cursor: 'pointer', display: 'flex', boxShadow: 'var(--elev-card)',
+              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'var(--elev-card)',
             }}
           >
             <Menu size={18} />
           </button>
         )}
         <TopBar />
-        <main style={{
+        <main id="main" tabIndex={-1} style={{
           flex: 1,
           overflowY: 'auto',
           padding: '28px 32px 112px',
           background: 'var(--void)',
+          outline: 'none',
         }}>
           {children}
         </main>
@@ -57,6 +60,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
       <button
         type="button"
         onClick={() => setDock((v) => !v)}
+        aria-expanded={dock}
+        aria-controls="nexa-dock"
         style={{
           position: 'fixed', right: 24, bottom: 24, zIndex: 80,
           padding: '12px 18px',
@@ -72,12 +77,13 @@ export default function AppShell({ children }: { children: ReactNode }) {
           borderWidth: dock ? 1 : 0,
           borderStyle: 'solid',
           borderColor: 'var(--line)',
+          minHeight: 44,
         }}
       >
         {dock ? 'Close' : 'Ask NEXA'}
       </button>
       {dock && (
-        <div className="glass" style={{
+        <div id="nexa-dock" role="dialog" aria-label="Ask NEXA" className="glass" style={{
           position: 'fixed', right: 24, bottom: 80, zIndex: 80,
           width: 'min(400px, calc(100vw - 32px))', padding: 18,
         }}>
