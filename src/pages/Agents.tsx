@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import agentsRaw from '../data/agents.json';
 import { type Agent } from '../data/types';
 import { CATEGORIES, getCategoryColor } from '../data/categories';
@@ -29,16 +29,16 @@ export default function Agents() {
 
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24, alignItems: 'center' }}>
         <div style={{ position: 'relative', flex: '1 1 260px', maxWidth: 360 }}>
-          <Search size={14} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-3)' }} />
+          <Search size={14} aria-hidden="true" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-3)' }} />
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search agents…"
             aria-label="Search agents by name, role, or tagline"
             style={{
-              width: '100%', padding: '9px 12px 9px 36px',
+              width: '100%', padding: '10px 12px 10px 36px',
               background: 'var(--glass)', border: '1px solid var(--line)',
-              borderRadius: 8, color: 'var(--ink)', fontFamily: 'Inter', fontSize: 13, outline: 'none',
+              borderRadius: 8, color: 'var(--ink)', fontFamily: 'Inter', fontSize: 13, outline: 'none', minHeight: 40,
             }}
           />
         </div>
@@ -48,8 +48,8 @@ export default function Agents() {
           onChange={e => setCategory(e.target.value)}
           aria-label="Filter agents by category"
           style={{
-            padding: '9px 12px', background: 'var(--glass)', border: '1px solid var(--line)',
-            borderRadius: 8, color: 'var(--ink)', fontFamily: 'Inter', fontSize: 13, cursor: 'pointer', outline: 'none',
+            padding: '10px 12px', background: 'var(--glass)', border: '1px solid var(--line)',
+            borderRadius: 8, color: 'var(--ink)', fontFamily: 'Inter', fontSize: 13, cursor: 'pointer', outline: 'none', minHeight: 40,
           }}
         >
           <option value="">All categories</option>
@@ -60,24 +60,25 @@ export default function Agents() {
           {(['grid', 'list'] as const).map(v => (
             <button
               key={v}
+              type="button"
               onClick={() => setView(v)}
               aria-pressed={view === v}
               aria-label={`Switch to ${v} view`}
               style={{
-                padding: '8px 10px', borderRadius: 8, cursor: 'pointer',
-                background: view === v ? 'rgba(34,211,238,0.12)' : 'var(--glass)',
-                border: `1px solid ${view === v ? 'rgba(34,211,238,0.3)' : 'var(--line)'}`,
-                color: view === v ? 'var(--cyan)' : 'var(--ink-3)',
+                padding: '10px 12px', minWidth: 40, minHeight: 40, borderRadius: 8, cursor: 'pointer',
+                background: view === v ? 'rgba(15,118,110,0.1)' : 'var(--glass)',
+                border: `1px solid ${view === v ? 'rgba(15,118,110,0.3)' : 'var(--line)'}`,
+                color: view === v ? 'var(--cyan)' : 'var(--ink-2)',
               }}
             >
-              {v === 'grid' ? <LayoutGrid size={15} /> : <List size={15} />}
+              {v === 'grid' ? <LayoutGrid size={15} aria-hidden="true" /> : <List size={15} aria-hidden="true" />}
             </button>
           ))}
         </div>
       </div>
 
-      <p style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', marginBottom: 16, letterSpacing: '0.1em' }}>
-        SHOWING {filtered.length} OF {agents.length} AGENTS
+      <p aria-live="polite" style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--ink-2)', marginBottom: 16, letterSpacing: '0.08em' }}>
+        Showing {filtered.length} of {agents.length} agents
       </p>
 
       {view === 'grid' ? (
@@ -101,7 +102,7 @@ function GridCard({ agent, onSelect }: { agent: Agent; onSelect: () => void }) {
     <div
       className="glass"
       onClick={onSelect}
-      onKeyDown={e => e.key === 'Enter' && onSelect()}
+      onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), onSelect())}
       role="button"
       tabIndex={0}
       aria-label={`${agent.name}, ${agent.role}`}
@@ -137,7 +138,7 @@ function ListRow({ agent, onSelect }: { agent: Agent; onSelect: () => void }) {
     <div
       className="glass"
       onClick={onSelect}
-      onKeyDown={e => e.key === 'Enter' && onSelect()}
+      onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), onSelect())}
       role="button"
       tabIndex={0}
       aria-label={`${agent.name}, ${agent.role}`}
@@ -169,6 +170,41 @@ function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
   const color = getCategoryColor(agent.category);
   const modalId = `agent-modal-${agent.id}`;
   const headingId = `agent-heading-${agent.id}`;
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab' || !dialogRef.current) return;
+      const nodes = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      const list = Array.from(nodes).filter((n) => !n.hasAttribute('disabled'));
+      if (!list.length) return;
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      prev?.focus?.();
+    };
+  }, [onClose]);
+
   return (
     <div
       onClick={onClose}
@@ -176,10 +212,11 @@ function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
       style={{
         position: 'fixed', inset: 0, zIndex: 100, display: 'flex',
         alignItems: 'center', justifyContent: 'center', padding: 24,
-        background: 'rgba(5,13,31,0.8)', backdropFilter: 'blur(6px)',
+        background: 'rgba(26,29,35,0.45)',
       }}
     >
       <div
+        ref={dialogRef}
         id={modalId}
         onClick={e => e.stopPropagation()}
         role="dialog"
@@ -199,11 +236,11 @@ function AgentModal({ agent, onClose }: { agent: Agent; onClose: () => void }) {
             <h2 id={headingId} style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 22, color: 'var(--ink)' }}>{agent.name}</h2>
             <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)' }}>{agent.role}</p>
           </div>
-          <button onClick={onClose} aria-label={`Close ${agent.name} details`} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--ink-3)', cursor: 'pointer', fontSize: 20, padding: '4px' }}>✕</button>
+          <button ref={closeRef} type="button" onClick={onClose} aria-label={`Close ${agent.name} details`} style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--ink-2)', cursor: 'pointer', fontSize: 20, padding: '8px', minWidth: 40, minHeight: 40 }}>✕</button>
         </div>
         <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)', fontStyle: 'italic', marginBottom: 20, lineHeight: 1.6 }}>"{agent.tagline}"</p>
         <div style={{ marginBottom: 16 }}>
-          <div style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>Capabilities</div>
+          <div style={{ fontFamily: 'JetBrains Mono', fontSize: 10, color: 'var(--ink-2)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 10 }}>Capabilities</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {agent.capabilities.map(cap => (
               <span key={cap} style={{
