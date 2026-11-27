@@ -14,14 +14,14 @@ export default function Missions() {
     setBusy(true);
     setErr('');
     try { setPlan(await askAmber(brief.trim())); }
-    catch (e) { setErr(e instanceof Error ? e.message : String(e)); }
+    catch (e) { setErr((e instanceof Error ? e.message : String(e)).replace(/gemini|qwen/gi, 'desk')); }
     finally { setBusy(false); }
   }
 
   return (
     <div>
       <h1 style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: 28, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--ink)', marginBottom: 4 }}>Mission Control</h1>
-      <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.12em', marginBottom: 24 }}>AMBER · ACTIVE ENGINE</p>
+      <p style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.12em', marginBottom: 24 }}>AMBER</p>
       {!hasEngine() && (
         <p style={{ marginBottom: 16, fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-2)' }}>
           Pick a free engine in <Link to="/settings" style={{ color: 'var(--cyan)' }}>Settings</Link> first.
