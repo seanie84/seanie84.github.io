@@ -13,7 +13,6 @@ export type ModuleEntry = {
   source: 'NEXAS' | 'Previous' | 'NEXORA';
 };
 
-/** Every repo on the seanie84 account. */
 export const REPOS: RepoEntry[] = [
   { name: 'seanie84.github.io', url: 'https://github.com/seanie84/seanie84.github.io', blurb: 'NEXAS AI — this app. 77 agents, business hub, light HUD.', kind: 'NEXAS' },
   { name: 'nexa-command-center', url: 'https://github.com/seanie84/nexa-command-center', blurb: 'Earlier NEXA command center (React 19, glass deck).', kind: 'NEXAS' },
@@ -27,26 +26,29 @@ export const REPOS: RepoEntry[] = [
   { name: 'desktop-tutorial', url: 'https://github.com/seanie84/desktop-tutorial', blurb: 'GitHub Desktop tutorial repo.', kind: 'Other' },
 ];
 
-/** Every module from this app and the previous NEXORA / command versions. */
 export const MODULES: ModuleEntry[] = [
   { to: '/dashboard', name: 'Home', group: 'NEXAS', blurb: 'Greeting, hubs, agents on duty.', source: 'NEXAS' },
   { to: '/hub', name: 'Business Hub', group: 'Business', blurb: 'Operations snapshot and doors into centers.', source: 'NEXAS' },
   { to: '/sme', name: 'SME', group: 'Business', blurb: 'SA small-business plans: CIPC, SARS, B-BBEE, hiring.', source: 'NEXAS' },
   { to: '/centers', name: 'Centers', group: 'Business', blurb: 'Sales, legal, finance, marketing, people, security.', source: 'NEXAS' },
+  { to: '/watch', name: 'Tender watch', group: 'AI', blurb: 'Draft a watch. Does not fetch live tenders.', source: 'NEXAS' },
+  { to: '/handoff', name: 'Handoff', group: 'AI', blurb: 'Amber routes a brief to the right specialist.', source: 'NEXAS' },
+  { to: '/integrity', name: 'Integrity', group: 'AI', blurb: 'Checks keys, watches, and the log.', source: 'NEXAS' },
+  { to: '/data', name: 'Data desk', group: 'Development', blurb: 'Export, import, role, and audit log.', source: 'NEXAS' },
   { to: '/repos', name: 'All repos', group: 'Command', blurb: 'Every repository on the account.', source: 'NEXAS' },
   { to: '/catalog', name: 'Full catalog', group: 'Command', blurb: 'Every module from this app and the previous version.', source: 'NEXAS' },
   { to: '/agents', name: 'Agents', group: 'NEXAS', blurb: '77 specialists.', source: 'NEXAS' },
   { to: '/missions', name: 'Missions', group: 'NEXAS', blurb: 'Amber turns a brief into a plan.', source: 'NEXAS' },
   { to: '/warroom', name: 'War Room', group: 'NEXAS', blurb: 'Ops board.', source: 'NEXAS' },
-  { to: '/crm', name: 'CRM', group: 'NEXAS', blurb: 'Local contacts. Not the NEXORA book.', source: 'NEXAS' },
+  { to: '/crm', name: 'CRM', group: 'NEXAS', blurb: 'Local contacts and follow-up drafts.', source: 'NEXAS' },
   { to: '/documents', name: 'Documents', group: 'NEXAS', blurb: 'Files and records.', source: 'NEXAS' },
   { to: '/analytics', name: 'Analytics', group: 'NEXAS', blurb: 'Numbers.', source: 'NEXAS' },
   { to: '/classroom', name: 'Classroom', group: 'NEXAS', blurb: 'Learning desk.', source: 'NEXAS' },
   { to: '/memory', name: 'Memory', group: 'NEXAS', blurb: 'Notes kept in this browser.', source: 'NEXAS' },
   { to: '/plugins', name: 'Plugins', group: 'NEXAS', blurb: 'Free engines.', source: 'NEXAS' },
-  { to: '/quotes', name: 'Quotes', group: 'NEXAS', blurb: 'Draft quotes.', source: 'NEXAS' },
+  { to: '/quotes', name: 'Quotes', group: 'NEXAS', blurb: 'Draft quotes from a brief.', source: 'NEXAS' },
   { to: '/profile', name: 'Profile', group: 'NEXAS', blurb: 'Operator profile.', source: 'NEXAS' },
-  { to: '/settings', name: 'Settings', group: 'NEXAS', blurb: 'Engine, keys, password.', source: 'NEXAS' },
+  { to: '/settings', name: 'Settings', group: 'NEXAS', blurb: 'Engine, keys, password. Ollama and LM Studio are already here.', source: 'NEXAS' },
   { to: '/ag-ui', name: 'AG-UI', group: 'NEXAS', blurb: 'Optional client. Off by default.', source: 'NEXAS' },
   { to: '/studio', name: 'Theme', group: 'NEXAS', blurb: 'HUD tokens.', source: 'NEXAS' },
   { to: '/tenders', name: 'Tender Desk', group: 'Previous', blurb: 'Open packs, gates, ranking. Draft only.', source: 'Previous' },
