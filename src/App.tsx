@@ -25,6 +25,10 @@ const SME = lazy(() => import('./pages/SME'));
 const BusinessCenters = lazy(() => import('./pages/BusinessCenters'));
 const Repos = lazy(() => import('./pages/Repos'));
 const Catalog = lazy(() => import('./pages/Catalog'));
+const TenderWatch = lazy(() => import('./pages/TenderWatch'));
+const Handoff = lazy(() => import('./pages/Handoff'));
+const Integrity = lazy(() => import('./pages/Integrity'));
+const DataDesk = lazy(() => import('./pages/DataDesk'));
 
 const pick = (name: string) => lazy(() => import('./pages/PreviousModules').then((m) => ({ default: (m as Record<string, ComponentType>)[name] })));
 const Tenders = pick('Tenders');
@@ -59,6 +63,10 @@ function PrivateRoutes() {
           <Route path="/centers" element={<BusinessCenters />} />
           <Route path="/repos" element={<Repos />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/watch" element={<TenderWatch />} />
+          <Route path="/handoff" element={<Handoff />} />
+          <Route path="/integrity" element={<Integrity />} />
+          <Route path="/data" element={<DataDesk />} />
           <Route path="/agents" element={<Agents />} />
           <Route path="/warroom" element={<WarRoom />} />
           <Route path="/missions" element={<Missions />} />
