@@ -14,12 +14,26 @@ export default function GeminiChat({ agent }: { agent?: Agent }) {
   const end = useRef<HTMLDivElement>(null);
   const name = agent?.name || 'NEXA';
 
-  useEffect(() => { setReady(hasEngine()); }, []);
+  useEffect(() => {
+    const refresh = () => setReady(hasEngine());
+    refresh();
+    window.addEventListener('focus', refresh);
+    window.addEventListener('storage', refresh);
+    return () => {
+      window.removeEventListener('focus', refresh);
+      window.removeEventListener('storage', refresh);
+    };
+  }, []);
   useEffect(() => { end.current?.scrollIntoView({ behavior: 'smooth' }); }, [turns, busy]);
 
   async function send() {
     const text = input.trim();
     if (!text || busy) return;
+    if (!hasEngine()) {
+      setReady(false);
+      setErr('No engine ready. Open Settings and save a key.');
+      return;
+    }
     setInput('');
     setErr('');
     const next = [...turns, { role: 'user' as const, text }];
