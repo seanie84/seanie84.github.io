@@ -67,6 +67,47 @@ const Presentation = lazy(() => import('./pages/RestoredDesks').then(m => ({ def
 const Voice = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.Voice })));
 const WhatsApp = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.WhatsApp })));
 const ScamScanner = lazy(() => import('./pages/RestoredDesks').then(m => ({ default: m.ScamScanner })));
+const Contacts = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Contacts })));
+const Products = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Products })));
+const FixedAssets = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.FixedAssets })));
+const Recruitment = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Recruitment })));
+const Jobs = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Jobs })));
+const Reports = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Reports })));
+const Timesheets = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Timesheets })));
+const Reminders = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Reminders })));
+const BrandStudio = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.BrandStudio })));
+const DesignAgent = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.DesignAgent })));
+const AppStudio = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.AppStudio })));
+const CampaignStudio = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.CampaignStudio })));
+const Canvas = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Canvas })));
+const Chains = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Chains })));
+const Workspaces = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Workspaces })));
+const Ideas = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Ideas })));
+const Support = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Support })));
+const Teacher = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Teacher })));
+const Tutor = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Tutor })));
+const Reader = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Reader })));
+const Live = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Live })));
+const AirportOps = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.AirportOps })));
+const ESD = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.ESD })));
+const Acceleration = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Acceleration })));
+const Retail = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Retail })));
+const Dropshipping = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Dropshipping })));
+const Fitness = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Fitness })));
+const Sabc = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Sabc })));
+const MoneyLoop = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.MoneyLoop })));
+const Storefront = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Storefront })));
+const Integrations = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Integrations })));
+const FreeRun = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.FreeRun })));
+const Skills = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Skills })));
+const AgentKit = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.AgentKit })));
+const Brain = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Brain })));
+const Executive = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Executive })));
+const Downloads = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Downloads })));
+const PrivacyCenter = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.PrivacyCenter })));
+const Social = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Social })));
+const Onboarding = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Onboarding })));
+const Language = lazy(() => import('./pages/RestoredDesks2').then(m => ({ default: m.Language })));
 
 function PageFallback() {
   return <div style={{ padding: 32, color: 'var(--ink-2)' }}>Loading…</div>;
@@ -123,6 +164,47 @@ function PrivateRoutes() {
           <Route path="/voice" element={<Voice />} />
           <Route path="/whatsapp" element={<WhatsApp />} />
           <Route path="/scam-scanner" element={<ScamScanner />} />
+                    <Route path="/contacts" element={<Contacts />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/fixed-assets" element={<FixedAssets />} />
+          <Route path="/recruitment" element={<Recruitment />} />
+          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/timesheets" element={<Timesheets />} />
+          <Route path="/reminders" element={<Reminders />} />
+          <Route path="/brand-studio" element={<BrandStudio />} />
+          <Route path="/design-agent" element={<DesignAgent />} />
+          <Route path="/app-studio" element={<AppStudio />} />
+          <Route path="/campaign-studio" element={<CampaignStudio />} />
+          <Route path="/canvas" element={<Canvas />} />
+          <Route path="/chains" element={<Chains />} />
+          <Route path="/workspaces" element={<Workspaces />} />
+          <Route path="/ideas" element={<Ideas />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/teacher" element={<Teacher />} />
+          <Route path="/tutor" element={<Tutor />} />
+          <Route path="/reader" element={<Reader />} />
+          <Route path="/live" element={<Live />} />
+          <Route path="/airport-ops" element={<AirportOps />} />
+          <Route path="/esd" element={<ESD />} />
+          <Route path="/acceleration" element={<Acceleration />} />
+          <Route path="/retail" element={<Retail />} />
+          <Route path="/dropshipping" element={<Dropshipping />} />
+          <Route path="/fitness" element={<Fitness />} />
+          <Route path="/sabc" element={<Sabc />} />
+          <Route path="/money-loop" element={<MoneyLoop />} />
+          <Route path="/storefront" element={<Storefront />} />
+          <Route path="/integrations" element={<Integrations />} />
+          <Route path="/free-run" element={<FreeRun />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/agent-kit" element={<AgentKit />} />
+          <Route path="/brain" element={<Brain />} />
+          <Route path="/executive" element={<Executive />} />
+          <Route path="/downloads" element={<Downloads />} />
+          <Route path="/privacy" element={<PrivacyCenter />} />
+          <Route path="/social" element={<Social />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/language" element={<Language />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/ag-ui" element={<AgUiChat />} />
           <Route path="/studio" element={<Studio />} />
