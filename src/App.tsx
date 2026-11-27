@@ -23,13 +23,12 @@ const Profile = lazy(() => import('./pages/Profile'));
 const BusinessHub = lazy(() => import('./pages/BusinessHub'));
 const SME = lazy(() => import('./pages/SME'));
 const BusinessCenters = lazy(() => import('./pages/BusinessCenters'));
+const Repos = lazy(() => import('./pages/Repos'));
+const Catalog = lazy(() => import('./pages/Catalog'));
+const Prev = lazy(() => import('./pages/PreviousModules'));
 
 function PageFallback() {
-  return (
-    <div style={{ padding: 32, fontFamily: 'Inter, system-ui', color: 'var(--ink-2)' }}>
-      Loading…
-    </div>
-  );
+  return <div style={{ padding: 32, color: 'var(--ink-2)' }}>Loading…</div>;
 }
 
 function PrivateRoutes() {
@@ -44,6 +43,8 @@ function PrivateRoutes() {
           <Route path="/hub" element={<BusinessHub />} />
           <Route path="/sme" element={<SME />} />
           <Route path="/centers" element={<BusinessCenters />} />
+          <Route path="/repos" element={<Repos />} />
+          <Route path="/catalog" element={<Catalog />} />
           <Route path="/agents" element={<Agents />} />
           <Route path="/warroom" element={<WarRoom />} />
           <Route path="/missions" element={<Missions />} />
@@ -58,6 +59,19 @@ function PrivateRoutes() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/ag-ui" element={<AgUiChat />} />
           <Route path="/studio" element={<Studio />} />
+          <Route path="/tenders" element={<Prev.Tenders />} />
+          <Route path="/scout" element={<Prev.Scout />} />
+          <Route path="/procurement" element={<Prev.Procurement />} />
+          <Route path="/campaigns" element={<Prev.Campaigns />} />
+          <Route path="/government" element={<Prev.Government />} />
+          <Route path="/education" element={<Prev.Education />} />
+          <Route path="/security" element={<Prev.Security />} />
+          <Route path="/architect" element={<Prev.Architect />} />
+          <Route path="/trading" element={<Prev.Trading />} />
+          <Route path="/sell" element={<Prev.Sell />} />
+          <Route path="/store" element={<Prev.Store />} />
+          <Route path="/operator" element={<Prev.Operator />} />
+          <Route path="/knowledge" element={<Prev.Knowledge />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Suspense>
