@@ -4,10 +4,14 @@ import {
   LayoutDashboard, Swords, Target, Users2, FileText,
   BarChart2, BookOpen, Cpu, Package, FileSpreadsheet,
   Settings, Palette, LogOut, Bot, ScrollText, X, MessageSquare,
+  Building2, Briefcase, Landmark,
 } from 'lucide-react';
 
 const NAV = [
   { to: '/dashboard',  label: 'Home',             Icon: LayoutDashboard },
+  { to: '/hub',        label: 'Business Hub',     Icon: Building2 },
+  { to: '/sme',        label: 'SME',              Icon: Briefcase },
+  { to: '/centers',    label: 'Centers',          Icon: Landmark },
   { to: '/warroom',    label: 'War Room',         Icon: Swords },
   { to: '/missions',   label: 'Missions',         Icon: Target },
   { to: '/agents',     label: 'Agents',           Icon: Bot },
@@ -43,7 +47,7 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
           <div className="nexa-mark" aria-hidden="true">NX</div>
           <div>
             <div style={{ fontWeight: 800, fontSize: 15, letterSpacing: '-0.03em', color: 'var(--ink)' }}>NEXAS</div>
-            <div style={{ fontSize: 11, color: 'var(--ink-3)' }}>Agent workspace</div>
+            <div style={{ fontSize: 11, color: 'var(--ink-3)' }}>Business workspace</div>
           </div>
         </div>
         {onClose && (
