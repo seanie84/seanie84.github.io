@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { serverHealth, serverUrl } from '../lib/serverClient';
+import { useEffect, useState } from 'react';
 import agentsRaw from '../data/agents.json';
 import { type Agent } from '../data/types';
 import { getCategoryColor } from '../data/categories';
@@ -39,6 +41,8 @@ const DESKS = [
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const [server, setServer] = useState<'checking' | 'up' | 'down'>('checking');
+  useEffect(() => { serverHealth().then(() => setServer('up')).catch(() => setServer('down')); }, []);
   const navigate = useNavigate();
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
@@ -61,6 +65,10 @@ export default function Dashboard() {
           <p style={{ fontSize: 16, color: 'var(--ink-2)', marginTop: 10, marginBottom: 18, lineHeight: 1.45 }}>
             Seventy-seven specialists are on the desk. What should we move today?
           </p>
+      <p style={{ fontSize: 13, color: 'var(--ink-2)', margin: '0 0 18px' }}>
+        Server {server === 'up' ? 'is up' : server === 'down' ? 'is down' : '…'} · <a href={serverUrl()} style={{ color: 'var(--cyan)' }}>API</a> · draft only, no payment
+      </p>
+
           <button onClick={() => navigate('/missions')} style={{
             display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px',
             borderRadius: 12, border: 'none', background: 'var(--cyan)', color: '#fff',
