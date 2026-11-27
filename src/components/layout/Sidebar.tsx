@@ -50,7 +50,7 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
   return (
     <aside aria-label="Main navigation" style={{
       width: 'var(--sidebar-w)', minHeight: '100vh',
-      background: '#ffffff',
+      background: '#fffdf8',
       borderRight: '1px solid var(--line)',
       display: 'flex', flexDirection: 'column',
       position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 40,
@@ -78,7 +78,7 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
             marginBottom: 2, textDecoration: 'none', fontWeight: 600,
             fontSize: 13.5,
             color: isActive ? 'var(--cyan)' : 'var(--ink-2)',
-            background: isActive ? 'rgba(15,118,110,.08)' : 'transparent',
+            background: isActive ? 'rgba(159,18,57,.08)' : 'transparent',
           })}>
             <Icon size={16} aria-hidden="true" />
             {label}
@@ -88,7 +88,7 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
       <div style={{ padding: '12px 10px 16px', borderTop: '1px solid var(--line)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 8px 12px' }}>
           <div aria-hidden="true" style={{
-            width: 32, height: 32, borderRadius: 10, background: 'rgba(15,118,110,.1)', border: '1px solid rgba(15,118,110,.2)',
+            width: 32, height: 32, borderRadius: 10, background: 'rgba(159,18,57,.1)', border: '1px solid rgba(159,18,57,.2)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--cyan)',
           }}>{(user?.name ?? 'O')[0].toUpperCase()}</div>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -98,7 +98,7 @@ export default function Sidebar({ open = true, onClose }: { open?: boolean; onCl
         </div>
         <button type="button" onClick={() => { logout(); navigate('/login'); }} style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderRadius: 10,
-          border: '1px solid var(--line)', background: '#ffffff', cursor: 'pointer', color: 'var(--ink-2)',
+          border: '1px solid var(--line)', background: '#fffdf8', cursor: 'pointer', color: 'var(--ink-2)',
           fontWeight: 600, fontSize: 13, minHeight: 40,
         }}>
           <LogOut size={14} aria-hidden="true" /> Sign out
